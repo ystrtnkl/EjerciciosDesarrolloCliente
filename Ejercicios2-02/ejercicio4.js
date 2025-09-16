@@ -27,7 +27,7 @@ const potencia = (base, exponente) => {
     if (exponente < 0) {
         resultado = 1 / resultado;
     }
-    
+
     return `${base} elevado a ${exponente} es ${resultado}`;
 }
 

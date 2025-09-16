@@ -58,12 +58,12 @@ console.log(multiplosDeTres());
 
 
 //Código para el ejercicio 4:
-console.log(potencia(3,4));
-console.log(potencia(0,3));
-console.log(potencia(3,0));
-console.log(potencia(0,0));
-console.log(potencia(2.4,3));
-console.log(potencia(3,-5));
+console.log(potencia(3, 4));
+console.log(potencia(0, 3));
+console.log(potencia(3, 0));
+console.log(potencia(0, 0));
+console.log(potencia(2.4, 3));
+console.log(potencia(3, -5));
 console.log(potencia(-3, 5));
 console.log(potencia(null, undefined));
 console.log(potencia(false, true));
@@ -71,22 +71,22 @@ console.log(potencia("hola"));
 
 
 //Código para el ejercicio 5:
-console.log(media(3,4,5,6,7));
+console.log(media(3, 4, 5, 6, 7));
 console.log(media(3));
 console.log(media());
 console.log(media(false, true, null, undefined, "hola"));
 
 
 //Código para el ejercicio 6:
-console.log(operacion(3,'+',4));
-console.log(operacion(3,'-',4));
-console.log(operacion(3,'*',4));
-console.log(operacion(3,'/',4));
-console.log(operacion(3,'%',4));
-console.log(operacion(3,'/',0));
-console.log(operacion(3,'%',0));
-console.log(operacion(3,'v',4));
-console.log(operacion(true,'+',false));
-console.log(operacion(undefined,'+',null));
-console.log(operacion(0.6,'+',4));
-console.log(operacion("hola",'+'));
+console.log(operacion(3, '+', 4));
+console.log(operacion(3, '-', 4));
+console.log(operacion(3, '*', 4));
+console.log(operacion(3, '/', 4));
+console.log(operacion(3, '%', 4));
+console.log(operacion(3, '/', 0));
+console.log(operacion(3, '%', 0));
+console.log(operacion(3, 'v', 4));
+console.log(operacion(true, '+', false));
+console.log(operacion(undefined, '+', null));
+console.log(operacion(0.6, '+', 4));
+console.log(operacion("hola", '+'));

@@ -14,6 +14,7 @@ function media() {
             return `ERROR: "${arguments[i]}" no es un número válido`;
         }
     }
+
     let suma = 0;
     for (let i = 0; i < arguments.length; i++) {
         suma += arguments[i];

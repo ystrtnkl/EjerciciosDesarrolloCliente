@@ -11,7 +11,7 @@ const verMes = (numeroMes) => {
     if (numeroMes < 1 || numeroMes > 12) {
         return "ERROR: Los meses van del 1 al 12";
     }
-    const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre",];
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",];
     return meses[numeroMes - 1];
 }
 

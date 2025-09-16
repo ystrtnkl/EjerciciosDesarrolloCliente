@@ -28,7 +28,7 @@ const comprobacionesNumero = (numero) => {
             }
         }
     }
-    
+
     //Devuelve el texto formateado mediante la función analisisNumerico
     return analisisNumerico(resultado, numero);
 };

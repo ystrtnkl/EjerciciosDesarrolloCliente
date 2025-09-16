@@ -19,6 +19,7 @@ const multiplosDeTres = (numero) => {
     if (resultado === "") {
         resultado = " (no tiene múltiplos de 3)"
     }
+    
     return `La secuencia para ${numero} es:${resultado}`;
 }
 
