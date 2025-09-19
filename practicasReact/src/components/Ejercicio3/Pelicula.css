@@ -1,0 +1,30 @@
+.pelicula_prnicipal {
+    border-radius: 8px;
+    border: 5px solid magenta;
+    background-color: #f0f0f0;
+    margin: 30px;
+}
+.pelicula_datos {
+    padding: 20px;
+    color: black;
+    padding-bottom: 0px;
+    display: flex;
+}
+.pelicula_foto img {
+    margin: 5px;
+    border-radius: 10%;
+    margin-right: 15px;
+    width: 100px;
+    height: 200px;
+}
+.pelicula_titulo {
+    font-weight: bolder;
+    font-size: 1.5em;
+}
+.pelicula_resumen {
+    font-style: italic;
+    max-height: 300px;
+    overflow: scroll;
+    color: black;
+    
+}

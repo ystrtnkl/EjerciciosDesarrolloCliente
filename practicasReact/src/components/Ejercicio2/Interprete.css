@@ -1,0 +1,25 @@
+.interprete_principal {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    border: 2px solid orange;
+    padding: 10px;
+    color: black;
+    margin: 10px;
+    text-align: left;
+    display: flex;
+}
+.interprete_foto img {
+    margin: 5px;
+    border-radius: 20%;
+    margin-right: 15px;
+    width: 100px;
+    height: 100px;
+}
+.interprete_nombre {
+    font-weight: bold;
+}
+.interprete_biografia {
+    font-style: italic;
+    max-height: 300px;
+    overflow: scroll;
+}
