@@ -1,2 +1,2 @@
 "use strict";
-import { x } from "./ejercicio1.js";
+import { x } from "./bibliotecas";
