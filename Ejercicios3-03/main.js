@@ -22,7 +22,7 @@ curso2.nivelEstudios = 2; //Añadiendo una propiedad extra
 //console.log(curso3.imprimirCurso()); //Error
 
 //Código para el ejercicio 3 (No se pidió que se mostrasen los datos por consola, así que los console.log están comentados):
-let alumno1 = discente.construirDiscente(1, "Alumno", "De Prueba", ["Afición normal", "Afición extraña"], {primera: 4, segunda: 9.6, tercera: 2.8});
+let alumno1 = discente.construirDiscente(1, "Alumno", "De Prueba", ["Afición normal", "Afición extraña"], { primera: 4, segunda: 9.6, tercera: 2.8 });
 //console.log(alumno1.calcularMedia());
 //alumno1.imprimirAficiones();
 //alumno1.imprimirInforme();
@@ -30,10 +30,14 @@ let alumno1 = discente.construirDiscente(1, "Alumno", "De Prueba", ["Afición no
 //Código para el ejercicio 4 (se modificó bastante el código del ejercicio 1 para que sea un objeto completo y no un simple constructor):
 curso1.matricular(alumno1);
 
-//Código para el ejercicio 5:
-console.log("-------------------------")
-console.log(mostrarObjeto(curso1, NOVAAAAA));
-
+//Código para el ejercicio 5 (No se pidió que se mostrasen los datos por consola, así que los console.log están comentados):
+//console.log(mostrarObjeto(curso1, true));
+//console.log(mostrarObjeto(curso1, false));
+//console.log(mostrarObjeto("hola", true));
+//console.log(mostrarObjeto(32, true));
+//console.log(mostrarObjeto(false, true));
+//console.log(mostrarObjeto(null, true));
+//console.log(mostrarObjeto(undefined, true));
 
 
 

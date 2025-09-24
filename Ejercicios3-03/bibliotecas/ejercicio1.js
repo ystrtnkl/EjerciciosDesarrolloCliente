@@ -1,6 +1,6 @@
 "use strict"
 //En este archivo se encuentra el código del ejercicio 1, 2 y 4
-import { validarDiscente } from "./ejercicio3.js";
+import { validarDiscente } from "./ejercicio3.js"; //La función para validar del ejercicio 3 se usa en la función de matricular
 
 //Se usa function ya que es necesario el uso de this.
 const curso = {
@@ -34,7 +34,7 @@ const curso = {
         nuevo.nombre = nombre;
         nuevo.agno = agno;
         nuevo.descripcion = descripcion;
-        return nuevo ;
+        return nuevo;
     }
 }
 
@@ -59,7 +59,7 @@ const validarCurso = (curso) => {
         return false;
     }
 
-    if (!Array.isArray(alumnado)) {
+    if (!Array.isArrayvalidarDiscente(alumnado)) {
         console.log("Ha habido un error en el alumnado.");
         return false;
     }

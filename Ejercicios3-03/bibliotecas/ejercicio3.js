@@ -12,22 +12,22 @@ const discente = {
         segunda: 5.6,
         tercera: 2.9
     },
-    calcularMedia: function(){
+    calcularMedia: function () {
         let total = 0;
         for (let e in this.notas) {
-            if (this.notas.hasOwnProperty(e)){
+            if (this.notas.hasOwnProperty(e)) {
                 total += this.notas[e];
             }
         }
         return total / 3;
-    }, 
-    imprimirAficiones: function(){
+    },
+    imprimirAficiones: function () {
         console.log(`Mis aficiones son: ${this.aficiones.join(", ")}.`);
     },
-    imprimirInforme: function(){
+    imprimirInforme: function () {
         console.log(`Mi ID es ${this.id} y mi nombre es ${this.nombre} ${this.apellidos}. Mis aficiones son: ${this.aficiones.join(", ")}. Mis notas (en orden) han sido: ${this.notas.primera}, ${this.notas.segunda} y ${this.notas.tercera}, y tengo una media de ${this.calcularMedia()}.`);
     },
-    construirDiscente: function(id, nombre, apellidos, aficiones, notas){
+    construirDiscente: function (id, nombre, apellidos, aficiones, notas) {
         if (!validarDiscente(id, nombre, apellidos, aficiones, notas)) {
             console.log("No se ha podido crear un nuevo discente.");
             return undefined;
@@ -42,24 +42,24 @@ const discente = {
     }
 }
 
-//Las validaciones de los datos a la hora de crear un nuevo objeto se hacen aquí.
+//Las validaciones de los datos a la hora de crear un nuevo objeto se hacen en esta función adicional.
 const validarDiscente = (id, nombre, apellidos, aficiones, notas) => {
     if (id === undefined || typeof id !== "number" || id < 0) {
         console.log("ID no válido al crear el discente.");
         return false;
     }
-    
+
     if (nombre === undefined || typeof nombre !== "string" || nombre === "") {
         console.log("Nombre no válido al crear el discente.");
         return false;
     }
-    
+
     if (apellidos === undefined || typeof apellidos !== "string") {
         console.log("Apellidos no válidos al crear el discente.");
         return false;
     }
 
-    if (aficiones === undefined || !Array.isArray(aficiones)){
+    if (aficiones === undefined || !Array.isArray(aficiones)) {
         console.log("Aficiones no válidos al crear el discente.");
         return false;
     }
@@ -82,4 +82,4 @@ const validarDiscente = (id, nombre, apellidos, aficiones, notas) => {
     return true;
 }
 
-export { discente, validarDiscente };
+export { discente, validarDiscente }; //La función validadora también se exporta ya que es útil en otros ejercicios
