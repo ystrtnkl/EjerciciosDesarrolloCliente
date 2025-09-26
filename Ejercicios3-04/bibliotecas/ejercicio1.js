@@ -2,7 +2,7 @@
 
 //El código del ejercicio está en esta función para no ponerlo directamente en main.js.
 const ejercicio1 = () => {
-    let nombres = ["Teinkiel", "Alerak", "Tetra", "Multer", "Heikko"];
+    const nombres = ["Teinkiel", "Alerak", "Tetra", "Multer", "Heikko"];
 
     nombres.map((e, i) => {
         console.log(`${e} en mayúsculas es ${e.toUpperCase()}.`);
