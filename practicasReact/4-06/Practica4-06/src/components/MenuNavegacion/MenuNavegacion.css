@@ -1,0 +1,17 @@
+.menu-navegacion_enlace {
+    color: rgb(150, 150, 150);
+    text-decoration: underline;
+    margin: 5px;
+    padding: 5px;
+    background-color: rgb(41, 41, 41);
+    border-radius: 3px;
+}
+.menu-navegacion_enlace:hover {
+    color:white;
+}
+.menu-navegacion_principal {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 7px;
+    background-color: rgb(70, 70, 70);
+}

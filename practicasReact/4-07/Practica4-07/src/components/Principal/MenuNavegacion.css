@@ -1,0 +1,13 @@
+.menu-navegacion_principal {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 7px;
+    background-color: rgb(70, 70, 70);
+
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}

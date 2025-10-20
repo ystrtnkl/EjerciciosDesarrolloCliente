@@ -1,7 +1,7 @@
 .interprete_principal {
     background-color: #f0f0f0;
     border-radius: 8px;
-    border: 2px solid rgb(230, 230, 230);
+    border: 2px solid rgb(48, 48, 48);
     padding: 10px;
     color: black;
     margin: 10px;
@@ -12,8 +12,8 @@
     margin: 5px;
     border-radius: 20%;
     margin-right: 15px;
-    width: 100px;
-    height: 100px;
+    width: 128px;
+    height: 128px;
 }
 .interprete_nombre {
     font-weight: bold;

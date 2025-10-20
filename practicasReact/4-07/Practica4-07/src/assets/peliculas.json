@@ -1,0 +1,326 @@
+{
+    "peliculas": [
+        {
+            "id": 1,
+            "titulo": "El eco del silencio",
+            "direccion": ["Lucía Ramírez"],
+            "interpretes": [
+                {"nombre": "Carlos Méndez", "biografia": "Actor español reconocido por su versatilidad y papeles intensos.", "urlImagen": "https://i.ibb.co/qLKfzMyd/A0.png"},
+                {"nombre": "Sofía Calderón", "biografia": "Actriz mexicana con una amplia carrera en cine independiente.", "urlImagen": "https://i.ibb.co/LX9hVZK9/A1.png"},
+                {"nombre": "Diego Salvatierra", "biografia": "Conocido por sus papeles cómicos en televisión.", "urlImagen": "https://i.ibb.co/bRjTHkF1/A2.png"}
+            ],
+            "resumen": "Un periodista se enfrenta a su pasado mientras investiga un caso de corrupción.",
+            "urlPortada": "https://i.ibb.co/rG210mpf/B0.png",
+            "facturado": 1203.75,
+            "agnoExibicion": 2023
+        },
+        {
+            "id": 2,
+            "titulo": "Horizonte perdido",
+            "direccion": ["Andrés Villegas", "María Pujol"],
+            "interpretes": [
+                {"nombre": "Clara Jiménez", "biografia": "Ganadora de varios premios internacionales por sus actuaciones dramáticas.", "urlImagen": "https://i.ibb.co/LztKGkG7/A3.png"},
+                {"nombre": "Raúl Ortega", "biografia": "Actor emergente conocido por su energía en pantalla.", "urlImagen": "https://i.ibb.co/gZZCBvYg/A4.png"},
+                {"nombre": "Beatriz León", "biografia": "Secundaria habitual en producciones de época.", "urlImagen": "https://i.ibb.co/B2msPqL4/A5.png"}
+            ],
+            "resumen": "Una arqueóloga descubre un secreto que podría cambiar la historia.",
+            "urlPortada": "https://i.ibb.co/4xcRcp4/B1.png",
+            "facturado": 7890.20,
+            "agnoExibicion": 2013
+        },
+        {
+            "id": 3,
+            "titulo": "Sombras en el tiempo",
+            "direccion": ["Ricardo Esteve"],
+            "interpretes": [
+                {"nombre": "Daniel Cortés", "biografia": "Actor chileno con gran experiencia en teatro.", "urlImagen": "https://i.ibb.co/KczrctpM/A6.png"},
+                {"nombre": "Elena Robledo", "biografia": "Actriz argentina que combina cine, televisión y doblaje.", "urlImagen": "https://i.ibb.co/zh7F0HD6/A7.png"},
+                {"nombre": "Tomás Vega", "biografia": "Conocido por su trabajo en thrillers psicológicos.", "urlImagen": "https://i.ibb.co/ym2FnggB/A8.png"}
+            ],
+            "resumen": "Un reloj antiguo conecta a dos personas de épocas diferentes.",
+            "urlPortada": "https://i.ibb.co/nGDkbvJ/B2.png",
+            "facturado": 4321.50,
+            "agnoExibicion": 2021
+        },
+        {
+            "id": 4,
+            "titulo": "La lluvia eterna",
+            "direccion": ["Marta López"],
+            "interpretes": [
+                {"nombre": "Lucía Torres", "biografia": "Actriz española con una fuerte presencia en dramas románticos.", "urlImagen": "https://i.ibb.co/tMj5nvBr/A9.png"},
+                {"nombre": "Adrián Suárez", "biografia": "Actor uruguayo conocido por su intensidad emocional.", "urlImagen": "https://i.ibb.co/qLKfzMyd/A0.png"},
+                {"nombre": "Fernando Díaz", "biografia": "Ha participado en numerosas producciones latinoamericanas.", "urlImagen": "https://i.ibb.co/LX9hVZK9/A1.png"}
+            ],
+            "resumen": "Una historia de amor y pérdida en una ciudad donde nunca deja de llover.",
+            "urlPortada": "https://i.ibb.co/9mKpMtJs/B3.png",
+            "facturado": 2560.90,
+            "agnoExibicion": 1973
+        },
+        {
+            "id": 5,
+            "titulo": "La paradoja del destino",
+            "direccion": ["Gonzalo Pérez", "Valeria Canto"],
+            "interpretes": [
+                {"nombre": "Javier Ramos", "biografia": "Actor veterano de cine y teatro.", "urlImagen": "https://i.ibb.co/LX9hVZK9/A1.png"},
+                {"nombre": "Ana Beltrán", "biografia": "Actriz reconocida por su papel en la serie 'Camino al cielo'.", "urlImagen": "https://i.ibb.co/bRjTHkF1/A2.png"},
+                {"nombre": "Pablo Gutiérrez", "biografia": "Actor de reparto habitual en comedias.", "urlImagen": "https://i.ibb.co/LztKGkG7/A3.png"}
+            ],
+            "resumen": "Un científico descubre que puede alterar su pasado, pero a un alto costo.",
+            "urlPortada": "https://i.ibb.co/SwGsPndT/B4.png",
+            "facturado": 6012.00,
+            "agnoExibicion": 2019
+        },
+        {
+            "id": 6,
+            "titulo": "Ciudad sin nombre",
+            "direccion": ["Laura Gadea"],
+            "interpretes": [
+                {"nombre": "Ernesto Fuentes", "biografia": "Actor que debutó en teatro independiente.", "urlImagen": "https://i.ibb.co/gZZCBvYg/A4.png"},
+                {"nombre": "Natalia Ruiz", "biografia": "Protagonista de varias producciones internacionales.", "urlImagen": "https://i.ibb.co/B2msPqL4/A5.png"},
+                {"nombre": "Marcos Gil", "biografia": "Actor y músico español.", "urlImagen": "https://i.ibb.co/KczrctpM/A6.png"}
+            ],
+            "resumen": "Un detective busca a una persona desaparecida en una ciudad distópica.",
+            "urlPortada": "https://i.ibb.co/Y4d0nHZV/B5.png",
+            "facturado": 9876.90,
+            "agnoExibicion": 2023
+        },
+        {
+            "id": 7,
+            "titulo": "El último viaje",
+            "direccion": ["Antonio Ibáñez"],
+            "interpretes": [
+                {"nombre": "Cecilia Navarro", "biografia": "Actriz chilena, conocida por su papel en 'El Retorno'.", "urlImagen": "https://i.ibb.co/zh7F0HD6/A7.png"},
+                {"nombre": "Luis Martínez", "biografia": "Actor de acción con una larga trayectoria en Hollywood.", "urlImagen": "https://i.ibb.co/ym2FnggB/A8.png"},
+                {"nombre": "Gabriel Peña", "biografia": "Secundario habitual en películas de ciencia ficción.", "urlImagen": "https://i.ibb.co/tMj5nvBr/A9.png"}
+            ],
+            "resumen": "Una nave espacial parte en busca de un nuevo hogar para la humanidad.",
+            "urlPortada": "https://i.ibb.co/Bx8t9LV/B6.png",
+            "facturado": 15432.75,
+            "agnoExibicion": 2024
+        },
+        {
+            "id": 8,
+            "titulo": "Luz de invierno",
+            "direccion": ["Carmen Ferrer"],
+            "interpretes": [
+                {"nombre": "Marta Cuevas", "biografia": "Actriz española galardonada por su sensibilidad interpretativa.", "urlImagen": "https://i.ibb.co/LX9hVZK9/A1.png"},
+                {"nombre": "Óscar Pérez", "biografia": "Actor de reparto en dramas y thrillers.", "urlImagen": "https://i.ibb.co/bRjTHkF1/A2.png"},
+                {"nombre": "Inés Romero", "biografia": "Actriz joven con gran proyección internacional.", "urlImagen": "https://i.ibb.co/LztKGkG7/A3.png"}
+            ],
+            "resumen": "Una familia se reúne durante las fiestas para enfrentar secretos del pasado.",
+            "urlPortada": "https://i.ibb.co/4xcRcp4/B1.png",
+            "facturado": 3980.10,
+            "agnoExibicion": 1879
+        },
+        {
+            "id": 9,
+            "titulo": "Código fantasma",
+            "direccion": ["Alberto Molina"],
+            "interpretes": [
+                {"nombre": "Víctor Sánchez", "biografia": "Actor especializado en thrillers tecnológicos.", "urlImagen": "https://i.ibb.co/gZZCBvYg/A4.png"},
+                {"nombre": "Patricia Gómez", "biografia": "Actriz argentina con experiencia en acción.", "urlImagen": "https://i.ibb.co/B2msPqL4/A5.png"},
+                {"nombre": "Jorge Ramal", "biografia": "Conocido por su papel en 'La sombra del hacker'.", "urlImagen": "https://i.ibb.co/KczrctpM/A6.png"}
+            ],
+            "resumen": "Un programador descubre un algoritmo que predice muertes futuras.",
+            "urlPortada": "https://i.ibb.co/nGDkbvJ/B2.png",
+            "facturado": 8230.00,
+            "agnoExibicion": 2011
+        },
+        {
+            "id": 10,
+            "titulo": "Mar abierto",
+            "direccion": ["Esteban Calderón"],
+            "interpretes": [
+                {"nombre": "Paula Sánchez", "biografia": "Actriz uruguaya, amante del cine de aventuras.", "urlImagen": "https://i.ibb.co/zh7F0HD6/A7.png"},
+                {"nombre": "Rafael García", "biografia": "Actor reconocido por su carisma y humor.", "urlImagen": "https://i.ibb.co/ym2FnggB/A8.png"},
+                {"nombre": "Camila López", "biografia": "Ha participado en producciones internacionales de drama.", "urlImagen": "https://i.ibb.co/tMj5nvBr/A9.png"}
+            ],
+            "resumen": "Una tripulación queda varada en el océano tras una tormenta.",
+            "urlPortada": "https://i.ibb.co/9mKpMtJs/B3.png",
+            "facturado": 5421.33,
+            "agnoExibicion": 1994
+        },
+        {
+            "id": 11,
+            "titulo": "El jardín secreto",
+            "direccion": ["Andrea Torres"],
+            "interpretes": [
+                {"nombre": "Sara Luna", "biografia": "Actriz joven con gran talento en dramas familiares.", "urlImagen": "https://i.ibb.co/LX9hVZK9/A1.png"},
+                {"nombre": "Pedro Valdés", "biografia": "Actor veterano de cine y teatro.", "urlImagen": "https://i.ibb.co/bRjTHkF1/A2.png"},
+                {"nombre": "Julia Robres", "biografia": "Actriz de reparto habitual en producciones infantiles.", "urlImagen": "https://i.ibb.co/LztKGkG7/A3.png"}
+            ],
+            "resumen": "Una niña descubre un jardín mágico detrás de la casa de su abuela.",
+            "urlPortada": "https://i.ibb.co/SwGsPndT/B4.png",
+            "facturado": 3012.50,
+            "agnoExibicion": 1988
+        },
+        {
+            "id": 12,
+            "titulo": "Memorias de hierro",
+            "direccion": ["Rafael Quintana"],
+            "interpretes": [
+                {"nombre": "Martín Díaz", "biografia": "Actor argentino, protagonista de varios dramas históricos.", "urlImagen": "https://i.ibb.co/gZZCBvYg/A4.png"},
+                {"nombre": "Claudia Pérez", "biografia": "Actriz chilena con gran presencia escénica.", "urlImagen": "https://i.ibb.co/B2msPqL4/A5.png"},
+                {"nombre": "Juan Pablo Lara", "biografia": "Secundario en películas de época.", "urlImagen": "https://i.ibb.co/KczrctpM/A6.png"}
+            ],
+            "resumen": "Un herrero del siglo XIX lucha por mantener su legado familiar durante la revolución.",
+            "urlPortada": "https://i.ibb.co/Y4d0nHZV/B5.png",
+            "facturado": 6799.40,
+            "agnoExibicion": 2000
+        },
+        {
+            "id": 13,
+            "titulo": "Entre sombras",
+            "direccion": ["Isabel Moreno"],
+            "interpretes": [
+                {"nombre": "Felipe Castro", "biografia": "Actor colombiano con gran trayectoria en cine negro.", "urlImagen": "https://i.ibb.co/zh7F0HD6/A7.png"},
+                {"nombre": "Lola Rivas", "biografia": "Actriz española de fuerte carácter interpretativo.", "urlImagen": "https://i.ibb.co/ym2FnggB/A8.png"},
+                {"nombre": "Miguel Luna", "biografia": "Reconocido por papeles en series policíacas.", "urlImagen": "https://i.ibb.co/tMj5nvBr/A9.png"}
+            ],
+            "resumen": "Un investigador se infiltra en una red criminal para descubrir a su propio hermano.",
+            "urlPortada": "https://i.ibb.co/Bx8t9LV/B6.png",
+            "facturado": 9345.00,
+            "agnoExibicion": 2023
+        },
+        {
+            "id": 14,
+            "titulo": "El vuelo del halcón",
+            "direccion": ["Nicolás Bravo"],
+            "interpretes": [
+                {"nombre": "Adriana Soler", "biografia": "Actriz argentina con experiencia en acción y drama.", "urlImagen": "https://i.ibb.co/LX9hVZK9/A1.png"},
+                {"nombre": "Julio Romero", "biografia": "Actor español apasionado por los papeles de héroe.", "urlImagen": "https://i.ibb.co/bRjTHkF1/A2.png"},
+                {"nombre": "Laura Pinto", "biografia": "Actriz secundaria en películas de aventuras.", "urlImagen": "https://i.ibb.co/LztKGkG7/A3.png"}
+            ],
+            "resumen": "Un piloto rebelde lidera una resistencia contra un régimen autoritario.",
+            "urlPortada": "https://i.ibb.co/Y4d0nHZV/B5.png",
+            "facturado": 11020.60,
+            "agnoExibicion": 2025
+        },
+        {
+            "id": 15,
+            "titulo": "Voces del pasado",
+            "direccion": ["Patricia Navarro"],
+            "interpretes": [
+                {"nombre": "Héctor Ruiz", "biografia": "Actor español con amplia carrera en el teatro clásico.", "urlImagen": "https://i.ibb.co/gZZCBvYg/A4.png"},
+                {"nombre": "Lucía Fernández", "biografia": "Actriz madrileña galardonada por su papel en 'Ecos'.", "urlImagen": "https://i.ibb.co/B2msPqL4/A5.png"},
+                {"nombre": "Samuel Torres", "biografia": "Actor emergente en el cine independiente.", "urlImagen": "https://i.ibb.co/KczrctpM/A6.png"}
+            ],
+            "resumen": "Un arqueólogo comienza a escuchar voces del pasado tras hallar un antiguo artefacto.",
+            "urlPortada": "https://i.ibb.co/4xcRcp4/B1.png",
+            "facturado": 7523.45,
+            "agnoExibicion": 2015
+        },
+        {
+            "id": 16,
+            "titulo": "Niebla en la montaña",
+            "direccion": ["Roberto García"],
+            "interpretes": [
+                {"nombre": "Alicia Vera", "biografia": "Actriz con experiencia en cine de suspenso.", "urlImagen": "https://i.ibb.co/zh7F0HD6/A7.png"},
+                {"nombre": "Mario Soto", "biografia": "Actor chileno que combina humor y drama.", "urlImagen": "https://i.ibb.co/ym2FnggB/A8.png"},
+                {"nombre": "Daniela Campos", "biografia": "Reconocida por su papel en 'Sueños de invierno'.", "urlImagen": "https://i.ibb.co/tMj5nvBr/A9.png"}
+            ],
+            "resumen": "Un grupo de excursionistas desaparece en una montaña envuelta en misterio.",
+            "urlPortada": "https://i.ibb.co/nGDkbvJ/B2.png",
+            "facturado": 4890.10,
+            "agnoExibicion": 2006
+        },
+        {
+            "id": 17,
+            "titulo": "El faro del fin del mundo",
+            "direccion": ["Elena Gutiérrez"],
+            "interpretes": [
+                {"nombre": "Gonzalo Prieto", "biografia": "Actor de carácter con trayectoria en dramas marítimos.", "urlImagen": "https://i.ibb.co/LX9hVZK9/A1.png"},
+                {"nombre": "Marta Aguilar", "biografia": "Actriz española ganadora de varios premios nacionales.", "urlImagen": "https://i.ibb.co/bRjTHkF1/A2.png"},
+                {"nombre": "Jorge Méndez", "biografia": "Actor joven con gran proyección internacional.", "urlImagen": "https://i.ibb.co/LztKGkG7/A3.png"}
+            ],
+            "resumen": "Un guardián de faro enfrenta su pasado cuando una tormenta arrastra un barco desconocido.",
+            "urlPortada": "https://i.ibb.co/9mKpMtJs/B3.png",
+            "facturado": 7100.90,
+            "agnoExibicion": 1967
+        },
+        {
+            "id": 18,
+            "titulo": "Fragmentos de un sueño",
+            "direccion": ["Carolina Soto"],
+            "interpretes": [
+                {"nombre": "Andrés Luna", "biografia": "Actor argentino especializado en papeles románticos.", "urlImagen": "https://i.ibb.co/gZZCBvYg/A4.png"},
+                {"nombre": "Rocío Márquez", "biografia": "Actriz madrileña de gran presencia escénica.", "urlImagen": "https://i.ibb.co/B2msPqL4/A5.png"},
+                {"nombre": "Iván Herrera", "biografia": "Actor secundario en dramas psicológicos.", "urlImagen": "https://i.ibb.co/KczrctpM/A6.png"}
+            ],
+            "resumen": "Una mujer revive fragmentos de su vida a través de sueños lúcidos.",
+            "urlPortada": "https://i.ibb.co/SwGsPndT/B4.png",
+            "facturado": 5843.70,
+            "agnoExibicion": 2013
+        },
+        {
+            "id": 19,
+            "titulo": "Sangre fría",
+            "direccion": ["Tomás Rivas"],
+            "interpretes": [
+                {"nombre": "Nuria Pardo", "biografia": "Actriz española famosa por papeles de acción.", "urlImagen": "https://i.ibb.co/zh7F0HD6/A7.png"},
+                {"nombre": "Hugo Vidal", "biografia": "Actor uruguayo especializado en thrillers.", "urlImagen": "https://i.ibb.co/ym2FnggB/A8.png"},
+                {"nombre": "Carla Domínguez", "biografia": "Actriz secundaria en películas de crimen.", "urlImagen": "https://i.ibb.co/tMj5nvBr/A9.png"}
+            ],
+            "resumen": "Un asesino a sueldo debe decidir entre cumplir su misión o salvar a su familia.",
+            "urlPortada": "https://i.ibb.co/Bx8t9LV/B6.png",
+            "facturado": 13200.00,
+            "agnoExibicion": 2003
+        },
+        {
+            "id": 20,
+            "titulo": "El reflejo de la luna",
+            "direccion": ["Verónica Lozano"],
+            "interpretes": [
+                {"nombre": "Claudia Mora", "biografia": "Actriz colombiana de renombre internacional.", "urlImagen": "https://i.ibb.co/LX9hVZK9/A1.png"},
+                {"nombre": "Rodrigo Peña", "biografia": "Actor peruano con amplia experiencia en dramas.", "urlImagen": "https://i.ibb.co/bRjTHkF1/A2.png"},
+                {"nombre": "Elisa Navas", "biografia": "Actriz joven con formación en arte escénico.", "urlImagen": "https://i.ibb.co/LztKGkG7/A3.png"}
+            ],
+            "resumen": "Dos desconocidos descubren que comparten los mismos sueños.",
+            "urlPortada": "https://i.ibb.co/Bx8t9LV/B6.png",
+            "facturado": 4299.99,
+            "agnoExibicion": 2005
+        },
+        {
+            "id": 21,
+            "titulo": "La sombra del bosque",
+            "direccion": ["Ignacio Ortega"],
+            "interpretes": [
+                {"nombre": "Julia Cid", "biografia": "Actriz española conocida por su trabajo en terror.", "urlImagen": "https://i.ibb.co/gZZCBvYg/A4.png"},
+                {"nombre": "Óscar Vidal", "biografia": "Actor joven con gran potencial en cine de misterio.", "urlImagen": "https://i.ibb.co/B2msPqL4/A5.png"},
+                {"nombre": "Rebeca Blanco", "biografia": "Actriz secundaria en dramas de suspense.", "urlImagen": "https://i.ibb.co/KczrctpM/A6.png"}
+            ],
+            "resumen": "Un grupo de amigos se enfrenta a fuerzas antiguas en un bosque maldito.",
+            "urlPortada": "https://i.ibb.co/Y4d0nHZV/B5.png",
+            "facturado": 6523.25,
+            "agnoExibicion": 2018
+        },
+        {
+            "id": 22,
+            "titulo": "El pacto",
+            "direccion": ["Raúl Hernández"],
+            "interpretes": [
+                {"nombre": "Andrea Muñoz", "biografia": "Actriz chilena reconocida por sus papeles intensos.", "urlImagen": "https://i.ibb.co/zh7F0HD6/A7.png"},
+                {"nombre": "Carlos Vargas", "biografia": "Actor español con una sólida carrera en cine de terror.", "urlImagen": "https://i.ibb.co/ym2FnggB/A8.png"},
+                {"nombre": "Lucía Pardo", "biografia": "Actriz de reparto en películas de fantasía.", "urlImagen": "https://i.ibb.co/tMj5nvBr/A9.png"}
+            ],
+            "resumen": "Tres amigos hacen un pacto que los perseguirá toda su vida.",
+            "urlPortada": "https://i.ibb.co/4xcRcp4/B1.png",
+            "facturado": 7430.50,
+            "agnoExibicion": 2016
+        },
+        {
+            "id": 23,
+            "titulo": "Arena y fuego",
+            "direccion": ["Eduardo Molina"],
+            "interpretes": [
+                {"nombre": "Sara Blanco", "biografia": "Actriz española especializada en aventuras históricas.", "urlImagen": "https://i.ibb.co/LX9hVZK9/A1.png"},
+                {"nombre": "Pedro Lozano", "biografia": "Actor argentino con experiencia en cine épico.", "urlImagen": "https://i.ibb.co/bRjTHkF1/A2.png"},
+                {"nombre": "Eva Torres", "biografia": "Actriz de reparto en producciones medievales.", "urlImagen": "https://i.ibb.co/LztKGkG7/A3.png"}
+            ],
+            "resumen": "Una gladiadora busca libertad en el Imperio romano.",
+            "urlPortada": "https://i.ibb.co/rG210mpf/B0.png",
+            "facturado": 15050.20,
+            "agnoExibicion": 2023
+        }
+    ]
+}

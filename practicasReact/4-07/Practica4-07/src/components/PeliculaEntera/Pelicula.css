@@ -1,0 +1,44 @@
+.pelicula_prnicipal {
+    border-radius: 8px;
+    border: 5px solid rgb(32, 32, 32);
+    background-color: #f0f0f0;
+    margin: 30px;
+    min-width: 300px;
+}
+.pelicula_datos {
+    padding: 20px;
+    color: black;
+    padding-bottom: 0px;
+    display: flex;
+}
+.pelicula_foto img {
+    margin: 5px;
+    border-radius: 10%;
+    margin-right: 15px;
+    width: 128px;
+    height: 256px;
+}
+.pelicula_titulo {
+    font-weight: bolder;
+    font-size: 1.5em;
+}
+.pelicula_resumen {
+    font-style: italic;
+    max-height: 300px;
+    overflow: scroll;
+    color: black;
+    
+}
+button {
+    margin: 20px;
+    background-color: cornsilk;
+    border: 1px solid black;
+    color: black;
+}
+button.pelicula_boton-deseleccionado {
+    color: white;
+    background-color: slategrey;
+}
+.oculto {
+    display: none;
+}
