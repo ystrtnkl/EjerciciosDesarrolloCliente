@@ -1,7 +1,7 @@
 import React from 'react';
 import peliculasOriginal from '../assets/peliculas.json';
 import Pelicula from '../components/PeliculaEntera/Pelicula.jsx';
-import Interprete from '../../../../4-05/Practica4-05/src/components/Interprete/Interprete.jsx';
+import Interprete from '../components/PeliculaEntera/Interprete.jsx';
 //import './Peliculas.css';
 
 function Peliculas() {
@@ -21,17 +21,19 @@ function Peliculas() {
         <h2>Esta es la página de Peliculas.</h2>
         <p>Aquí puedes ver todas las películas a la vez.</p>
         
-        {peliculas.length === 0 ? "Sin películas" : peliculas.map((e, i) => {
+        <div className="lista-peliculas">
+          {peliculas.length === 0 ? "Sin películas" : peliculas.map((e, i) => {
           return (
             <Pelicula key={i} pelicula={e}>
               {e.interpretes.map((e, i) => {
                 return (
                   <Interprete key={i} interprete={e} />
                 )
-              })}
+              }) ?? "Sin intérpretes"}
             </Pelicula>
           );
         })}
+        </div>
         
 
         {/*<Pelicula facturado="5948.27" titulo="Primera película" direccion={["Director maestro", "Director principiante", "Otro director"]} resumen="La primera película de todas." portada="https://cataas.com/cat/orange">
