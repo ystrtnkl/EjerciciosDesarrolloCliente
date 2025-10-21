@@ -2,11 +2,14 @@ import React, { useRef } from 'react';
 import './PeliculaDetalle.css';
 import Elenco from './Elenco.jsx';
 import Taquilla from './Taquilla.jsx';
+import { Link } from 'react-router-dom';
 
 //Este componente representa una película entera con sus datos, está reciclado de otro ejercicio.
 const PeliculaDetalle = (props) => {
 
   const { id, titulo, direccion, resumen, urlPortada, facturado, agnoExibicion } = props.pelicula;
+
+  const expandidoPorDefecto = props.expandido ? true : false;
 
   //Referencias para los botones y los componentes que se alternan, así como funciones para esto mismo.
   const elencoRef = useRef(null);
@@ -22,21 +25,25 @@ const PeliculaDetalle = (props) => {
     taquillaBotonRef.current.classList.toggle("pelicula_boton-deseleccionado");
   }
 
+
   return (
     <div className="pelicula-detalle_prnicipal">
       <div className="pelicula-detalle_datos">
         <div className="pelicula-detalle_foto"><img src={urlPortada ?? ""} /></div>
         <div>
-          <h3 className="pelicula-detalle_titulo">{titulo ?? "Sin título"}</h3>
+          
+          <h3 className="pelicula-detalle_titulo">
+            {expandidoPorDefecto ? (titulo ?? "Sin título") : (<Link to={`/peliculas/${id}`}>{titulo ?? "Sin título"}</Link>)}
+          </h3>
           <p>Dirección: {direccion?.join(", ") ?? "Nadie"}</p>
           <p>Año de exibición: {agnoExibicion ?? "????"}</p>
           <p>ID Interno: {id}</p>
           <p className="pelicula-detalle_resumen">{resumen ?? "Sin resumen"}</p>
         </div>
       </div>
-      <button className="pelicula-detalle_boton-deseleccionado" ref={elencoBotonRef} onClick={alternarElenco}>Elenco</button>
-      <button className="pelicula-detalle_boton-deseleccionado" ref={taquillaBotonRef} onClick={alternarTaquilla}>Taquilla</button>
-      <div ref={elencoRef} className="oculto">
+      <button className={expandidoPorDefecto ? "" : "pelicula-detalle_boton-deseleccionado"} ref={elencoBotonRef} onClick={alternarElenco}>Elenco</button>
+      <button className={expandidoPorDefecto ? "" : "pelicula-detalle_boton-deseleccionado"} ref={taquillaBotonRef} onClick={alternarTaquilla}>Taquilla</button>
+      <div ref={elencoRef} className={expandidoPorDefecto ? "" : "oculto"}>
         <Elenco> 
         {props.children}    
         </Elenco>

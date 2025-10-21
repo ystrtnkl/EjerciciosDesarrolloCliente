@@ -7,6 +7,7 @@ import Galeria from '../pages/Galeria.jsx';
 import Interpretes from '../pages/Interpretes.jsx';
 import Peliculas from '../pages/Peliculas.jsx';
 import PeliculaConcreta from '../pages/PeliculaConcreta.jsx';
+import InterpreteConcreto from '../pages/InterpreteConcreto.jsx'
 
 //Enrutador que lleva a las distintas páginas de la aplicación, incluyendo un componente en caso de no encontrar la ruta.
 function Rutas() {
@@ -19,9 +20,9 @@ function Rutas() {
             <Route path="/acercaDe" element={<AcercaDe />} />
             <Route path="/galeria" element={<Galeria />} />
             <Route path="/interpretes" element={<Interpretes />} />
-            <Route path="/peliculas" element={<Peliculas />}>
-              <Route path="/peliculas/:id" element={<PeliculaConcreta />} />
-            </Route>
+            <Route path="/interpretes/:id" element={<InterpreteConcreto />} />
+            <Route path="/peliculas" element={<Peliculas />} />
+            <Route path="/peliculas/:id" element={<PeliculaConcreta />} />
             <Route path="/*" element={<Error />} />
         </Routes>
     </>

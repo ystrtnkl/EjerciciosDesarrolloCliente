@@ -2,18 +2,12 @@ import React from 'react';
 import peliculasOriginal from '../assets/peliculas.json';
 import Pelicula from '../components/PeliculaEntera/Pelicula.jsx';
 import Interprete from '../components/PeliculaEntera/Interprete.jsx';
+import validaciones from '../libraries/validacionPeliculas.js'
 //import './Peliculas.css';
 
 function Peliculas() {
   
-  
-
-  const filtrarCorrectos = (listaPeliculas) => {
-    
-      return [...listaPeliculas];
-  }
-
-  const peliculas = filtrarCorrectos(peliculasOriginal.peliculas);
+  const peliculas = validaciones.filtrarPeliculasValidas(peliculasOriginal.peliculas);
 
 
   return (

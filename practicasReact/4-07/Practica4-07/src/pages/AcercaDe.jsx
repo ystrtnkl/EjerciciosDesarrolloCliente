@@ -5,7 +5,8 @@ function AcercaDe() {
 
   return (
     <>
-        <h2>Esta es la página de AcercaDe.</h2>
+        <h2>Esta es la página de Acerca de.</h2>
+        <p>pues info</p>
     </>
   )
 }

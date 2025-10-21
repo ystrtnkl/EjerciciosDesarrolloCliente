@@ -14,8 +14,9 @@
 
 .pelicula_portada-contraida {
     margin: 5px;
-    width: 64px;
-    height: 128px;
+    width: 256px;
+    height: 512px;
+    border-radius: 5px;
 }
 
 .pelicula_boton-detalles {
