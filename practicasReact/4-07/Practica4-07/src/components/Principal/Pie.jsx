@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Pie.css';
 
-//Menu de navegación sencillo para ir a las páginas usando Link en lugar de <a>.
+//Footer de la página que también puede redirigir al inicio.
 function Pie() {
 
   return (

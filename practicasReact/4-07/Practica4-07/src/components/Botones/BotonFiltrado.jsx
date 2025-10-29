@@ -1,17 +1,20 @@
-import React from 'react';
+import React from "react";
 
-//Botón sencillo para volver al inicio (/) usando el hook de useNavigate.
+//Botón genérico para filtrar datos
 function BotonFiltrado(props) {
 
-    const funcionIndefinida = () => {
-        console.log("Este botón no filtra nada.");
-    }
+  //Función que se ejecutaría en caso de no pasar ninguna por props.
+  const funcionIndefinida = () => {
+    console.log("Este botón no filtra nada.");
+  };
 
   return (
     <>
-        <button onClick={props.funcion ?? funcionIndefinida}>Filtrar por {props.campo ?? "Campo indefinido"}</button>
+      <button onClick={props.funcion ?? funcionIndefinida}>
+        {props.campo ?? "Campo indefinido"}
+      </button>
     </>
-  )
+  );
 }
 
 export default BotonFiltrado;

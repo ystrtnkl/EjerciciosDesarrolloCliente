@@ -1,15 +1,16 @@
 import React from 'react';
 import './Taquilla.css';
 
+//Componente simple para mostrar lo recaudado por una película.
 const Taquilla = (props) => {
 
-    //El dinero recaudado se adapta al formato de euros en España.
-    const precioFormateado = props.facturado.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' }) ?? "Desconocido";
+  //El dinero recaudado se adapta al formato de euros en España.
+  const precioFormateado = props.facturado.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' }) ?? "Desconocido";
 
   return (
-        <div className="taquilla_principal">
-            <p>Recaudación total: <b>{precioFormateado}</b></p>
-        </div>
+    <div className="taquilla_principal">
+      <p>Recaudación total: <b>{precioFormateado}</b></p>
+    </div>
   )
 }
 

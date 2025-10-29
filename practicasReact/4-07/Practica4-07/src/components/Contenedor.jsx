@@ -6,7 +6,7 @@ const Contenedor = (props) => {
 
   return (
     <div className="contenedor_principal">
-        {props.children}
+      {props.children}
     </div>
   )
 }

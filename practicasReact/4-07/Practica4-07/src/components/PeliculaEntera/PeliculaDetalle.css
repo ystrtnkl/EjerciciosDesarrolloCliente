@@ -5,12 +5,14 @@
     margin: 10px;
     min-width: 300px;
 }
+
 .pelicula-detalle_datos {
     padding: 20px;
     color: black;
     padding-bottom: 0px;
     display: flex;
 }
+
 .pelicula-detalle_foto img {
     margin: 5px;
     border-radius: 10%;
@@ -18,10 +20,12 @@
     width: 128px;
     height: 256px;
 }
+
 .pelicula-detalle_titulo {
     font-weight: bolder;
     font-size: 1.5em;
 }
+
 .pelicula-detalle_resumen {
     font-style: italic;
     max-height: 300px;
@@ -29,16 +33,19 @@
     color: black;
     
 }
+
 button {
     margin: 20px;
     background-color: cornsilk;
     border: 1px solid black;
     color: black;
 }
+
 button.pelicula-detalle_boton-deseleccionado {
     color: white;
     background-color: slategrey;
 }
+
 .oculto {
     display: none;
 }

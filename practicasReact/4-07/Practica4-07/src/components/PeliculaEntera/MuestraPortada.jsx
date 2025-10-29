@@ -1,17 +1,20 @@
 import React from 'react';
 import './MuestraPortada.css';
-import BotonFiltrado from '../Botones/BotonFiltrado';
+import { Link } from 'react-router-dom';
 
-//Este componente representa una película entera con sus datos, está reciclado de otro ejercicio.
+//Componente para mostrar la portada de una película en la galería, puede redireccionar a la página de esa película.
 const MuestraPortada = (props) => {
 
-    
+  const { urlPortada, titulo, direccion, id } = props.pelicula;
 
   return (
-    <div>
-        <img src={props.urlPortada} alt="" />
+    <div className="muestra-portada_principal">
+      <Link to={`/peliculas/${id}`} >
+        <p>{titulo}, de {direccion.join(", ")}</p>
+        <img src={urlPortada} alt="" />
+      </Link>
     </div>
   )
 }
-       
+
 export default MuestraPortada;

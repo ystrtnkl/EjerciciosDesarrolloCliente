@@ -1,7 +1,7 @@
 import React from 'react';
 import VolverInicio from '../components/Botones/VolverInicio';
-//import './ErrorRuta.css';
 
+//Página para el error de ruta, en caso de no encontrar dicha ruta.
 function Error() {
 
   return (

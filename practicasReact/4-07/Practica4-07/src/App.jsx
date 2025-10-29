@@ -6,6 +6,7 @@ import Pie from './components/Principal/Pie.jsx';
 import Contenedor from './components/Contenedor.jsx';
 import Contenido from './components/Contenido.jsx';
 
+//En app se llama a los elementos que estarán disponibles siempre, como la cabecera, el menú de navegación o el footer.
 function App() {
 
   return (

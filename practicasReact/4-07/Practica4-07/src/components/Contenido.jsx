@@ -1,12 +1,12 @@
 import React from 'react';
 import Rutas from '../routes/Rutas';
 
-//Este componente muestra un grupo de actores (o lo que sea que se le pase como children)
+//Componente donde se mostrará en sí la página haciendo el uso de rutas.
 const Contenedor = () => {
 
   return (
     <div className="contenido_pagina">
-        <Rutas />
+      <Rutas />
     </div>
   )
 }

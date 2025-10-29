@@ -7,13 +7,13 @@ function MenuNavegacion() {
 
   return (
     <>
-        <div className="menu-navegacion_principal">
-            <BotonNavegacion direccion="/" titulo="Inicio" />
-            <BotonNavegacion direccion="/peliculas" titulo="Películas" />
-            <BotonNavegacion direccion="/interpretes" titulo="Intérpretes" />
-            <BotonNavegacion direccion="/galeria" titulo="Galería" />
-            <BotonNavegacion direccion="/acercade" titulo="Acerca de" />
-        </div>
+      <div className="menu-navegacion_principal">
+        <BotonNavegacion direccion="/" titulo="Inicio" />
+        <BotonNavegacion direccion="/peliculas" titulo="Películas" />
+        <BotonNavegacion direccion="/interpretes" titulo="Intérpretes" />
+        <BotonNavegacion direccion="/galeria" titulo="Galería" />
+        <BotonNavegacion direccion="/acercade" titulo="Acerca de" />
+      </div>
     </>
   )
 }
