@@ -1,9 +1,13 @@
 "use strict";
-import { agregarEventoDespliegue } from "./bibliotecas/ejercicio1.js";
 
-//Se usa un querySelector para recoger los elementos pares de igual manera que se hace en CSS.
-//No se usó el getElementsByClassName ya que el enunciado pide agregar el evento a los elementos impares, independientemente de su clase.
-//Se usa el método forEach ya que querySelectorAll devuelve un NodeList, el cual no tiene el método map.
-document.querySelectorAll("main div:nth-child(odd)").forEach(e => {
-    agregarEventoDespliegue(e);
-});
+window.onload = () => {
+    //El evento se aplica al elemento padre para no hacer un evento por cada desplegable.
+    document.getElementsByTagName("MAIN")[0].addEventListener("click", (e) => {
+        //El ejercicio dice que son los elementos pares los que reaccionan al evento (independientemente de su clase), así que se comprueba si coincide con este selector CSS (similar a querySelector).
+        if (e.target.matches("main div:nth-child(odd)")) {
+            //Se entendió que "elemento inmediatamente inferior a él" se refería a su siguiente hermano y no a su hijo, ya que se renderizan de arriba a abajo.
+            //Para que en su lugar aplique el cambio al hijo del elemento, habría que cambiar nextElementSibling por firstChild (así como modificar el HTML).
+            e.target.nextElementSibling.classList.toggle("oculto");
+        }
+    });
+}
