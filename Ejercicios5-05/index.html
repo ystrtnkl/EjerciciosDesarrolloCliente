@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="./estilos/estilo.css">
 </head>
 <body>
-    <form action="">
+    <form name="agregarDisco" id="agregarDisco">
         <fieldset>
+            <ul id="mensajes-error" class="oculto">
+
+            </ul>
             <legend>Agregar disco</legend>
             <label for="nombre">Nombre del disco:</label>
             <input required type="text" id="nombre" name="nombre" placeholder="Ejemplo"><br>
@@ -17,8 +20,8 @@
             <label for="grupo">Grupo o intérprete:</label>
             <input required type="text" id="grupo" name="grupo" placeholder="Un artista o grupo"><br>
             <label for="agno">Año de publicación:</label>
-            <input type="number" id="agno" name="agno" placeholder="2025" min="1" max="2500"><br>
-            <fieldset>
+            <input type="number" id="agno" name="agno" placeholder="2025" min="1000" max="9999"><br>
+            <fieldset name="generos" id="generos">
                 <legend>Géneros</legend>
                 <label for="genero-pop">Pop</label>
                 <input type="checkbox" id="genero-pop" name="genero" value="pop"><br>
@@ -48,11 +51,12 @@
             <label for="localizacion">Localización (código):</label>
             <input type="text" id="localizacion" name="localizacion" placeholder="ES-001AA"><br>
             <label for="localizacion">Prestado:</label>
-            <input type="checkbox" id="prestado" name="prestado"><br>
-            <button id="boton-guardar">Guardar</button>
-            <button id="boton-mostrar">Mostrar</button>
+            <input type="checkbox" id="prestado" name="prestado"><br> 
         </fieldset>
     </form>
+    <button id="boton-guardar">Guardar</button>
+    <button id="boton-mostrar">Mostrar</button>
+    <button id="boton-limpiar">Limpiar</button>
     <script src="./main.js" type="module"></script>
 </body>
 </html>

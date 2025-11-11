@@ -1,0 +1,94 @@
+{
+    "discos": [
+        {
+            "localizacion": "ES-001AA",
+            "nombre": "Nombre de disco uno",
+            "caratula": "https://i.ibb.co/qLKfzMyd/A0.png",
+            "grupo": "Artistas uno",
+            "agno": 2001,
+            "genero": ["rock", "pop"],
+            "prestado": true
+        }, 
+        {
+            "localizacion": "ES-002AA",
+            "nombre": "Nombre de disco dos",
+            "caratula": "https://i.ibb.co/LX9hVZK9/A1.png",
+            "grupo": "Artistas dos",
+            "agno": 2005,
+            "genero": ["rock"],
+            "prestado": false
+        }, 
+        {
+            "localizacion": "ES-003AB",
+            "nombre": "Nombre de disco tres",
+            "caratula": "https://i.ibb.co/bRjTHkF1/A2.png",
+            "grupo": "Artistas uno",
+            "agno": 2009,
+            "genero": ["rock", "clasica"],
+            "prestado": true
+        }, 
+        {
+            "localizacion": "ES-004AA",
+            "nombre": "Nombre de disco cuatro",
+            "caratula": "https://i.ibb.co/LztKGkG7/A3.png",
+            "grupo": "Artistas dos",
+            "agno": 1996,
+            "genero": ["house", "pop"],
+            "prestado": true
+        }, 
+        {
+            "localizacion": "ES-005AA",
+            "nombre": "Nombre de disco cinco",
+            "caratula": "https://i.ibb.co/gZZCBvYg/A4.png",
+            "grupo": "Artistas tres",
+            "agno": 2020,
+            "genero": ["rock", "pop"],
+            "prestado": false
+        }, 
+        {
+            "localizacion": "ES-006CE",
+            "nombre": "Nombre de disco seis",
+            "caratula": "https://i.ibb.co/B2msPqL4/A5.png",
+            "grupo": "Artistas tres",
+            "agno": 1922,
+            "genero": ["rock"],
+            "prestado": false
+        }, 
+        {
+            "localizacion": "ES-007TT",
+            "nombre": "Nombre de disco siete",
+            "caratula": "https://i.ibb.co/KczrctpM/A6.png",
+            "grupo": "Artistas tres",
+            "agno": 2011,
+            "genero": ["rock", "pop"],
+            "prestado": true
+        }, 
+        {
+            "localizacion": "ES-008CA",
+            "nombre": "Nombre de disco ocho",
+            "caratula": "https://i.ibb.co/zh7F0HD6/A7.png",
+            "grupo": "Artistas uno",
+            "agno": 2001,
+            "genero": ["pop"],
+            "prestado": true
+        }, 
+        {
+            "localizacion": "ES-009PE",
+            "nombre": "Nombre de disco nueve",
+            "caratula": "https://i.ibb.co/ym2FnggB/A8.png",
+            "grupo": "Artistas cuatro",
+            "agno": 2007,
+            "genero": ["rock", "pop"],
+            "prestado": false
+        }, 
+        {
+            "localizacion": "ES-010PE",
+            "nombre": "Nombre de disco diez",
+            "caratula": "https://i.ibb.co/tMj5nvBr/A9.png",
+            "grupo": "Artistas tres",
+            "agno": 2021,
+            "genero": ["metal", "pop"],
+            "prestado": true
+        }
+    ]
+}

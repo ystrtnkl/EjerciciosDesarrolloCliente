@@ -1,0 +1,27 @@
+input.error, fieldset.error {
+    border: 2px solid red;
+}
+input {
+    margin: 5px;
+}
+button {
+    margin: 3px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+#mensajes-error {
+    border: 2px solid red;
+    background-color: #fdd;
+    color: red;
+    margin-bottom: 20px;
+}
+#mensajes-error li {
+    color: black;
+    margin: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.oculto {
+    display: none;
+}
