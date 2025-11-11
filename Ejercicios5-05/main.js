@@ -1,6 +1,5 @@
 "use strict";
 import { validarNombreDisco, validarInterpreteOGrupo, validarAgno, validarGenero, validarLocalizacion } from "./bibliotecas/validaciones.js";
-import discosIniciales from "./bibliotecas/discosIniciales.json";
 import { getTodosLosDiscos, guardarDiscos, borrarDisco } from "./bibliotecas/persistencia.js";
 
 window.onload = () => {
@@ -15,7 +14,9 @@ window.onload = () => {
     const inputLocalizacion = formularioAgregar.localizacion;
     const inputPrestado = formularioAgregar.prestado;
     const mensajesError = document.getElementById("mensajes-error");
-    const discosCargados = [...discosIniciales]; //Aquí aparecerán los discos cargados en la página (por defecto los del json).
+    const listaDiscos = document.getElementById("mostrar-discos");
+    let discosCargados = getTodosLosDiscos(); //Aquí aparecerán los discos cargados en la página.
+    //actualizarLista(); //En el ejercicio se especifica que la lista de discos se muestre al pulsar el botón, no cuando cargue la página.
 
     //Devuelve un array con los géneros seleccionados en formato texto.
     const getGenerosSeleccionados = () => {
@@ -66,13 +67,35 @@ window.onload = () => {
         //Se podría haber separado en dos funciones, una que valide los campos y otra que genere los errores, pero esto haría que el código fuese mucho más largo ya que habría que hacer una comprobación por cada campo para agregar o quitar la clase error.
         return errores;
     }
-
     //Se comprueban los campos cada vez que se cambian.
     //Se podría haber hecho que dependiendo del id de e.target se comprobase solo ese campo, pero conviene también tener una manera de comprobarlos todos a la vez (además si se comprueban todos cada vez, los errores también saldrán si se modifican los valores mediante Inspeccionar).
     formularioAgregar.addEventListener("change", comprobarCampos);
 
+    //Actualiza la lista de discos (según los que hay guardados).
+    const actualizarLista = () => {
+        discosCargados = [...getTodosLosDiscos()]; //Se reciben todos los discos guardados.
+        //Se agrega el disco similar a un componente de React.
+        if (discosCargados.length === 0) {
+            listaDiscos.innerHTML = "<p>No hay discos guardados.</p>";
+        } else {
+            listaDiscos.innerHTML = discosCargados.map((e) => {
+                return `<div class="disco" id="${e.localizacion}">
+                    <h3>${e.nombre ?? 'Sin nombre'}</h3>
+                    <p>Intérprete o grupo: ${e.grupo ?? 'Sin intérprete o grupo'}</p>
+                    ${e.agno === undefined || e.agno === '' ? `Sin año` : `<p>Año: ${e.agno}</p>`}
+                    <p>Géneros: ${e.genero.join(", ")}</p>
+                    <p>Localización: ${e.localizacion}</p>
+                    <p>Prestado: ${e.prestado ? "Sí" : "No"}</p>
+                    <button id="eliminar-${e.localizacion}"><img src="./assets/eliminar.png" alt="Eliminar"></button><br>
+                    <img src="${e.caratula === undefined || e.caratula === '' && './assets/sinportada.jpg'}" alt="Portada">
+                </div>`
+            }).join("");
+        }
+    }
+    document.getElementById("boton-mostrar").addEventListener("click", actualizarLista);
+
     //Resetear el formulario y los errores.
-    document.getElementById("boton-limpiar").addEventListener("click", () => {
+    const reiniciarFormulario = () => {
         formularioAgregar.reset();
         mensajesError.classList.add("oculto");
         mensajesError.innerHTML = "";
@@ -81,17 +104,22 @@ window.onload = () => {
         inputAgno.classList.remove("error");
         fieldSetGeneros.classList.remove("error");
         inputLocalizacion.classList.remove("error");
-    });
+    }
+    document.getElementById("boton-limpiar").addEventListener("click", reiniciarFormulario);
 
-    //Actualiza la lista para mostrar los discos guardados.
-    document.getElementById("boton-mostrar").addEventListener("click", () => {
-        
+    //Agregar la funcionalidad de eliminar discos
+    listaDiscos.addEventListener("click", (e) => {
+        if (e.target.id.startsWith("eliminar-")) {
+            const identificador = e.target.id.replace("eliminar-", ""); //El botón tiene como id el identificador del disco a borrar.
+            borrarDisco(identificador);
+            actualizarLista();
+        }
     });
 
     //Comprueba que todos los campos estén bien, y si lo están lo guarda (no lo muestra, para eso está el botón de mostrar).
     document.getElementById("boton-guardar").addEventListener("click", () => {
         if (comprobarCampos().length === 0) {
-            guardarDiscos([{
+            discosCargados = [...discosCargados, {
                 nombre: inputNombre.value,
                 grupo: inputGrupo.value,
                 agno: inputAgno.value,
@@ -99,7 +127,10 @@ window.onload = () => {
                 localizacion: inputLocalizacion.value,
                 prestado: inputPrestado.checked,
                 caratula: inputCaratula.value
-            }]);
+            }];
+            guardarDiscos(discosCargados);
+            reiniciarFormulario();
+            //actualizarLista(); //En el ejercicio se especifica que la lista de discos se muestre al pulsar el botón, no cada vez que se hace una modificación a la lista.
         }
     });
 }

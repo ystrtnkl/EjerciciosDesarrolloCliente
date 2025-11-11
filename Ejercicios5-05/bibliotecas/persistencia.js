@@ -21,9 +21,10 @@ const getTodosLosDiscos = () => {
 }
 
 //Guarda tantos discos como se le pasen en el array (para guardar uno, pasar un array con un solo elemento).
-const guardarDiscos = (discos) => {
+const guardarDiscos = (discosNuevos) => {
+    console.log(discosNuevos);
     //Comprueba que discos sea un array válido con discos válidos.
-    if (permitidoLocalStorage() && Array.isArray(discos) && discos.length > 0 && discos.every((e) => {return validarDisco(e)})) {
+    if (permitidoLocalStorage() && Array.isArray(discosNuevos) && discosNuevos.length > 0 && discosNuevos.every((e) => {return validarDisco(e)})) {
         let discos = getTodosLosDiscos(); //Ver los discos que ya habían.
         discos = [...discos, ...discosNuevos]; //Agregar los discos nuevos.
         localStorage.setItem("discos", JSON.stringify(discos)); //Reemplazar los anteriores por el array de los anteriores más los nuevos.
