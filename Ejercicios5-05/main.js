@@ -1,7 +1,8 @@
 "use strict";
 import { validarNombreDisco, validarInterpreteOGrupo, validarAgno, validarGenero, validarLocalizacion } from "./bibliotecas/validaciones.js";
-import { getTodosLosDiscos, guardarDiscos, borrarDisco } from "./bibliotecas/persistencia.js";
+import { getTodosLosDiscos, guardarDiscos, borrarDisco, borrarTodosLosDiscos } from "./bibliotecas/persistencia.js";
 
+//Se intenta que las manipulaciones del DOM estén en este script, mientras que funciones externas a este si están en las bibliotecas.
 window.onload = () => {
     //Referencias usualmente necesitadas en el código.
     const formularioAgregar = document.forms.agregarDisco;
@@ -15,8 +16,7 @@ window.onload = () => {
     const inputPrestado = formularioAgregar.prestado;
     const mensajesError = document.getElementById("mensajes-error");
     const listaDiscos = document.getElementById("mostrar-discos");
-    let discosCargados = getTodosLosDiscos(); //Aquí aparecerán los discos cargados en la página.
-    //actualizarLista(); //En el ejercicio se especifica que la lista de discos se muestre al pulsar el botón, no cuando cargue la página.
+    const filtros = document.getElementById("filtro");
 
     //Devuelve un array con los géneros seleccionados en formato texto.
     const getGenerosSeleccionados = () => {
@@ -71,14 +71,13 @@ window.onload = () => {
     //Se podría haber hecho que dependiendo del id de e.target se comprobase solo ese campo, pero conviene también tener una manera de comprobarlos todos a la vez (además si se comprueban todos cada vez, los errores también saldrán si se modifican los valores mediante Inspeccionar).
     formularioAgregar.addEventListener("change", comprobarCampos);
 
-    //Actualiza la lista de discos (según los que hay guardados).
-    const actualizarLista = () => {
-        discosCargados = [...getTodosLosDiscos()]; //Se reciben todos los discos guardados.
-        //Se agrega el disco similar a un componente de React.
-        if (discosCargados.length === 0) {
-            listaDiscos.innerHTML = "<p>No hay discos guardados.</p>";
+    //Actualiza la lista de discos (recibe por parámetro los discos a mostrar e nla lista).
+    const actualizarLista = (lista) => {
+        //Se agrega el disco al DOM similar a un componente de React.
+        if (lista.length === 0) {
+            listaDiscos.innerHTML = "<p>No hay discos guardados (o al menos no que coincidan con el filtro).</p>";
         } else {
-            listaDiscos.innerHTML = discosCargados.map((e) => {
+            listaDiscos.innerHTML = lista.map((e) => {
                 return `<div class="disco" id="${e.localizacion}">
                     <h3>${e.nombre ?? 'Sin nombre'}</h3>
                     <p>Intérprete o grupo: ${e.grupo ?? 'Sin intérprete o grupo'}</p>
@@ -86,13 +85,16 @@ window.onload = () => {
                     <p>Géneros: ${e.genero.join(", ")}</p>
                     <p>Localización: ${e.localizacion}</p>
                     <p>Prestado: ${e.prestado ? "Sí" : "No"}</p>
-                    <button id="eliminar-${e.localizacion}"><img src="./assets/eliminar.png" alt="Eliminar"></button><br>
-                    <img src="${e.caratula === undefined || e.caratula === '' && './assets/sinportada.jpg'}" alt="Portada">
+                    <button type="button" id="eliminar-${e.localizacion}"><img src="./assets/eliminar.png" alt="Eliminar"></button><br>
+                    <img src="${e.caratula === undefined || e.caratula === '' ? './assets/sinportada.jpg' : e.caratula}" alt="Portada">
                 </div>`
             }).join("");
         }
     }
-    document.getElementById("boton-mostrar").addEventListener("click", actualizarLista);
+    document.getElementById("boton-mostrar").addEventListener("click", () => {
+        actualizarLista(getTodosLosDiscos());
+    });
+    actualizarLista(getTodosLosDiscos()); //En el ejercicio se especifica que los discos se deben cargar de un JSON en la carga de la página, interpreté que se refería a que se leyesen y se mostrasen en la lista.
 
     //Resetear el formulario y los errores.
     const reiniciarFormulario = () => {
@@ -112,14 +114,15 @@ window.onload = () => {
         if (e.target.id.startsWith("eliminar-")) {
             const identificador = e.target.id.replace("eliminar-", ""); //El botón tiene como id el identificador del disco a borrar.
             borrarDisco(identificador);
-            actualizarLista();
+            //actualizarLista(getTodosLosDiscos());
+            actualizarConFiltro(); //Se vuelve a actualizar la lista aplicando filtros ya que si se borraba un elemento con los filtros aplicados, si se actualiza de normal estos filtros se quitarían.
         }
     });
 
     //Comprueba que todos los campos estén bien, y si lo están lo guarda (no lo muestra, para eso está el botón de mostrar).
     document.getElementById("boton-guardar").addEventListener("click", () => {
         if (comprobarCampos().length === 0) {
-            discosCargados = [...discosCargados, {
+            const nuevosDiscos = [{
                 nombre: inputNombre.value,
                 grupo: inputGrupo.value,
                 agno: inputAgno.value,
@@ -128,9 +131,30 @@ window.onload = () => {
                 prestado: inputPrestado.checked,
                 caratula: inputCaratula.value
             }];
-            guardarDiscos(discosCargados);
+            guardarDiscos(nuevosDiscos);
             reiniciarFormulario();
-            //actualizarLista(); //En el ejercicio se especifica que la lista de discos se muestre al pulsar el botón, no cada vez que se hace una modificación a la lista.
+            //actualizarLista(getTodosLosDiscos()); //En el ejercicio se especifica que la lista de discos se muestre al pulsar el botón, no cada vez que se hace una modificación a la lista.
         }
+    });
+
+    //Botón para borrar todos los discos (limpiar).
+    document.getElementById("boton-borrar-lista").addEventListener("click", () => {
+        borrarTodosLosDiscos();
+        actualizarLista([]);
+    });
+
+    //Función para aplicar los filtros (a los discos que están cargados en la página, no a los que están guardados).
+    const actualizarConFiltro = () => {
+        actualizarLista(getTodosLosDiscos().filter((e) => {
+            //Filtra si el lo buscado se incluye o en el nombre o en el artista/grupo del disco.
+            return e.nombre.toLowerCase().includes(filtros.value.toLowerCase()) || e.grupo.toLowerCase().includes(filtros.value.toLowerCase()) ;
+        }));
+    }
+    document.getElementById("boton-filtrar").addEventListener("click", actualizarConFiltro);
+
+    //Botón para revertir la búsqueda (quitar los filtros).
+    document.getElementById("boton-reset-filtros").addEventListener("click", () => {
+        filtros.value = "";
+        actualizarLista(getTodosLosDiscos());
     });
 }

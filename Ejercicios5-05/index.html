@@ -7,11 +7,10 @@
     <link rel="stylesheet" href="./estilos/estilo.css">
 </head>
 <body>
+    <!--En los botones se usa type="button" para evitar que actualicen la página cuando sean pulsados (de normal hacen esto cuando están en un formulario)-->
     <form name="agregarDisco" id="agregarDisco">
         <fieldset>
-            <ul id="mensajes-error" class="oculto">
-
-            </ul>
+            
             <legend>Agregar disco</legend>
             <label for="nombre">Nombre del disco:</label>
             <input required type="text" id="nombre" name="nombre" placeholder="Ejemplo"><br>
@@ -53,14 +52,27 @@
             <label for="localizacion">Prestado:</label>
             <input type="checkbox" id="prestado" name="prestado"><br> 
         </fieldset>
+        <ul id="mensajes-error" class="oculto">
+        </ul>
+        <button type="button" id="boton-guardar">Guardar</button>
+        <button type="button" id="boton-mostrar">Mostrar (actualizar lista)</button>
+        <button type="button" id="boton-limpiar">Limpiar formulario</button>
+        <p>La lista solo se actualiza al presionar el botón o al filtrar, no cuando carga la página o se agrega un nuevo disco.</p>
     </form>
-    <button id="boton-guardar">Guardar</button>
-    <button id="boton-mostrar">Mostrar</button>
-    <button id="boton-limpiar">Limpiar</button>
-    <br>
-    <div id="mostrar-discos">
-
+    
+    <br><hr><br>
+    <div name="lista">
+        
+        <input type="text" name="filtro" id="filtro" placeholder="Filtrar por nombre o grupo">
+        <button type="button" id="boton-filtrar">Buscar</button>
+        <button type="button" id="boton-reset-filtros">Limpiar (reiniciar filtro)</button>
+        <button type="button" id="boton-borrar-lista">Limpiar (borrar todos los discos)</button>
+        <p>Lista de discos:</p>
+        <div id="mostrar-discos">
+        </div>
     </div>
+    
+    
     <script src="./main.js" type="module"></script>
 </body>
 </html>

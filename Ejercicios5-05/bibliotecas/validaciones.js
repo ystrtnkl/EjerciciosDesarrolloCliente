@@ -48,7 +48,7 @@ const validarDisco = (disco) => {
         && (disco.agno === undefined || validarAgno(disco.agno) || disco.agno === '')
         && validarLocalizacion(disco.localizacion)
         && validarGenero(disco.genero)
-        && typeof disco.prestado === "boolean" || typeof disco.prestado === "undefined"
+        && (typeof disco.prestado === "boolean" || typeof disco.prestado === "undefined")
         ? disco : false;
 }
 
