@@ -2,7 +2,7 @@
 //Distintas funciones que reciben un dato a usar en la aplicación y lo validan, devuelven false si no cumple los criterios y true o el propio dato si sí.
 
 const regexAgno = /^\d{4}$/;
-const regexLocalizacion = /^[A-Z]{2}-\d{3}[A-Z]{2}$/;
+const regexLocalizacion = /^ES-\d{3}[A-Z]{2}$/;
 
 //Texto de al menos 5 caracteres.
 const validarNombreDisco = (nombre) => {
@@ -18,7 +18,10 @@ const validarInterpreteOGrupo = (nombre) => {
 
 //Cuatro caracteres numéricos (pero sigue siendo texto).
 const validarAgno = (agno) => {
-    return typeof agno === "string" 
+    if (typeof agno === "undefined" || agno === "") {
+        return true;
+    }
+    return typeof agno === "string"
         && regexAgno.test(agno)
         ? agno : false;
 }
@@ -32,7 +35,7 @@ const validarGenero = (generos) => {
         ? generos : false;
 }
 
-//Un código que sea así: <dos mayúsculas>-<tres dígitos><dos mayúsculas>, por ejemplo ES-001AA o ZR-512TR.
+//Un código que sea así: ES-<tres dígitos><dos mayúsculas>, por ejemplo ES-001AA o ZR-512TR.
 const validarLocalizacion = (localizacion) => {
     return typeof localizacion === "string"
         && regexLocalizacion.test(localizacion)

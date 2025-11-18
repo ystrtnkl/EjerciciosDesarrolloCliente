@@ -6,3 +6,10 @@ fieldset {
     margin: auto;
     margin-bottom: 5px;
 }
+.mal {
+    color: red;
+    font-weight: bold;
+}
+.oculto {
+    display: none;
+}

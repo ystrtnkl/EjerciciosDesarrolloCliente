@@ -1,10 +1,10 @@
 import React from 'react';
-import FormularioInsercionDisco from '../components/FormularioInsercionDisco';
+import FormularioInsercionDisco from '../components/Formularios/FormularioInsercionDisco.jsx';
 
 function InsertarDisco() {
 
-  const guardar = () => {
-    console.log("asdofiusa")
+  const guardar = (disco) => {
+    console.log(disco)
   }
 
   return (
