@@ -1,9 +1,11 @@
 import React from 'react';
 import './Disco.css';
 import { Link } from 'react-router-dom';
- import imgBorrar from '../../assets/eliminar.png';
- import sinPortada from '../../assets/sinportada.jpg';
+//Este componente usa imágenes en la carpeta de assets.
+import imgBorrar from '../../assets/eliminar.png';
+import sinPortada from '../../assets/sinportada.jpg';
 
+//Elemento para renderizar un solo disco, recibe por props el disco y la función a ejecutar (pasandole el evento) al presionar sobre borrar.
 const Disco = (props) => {
 
   return (
@@ -15,7 +17,7 @@ const Disco = (props) => {
       <p>Prestado: <strong>{props.disco.prestado ? "Sí" : "No"}</strong></p>
       <p>({props.disco.localizacion ?? ''})</p>
       <img className="disco-portada" src={props.disco.caratula ? props.disco.caratula : (sinPortada ?? '#')} alt="" /><br />
-      <button className="disco-eliminar" onClick={() => {props.borrar(props.disco.localizacion)}}><img src={imgBorrar} alt="Eliminar disco" /></button>
+      <button className="disco-eliminar" onClick={() => { props.borrar(props.disco.localizacion) }}><img src={imgBorrar} alt="Eliminar disco" /></button>
     </div>
   )
 }

@@ -8,6 +8,7 @@ function Inicio() {
         <h2>Esta es la página de Inicio.</h2>
         <p>Realmente no hay mucho que mostrar en la página de inicio, prueba a navegar con la barra de navegación.</p>
         <p>Con esta aplicación puedes adminstrar tus discos.</p>
+        <p>De momento, los discos se guardan en LocalStorage.</p>
     </>
   )
 }

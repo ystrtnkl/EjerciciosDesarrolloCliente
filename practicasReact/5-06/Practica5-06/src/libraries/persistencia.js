@@ -32,7 +32,6 @@ const getDisco = (localizacion) => {
 
 //Guarda tantos discos como se le pasen en el array (para guardar uno, pasar un array con un solo elemento).
 const guardarDiscos = (discosNuevos) => {
-    console.log(discosNuevos);
     //Comprueba que discos sea un array válido con discos válidos.
     if (permitidoLocalStorage() && Array.isArray(discosNuevos) && discosNuevos.length > 0 && discosNuevos.every((e) => {return validarDisco(e)})) {
         let discos = getTodosLosDiscos(); //Ver los discos que ya habían.
@@ -57,6 +56,14 @@ const borrarTodosLosDiscos = () => {
     }
 }
 
+//Borra todos los discos almacenados y guarda solo los almacenados por parámetros.
+const reemplazarDiscos = (discosNuevos) => {
+    if (permitidoLocalStorage() && Array.isArray(discosNuevos) && discosNuevos.length > 0 && discosNuevos.every((e) => {return validarDisco(e)})) {
+        borrarTodosLosDiscos();
+        if (discosNuevos.length > 0) {
+            localStorage.setItem("discos", JSON.stringify(discosNuevos));
+        }
+    }
+}
 
-
-export { getTodosLosDiscos, guardarDiscos, borrarTodosLosDiscos, borrarDisco, getDisco };
+export { getTodosLosDiscos, guardarDiscos, borrarTodosLosDiscos, borrarDisco, getDisco, reemplazarDiscos };
