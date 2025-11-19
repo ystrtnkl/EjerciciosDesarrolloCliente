@@ -61,7 +61,7 @@ const FormularioInsercionDisco = (props) => {
     }
 
   return (
-    <form>
+    <form name="insertarDisco">
         <img src={disco.caratula === "" ? "#" : disco.caratula} alt="" />
         <br />
         <InputTextCompleto titulo="Localización:" nombre="localizacion" ejemplo="ES-001AA" valor={disco.localizacion} actualizarValor={actualizarDatos} error="La localización debe tener este formato: ES-(tres cifras)(dos letras mayúsculas)" validacion={validarLocalizacion} />
@@ -82,7 +82,6 @@ const FormularioInsercionDisco = (props) => {
         <input type="button" name="reset" value="Reiniciar" id="reset" onClick={resetear} />
         <p className="bien oculto" ref={mensajeExito}>Disco guardado correctamente.</p>
         <p className="mal oculto" ref={mensajeError}>El formulario tiene errores, revísalos.</p>
-        <p>{JSON.stringify(disco)}</p>
     </form>
   )
 }

@@ -15,7 +15,7 @@ const Disco = (props) => {
       <p>Prestado: <strong>{props.disco.prestado ? "Sí" : "No"}</strong></p>
       <p>({props.disco.localizacion ?? ''})</p>
       <img className="disco-portada" src={props.disco.caratula ? props.disco.caratula : (sinPortada ?? '#')} alt="" /><br />
-      <button className="disco-eliminar" onClick={props.borrar}><img src={imgBorrar} alt="Eliminar disco" /></button>
+      <button className="disco-eliminar" onClick={() => {props.borrar(props.disco.localizacion)}}><img src={imgBorrar} alt="Eliminar disco" /></button>
     </div>
   )
 }

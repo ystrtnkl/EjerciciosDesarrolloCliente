@@ -1,7 +1,7 @@
 .disco {
     border: 2px solid rgb(226, 226, 226);
     border-radius: 10px;
-    padding: 5px;
+    padding: 8px;
     margin: 3px;
 }
 .disco-portada {
@@ -12,9 +12,12 @@
 .disco-eliminar img {
     max-width: 32px;
     max-height: 32px;
+    margin: 0;
+    padding: 0;
 }
 .disco-eliminar {
     background-color: rgb(209, 0, 0);
+    padding: 0;
 }
 .disco h2, .disco a {
     color: white;

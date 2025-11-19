@@ -16,7 +16,7 @@ function Rutas() {
         <Route path="/inicio" element={<Inicio />} />
         <Route path="/insertarDisco" element={<InsertarDisco />} />
         <Route path="/listarDisco" element={<ListarDisco />} />
-        <Route path="/listarDisco/:localizacion" element={<DiscoConcreto/>} />
+        <Route path="/listarDisco/:localizacion" element={<DiscoConcreto />} />
         <Route path="/*" element={<Error />} />
       </Routes>
     </>
