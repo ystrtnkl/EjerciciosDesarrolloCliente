@@ -13,3 +13,7 @@ fieldset {
 .oculto {
     display: none;
 }
+.bien {
+    color: greenyellow;
+    font-weight: bold;
+}

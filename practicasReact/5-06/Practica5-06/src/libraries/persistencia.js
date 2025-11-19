@@ -20,6 +20,16 @@ const getTodosLosDiscos = () => {
     }
 }
 
+//Devuelve el disco que coincida con la localización si existe.
+const getDisco = (localizacion) => {
+    if (permitidoLocalStorage() && validarLocalizacion(localizacion)) {
+        let discos = getTodosLosDiscos(); //Se comprueban todos los discos, esto en una base de datos real se haría de manera más óptima.
+        discos = discos.filter((e) => {return e.localizacion === localizacion});
+        return discos[0] ?? null;
+    }
+    return null;
+}
+
 //Guarda tantos discos como se le pasen en el array (para guardar uno, pasar un array con un solo elemento).
 const guardarDiscos = (discosNuevos) => {
     console.log(discosNuevos);
@@ -49,4 +59,4 @@ const borrarTodosLosDiscos = () => {
 
 
 
-export { getTodosLosDiscos, guardarDiscos, borrarTodosLosDiscos, borrarDisco };
+export { getTodosLosDiscos, guardarDiscos, borrarTodosLosDiscos, borrarDisco, getDisco };

@@ -1,10 +1,11 @@
 import React from 'react';
 import FormularioInsercionDisco from '../components/Formularios/FormularioInsercionDisco.jsx';
+import { guardarDiscos } from '../libraries/persistencia.js';
 
 function InsertarDisco() {
 
   const guardar = (disco) => {
-    console.log(disco)
+      guardarDiscos([disco]);
   }
 
   return (

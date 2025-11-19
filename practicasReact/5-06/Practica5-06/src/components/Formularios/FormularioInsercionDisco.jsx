@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './FormularioInsercionDisco.css';
 import InputCheckCompleto from './InputCheckCompleto.jsx';
 import InputTextCompleto from './InputTextCompleto.jsx';
@@ -8,8 +8,7 @@ const FormularioInsercionDisco = (props) => {
 
     const posiblesGeneros = ["pop", "rock", "metal", "house", "clasica", "musical", "country", "oriental", "indie", "opera", "chiptune", "experimental"];
     const posiblesGenerosTitulos = ["Pop", "Rock", "Metal", "House", "Clásica", "Musical", "Country", "Oriental", "Indie", "Ópera", "Chiptune", "Experimental"];
-
-    const [disco, setDisco] = useState({
+    const estadoInicial = {
         nombre: "",
         caratula: "",
         grupo: "",
@@ -17,7 +16,11 @@ const FormularioInsercionDisco = (props) => {
         genero: [],
         localizacion: "",
         prestado: false
-    });
+    };
+    const mensajeExito = useRef(null);
+    const mensajeError = useRef(null);
+
+    const [disco, setDisco] = useState(estadoInicial);
 
     const actualizarDatos = (e) => {
         if (e.target.type === "checkbox") {
@@ -29,16 +32,31 @@ const FormularioInsercionDisco = (props) => {
     }
 
     const actualizarDatosGenero = (e) => {
-
-
-        //validAR VALIDAR AAODEFIUASYODFSAIFUASYTDFIUOSTYD
-
-
         if (!e.target.checked) {
             let nuevosGeneros = [...disco.genero].filter((ee) => {return ee !== e.target.name});
             setDisco({...disco, genero:nuevosGeneros});
         } else {
             setDisco({...disco, genero: [...disco.genero, e.target.name]});
+        }
+    }
+
+    const resetear = () => {
+        setDisco(estadoInicial);
+    }
+
+    const guardar = () => {
+        if (validarDisco(disco)) {
+            props.guardar(disco);
+            resetear();
+            mensajeExito.current.classList.remove("oculto");
+            setTimeout(() => {
+                mensajeExito.current.classList.add("oculto");
+            }, 2000);
+        } else {
+            mensajeError.current.classList.remove("oculto");
+            setTimeout(() => {
+                mensajeError.current.classList.add("oculto");
+            }, 2000);
         }
     }
 
@@ -56,11 +74,14 @@ const FormularioInsercionDisco = (props) => {
             {posiblesGeneros.map((e, i) => {
                 return (<InputCheckCompleto key={i} idFormateado={"genero-" + e} valor={e} titulo={posiblesGenerosTitulos[i]} actualizarValor={actualizarDatosGenero} estaChecked={disco.genero.includes(e)} />)
             })}
+            <p className={validarGenero(disco.genero) ? "oculto" : "mal"}>Debes elegir al menos un género de música.</p>
         </fieldset>
         <label htmlFor="prestado">Prestado: </label>
         <input type="checkbox" id="prestado" name="prestado" value="prestado" onChange={(e) => {actualizarDatos(e);}} checked={disco.prestado === true} /><br />
-        <input type="button" name="guardar" value="Guardar" id="guardar" onClick={() => { if (validarDisco(disco)) {props.guardar(disco)} }} />
-        <p className="oculto error">Hay datos invalidos</p>
+        <input type="button" name="guardar" value="Guardar" id="guardar" onClick={guardar} />
+        <input type="button" name="reset" value="Reiniciar" id="reset" onClick={resetear} />
+        <p className="bien oculto" ref={mensajeExito}>Disco guardado correctamente.</p>
+        <p className="mal oculto" ref={mensajeError}>El formulario tiene errores, revísalos.</p>
         <p>{JSON.stringify(disco)}</p>
     </form>
   )
