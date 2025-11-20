@@ -1,5 +1,5 @@
 import React from 'react';
-import Rutas from '../routes/Rutas';
+import Rutas from '../routes/Rutas.jsx';
 
 //Componente donde se mostrará en sí la página haciendo el uso de rutas.
 const Contenedor = () => {
