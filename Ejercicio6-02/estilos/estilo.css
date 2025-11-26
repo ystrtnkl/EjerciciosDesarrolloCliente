@@ -18,4 +18,8 @@ main>div {
 }
 .pelicula:hover{
     cursor: pointer;
+    color: slategray;
+}
+.error {
+    color: red;
 }
