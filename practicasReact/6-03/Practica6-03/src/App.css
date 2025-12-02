@@ -22,3 +22,6 @@ input {
   font-weight: bolder;
   color: red;
 }
+img {
+  margin: 5px;
+}

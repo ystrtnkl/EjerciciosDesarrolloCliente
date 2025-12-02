@@ -1,0 +1,12 @@
+.personaje {
+    border: 2px solid white;
+    border-radius: 15px;
+    padding: 25px;
+    max-width: 300px;
+    margin: auto;
+}
+.personaje a {
+    color: white;
+    font-size: 1.3em;
+    text-decoration: underline;
+}

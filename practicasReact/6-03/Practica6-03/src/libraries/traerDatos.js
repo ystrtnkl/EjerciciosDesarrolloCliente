@@ -20,4 +20,11 @@ const traerDatos = (endpoint, multiple) => {
     });
 }
 
-export { urlsSwapi, traerDatos }
+const traerMultiplesDatos = (endpoints) => {
+    return Promise.all()
+    .catch((error) => {
+        return {fallo: true, error:error};
+    });
+}
+
+export { urlsSwapi, traerDatos, traerMultiplesDatos }

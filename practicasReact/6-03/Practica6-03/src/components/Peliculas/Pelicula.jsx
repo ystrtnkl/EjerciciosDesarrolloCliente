@@ -9,10 +9,10 @@ function Pelicula(props) {
 
   return (
     <div className={(props.expandir && "pelicula-expandida") + " pelicula"}>
-      <div className="titulo-pelicula"><Link to={enlace}>{props.pelicula.title ?? "sin titulo"}</Link></div>
-      <div>Director(es): {props.pelicula.director}</div>
-      <div>Productor(es): {props.pelicula.producer}</div>
-      <div>Fecha de salida: {props.pelicula.release_date}</div>
+      <div className="titulo-pelicula"><Link to={enlace}>{props.pelicula.title ?? "Sin título"}</Link></div>
+      <div>Director(es): {props.pelicula.director ?? "Sin directores"}</div>
+      <div>Productor(es): {props.pelicula.producer ?? "Sin productores"}</div>
+      <div>Fecha de salida: {props.pelicula.release_date ?? "Fecha desconocida"}</div>
       {props.expandir && (
         <div>
           <p>{props.pelicula.opening_crawl.replaceAll("\\r\\n", "<br>")}</p>
