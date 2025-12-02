@@ -8,7 +8,7 @@ function Peliculas() {
   const [peliculas, setPeliculas] = useState([]);
 
   const recibirDatos = async () => {
-    setPeliculas(await traerDatos("films"));
+    setPeliculas(await traerDatos("films", true));
   }
   useEffect(() => {
     recibirDatos();
@@ -17,7 +17,10 @@ function Peliculas() {
   return (
     <>
         <h2>Peliculas de Star Wars.</h2>
-        <ListaPeliculas peliculas={peliculas} />
+        {peliculas.fallo
+        ? (<p className="error">Parece que ha habido un error al conectar con la(s) API.</p>)
+        : (<ListaPeliculas peliculas={peliculas} />)}
+        
 
     </>
   )

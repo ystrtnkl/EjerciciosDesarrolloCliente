@@ -1,20 +1,22 @@
 const urlsSwapi = ["https://swapi.info/api/", "https://swapi.dev/api/", "https://swapi.py4e.com/api/"];
 
-const traerDatos = (endpoint) => {
+const traerDatos = (endpoint, multiple) => {
     return Promise.race(urlsSwapi.map((url) => {
         return fetch(url + endpoint).then((respuesta) => {
             return respuesta.json();
         }).then((respuesta) => {
             return respuesta.results ? respuesta.results : respuesta;
         }).then((respuesta) => {
-            return respuesta.map((e, i) => {return {...e, id:i}});
+            if (multiple) {
+                return respuesta.map((e, i) => {return {...e, id:i}});
+            } else {
+                return respuesta;
+            }
         }).catch((error) => {
-            console.log(error);
-            return error;
+            return {fallo: true, error:error};
         });
     })).catch((error) => {
-        console.log(error);
-        return error;
+        return {fallo: true, error:error};
     });
 }
 

@@ -17,3 +17,8 @@
 input {
   margin: 4px;
 }
+
+.error {
+  font-weight: bolder;
+  color: red;
+}
