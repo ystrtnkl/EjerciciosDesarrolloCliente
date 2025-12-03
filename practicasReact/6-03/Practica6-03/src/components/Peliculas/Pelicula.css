@@ -5,10 +5,12 @@
     max-width: 300px;
     margin: 10px;
 }
-.titulo-pelicula a {
-    color: white;
+.titulo-pelicula {
     font-size: 1.3em;
+}
+.titulo-pelicula a {
     text-decoration: underline;
+    color: white;
 }
 .pelicula-expandida {
     max-width: 100%;

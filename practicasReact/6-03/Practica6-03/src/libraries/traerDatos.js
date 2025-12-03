@@ -21,7 +21,13 @@ const traerDatos = (endpoint, multiple) => {
 }
 
 const traerMultiplesDatos = (endpoints) => {
-    return Promise.all()
+    if (!Array.isArray(endpoints) && endpoints.length > 0) {
+        return {fallo: true, error:"No se proporcionó un array de endpoints"};
+    }
+    console.log(endpoints);
+    return Promise.all(endpoints.map((endpoint) => {
+        return traerDatos(endpoint, false);
+    }))
     .catch((error) => {
         return {fallo: true, error:error};
     });
