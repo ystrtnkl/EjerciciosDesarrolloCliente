@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { traerDatos } from '../libraries/traerDatos.js';
 import ListaPersonajes from '../components/Personajes/ListaPersonajes.jsx';
 
-//Página de inicio de la aplicación, accesible desde / y desde /inicio.
+//Página para mostrar todos los personajes (en teoría la API solo puede devolver 10).
 function Personajes() {
 
-  const [personajes, setPersonajes] = useState([]);
+  const [personajes, setPersonajes] = useState([]); //Estado para los personajes.
 
+  //Recibe los personajes de la API.
   const recibirDatos = async () => {
     setPersonajes(await traerDatos("people", true));
   }
@@ -18,7 +19,7 @@ function Personajes() {
     <>
         <h2>Personajes de Star Wars.</h2>
         {personajes.fallo
-        ? (<p className="error">Parece que ha habido un error al conectar con la(s) API.</p>)
+        ? (<p className="error">Parece que ha habido un error al conectar con la(s) API.</p> /*Si hay algún error, notifica al usuario.*/)
         : (<ListaPersonajes personajes={personajes} />)}
         
 

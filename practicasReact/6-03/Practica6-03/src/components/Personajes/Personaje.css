@@ -6,8 +6,9 @@
     margin: auto;
     margin-top: 10px;
 }
-.personaje {
+.titulo-personaje {
     font-size: 1.3em;
+    font-weight: bolder;
 }
 .personaje a {
     color: white;

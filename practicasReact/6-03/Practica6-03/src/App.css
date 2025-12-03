@@ -22,6 +22,11 @@ input {
   font-weight: bolder;
   color: red;
 }
-img {
+img.cargando {
+  margin: 5px;
+  width: 128px;
+  height: 128px;
+}
+p {
   margin: 5px;
 }
