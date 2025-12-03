@@ -17,11 +17,11 @@ function Personajes() {
 
   return (
     <>
-        <h2>Personajes de Star Wars.</h2>
-        {personajes.fallo
+      <h2>Personajes de Star Wars.</h2>
+      {personajes.fallo
         ? (<p className="error">Parece que ha habido un error al conectar con la(s) API.</p> /*Si hay algún error, notifica al usuario.*/)
         : (<ListaPersonajes personajes={personajes} />)}
-        
+
 
     </>
   )

@@ -7,12 +7,12 @@ function Pie() {
 
   return (
     <>
-        <footer className='pie_principal'>
-            <p>Contenido del footer</p>
-            <p>Aquí pueden haber muchas cosas, como un enlace para 
-              <span><Link className="boton-navegacion_enlace" to="/">Volver al inicio</Link></span>.
-            </p>
-        </footer>
+      <footer className='pie_principal'>
+        <p>Contenido del footer</p>
+        <p>Aquí pueden haber muchas cosas, como un enlace para
+          <span><Link className="boton-navegacion_enlace" to="/">Volver al inicio</Link></span>.
+        </p>
+      </footer>
     </>
   )
 }

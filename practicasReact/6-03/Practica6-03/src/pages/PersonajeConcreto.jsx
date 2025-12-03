@@ -21,7 +21,7 @@ function PersonajeConcreto() {
 
   return (
     <>
-        {personaje.name 
+      {personaje.name
         ? (<Personaje personaje={personaje} expandir={true} /> /*Muestra el personaje en formato expandido.*/)
         : (personaje.fallo || personaje.detail == "Not found"
           ? (<p className="error">Parece que ha habido un error al conectar con la(s) API o la película no se ha encontrado.</p> /*Si hay algún error lo notifica al usuario.*/)

@@ -8,11 +8,11 @@ function ListaPeliculas(props) {
 
   return (
     <div className="lista-pelicula">
-      {props.peliculas.length 
-      ? (props.peliculas.map((pelicula, i) => {
-        return (<Pelicula key={pelicula.episode_id ?? i} pelicula={pelicula}/>);
-      }))
-      : (<img className="cargando" src={cargando} alt="Cargando..." />) /*Mientras que las películas no están presnetes, muestra un gif de carga.*/}
+      {props.peliculas.length
+        ? (props.peliculas.map((pelicula, i) => {
+          return (<Pelicula key={pelicula.episode_id ?? i} pelicula={pelicula} />);
+        }))
+        : (<img className="cargando" src={cargando} alt="Cargando..." />) /*Mientras que las películas no están presnetes, muestra un gif de carga.*/}
     </div>
   )
 }

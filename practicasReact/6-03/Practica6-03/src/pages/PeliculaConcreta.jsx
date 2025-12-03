@@ -21,7 +21,7 @@ function PeliculaConcreta() {
 
   return (
     <>
-        {pelicula.title /*Si el objeto tiene "title" es que la película ha cargado bien.*/ 
+      {pelicula.title /*Si el objeto tiene "title" es que la película ha cargado bien.*/
         ? (<Pelicula pelicula={pelicula} expandir={true} /> /*Muestra la película en formato expandido.*/)
         : (pelicula.fallo || pelicula.detail == "Not found"
           ? (<p className="error">Parece que ha habido un error al conectar con la(s) API o la película no se ha encontrado.</p> /*Si hay algún error lo notifica al usuario.*/)

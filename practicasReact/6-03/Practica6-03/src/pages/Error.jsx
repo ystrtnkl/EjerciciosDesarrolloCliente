@@ -6,9 +6,9 @@ function Error() {
 
   return (
     <>
-        <h2>Error</h2>
-        <p>Parece que la página que buscabas no existe.</p>
-        <VolverInicio />
+      <h2>Error</h2>
+      <p>Parece que la página que buscabas no existe.</p>
+      <VolverInicio />
     </>
   )
 }

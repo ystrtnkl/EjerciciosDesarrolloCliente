@@ -9,38 +9,38 @@ const traerDatos = (endpoint, multiple) => { //"endpoint" es el endpoint a parti
             return respuesta.results ? respuesta.results : respuesta; //Se devuelve la respuesta directamente o lo que contenga results en caso de existir.
         }).then((respuesta) => {
             if (multiple) { //Si multiple es true, aplica un id auxiliar a cada uno de los items.
-                return respuesta.map((e, i) => {return {...e, id:i}});
+                return respuesta.map((e, i) => { return { ...e, id: i } });
             } else {
                 return respuesta;
             }
         }).catch((error) => {
-            return {fallo: true, error:error}; //En caso de cualquier error, devuelve un objeto con "fallo" en true y con el error.
+            return { fallo: true, error: error }; //En caso de cualquier error, devuelve un objeto con "fallo" en true y con el error.
         });
     })).catch((error) => {
-        return {fallo: true, error:error};
+        return { fallo: true, error: error };
     });
 }
 
 //Recibe un array de endpoints y los resuelve todos con fetch. Devuelve una promesa agrupando todos ellos (todos tienen que acabar sin errores).
 const traerMultiplesDatos = (endpoints) => {
     if (!Array.isArray(endpoints) && endpoints.length > 0) {
-        return {fallo: true, error:"No se proporcionó un array de endpoints"};
+        return { fallo: true, error: "No se proporcionó un array de endpoints" };
     }
     return Promise.all(endpoints.map((endpoint) => { //Se busca que todas las promesas terminen sin errores.
         return fetch(endpoint)
-        .then((respuesta) => {
-            return respuesta.json();
-        })
-        .then((respuesta) => {
-            return respuesta.results ? respuesta.results : respuesta; //Se devuelve la respuesta directamente o lo que contenga results en caso de existir.
-        })
-        .catch((error) => {
-            return {fallo: true, error:error}; //En caso de cualquier error, devuelve un objeto con "fallo" en true y con el error.
-        })
+            .then((respuesta) => {
+                return respuesta.json();
+            })
+            .then((respuesta) => {
+                return respuesta.results ? respuesta.results : respuesta; //Se devuelve la respuesta directamente o lo que contenga results en caso de existir.
+            })
+            .catch((error) => {
+                return { fallo: true, error: error }; //En caso de cualquier error, devuelve un objeto con "fallo" en true y con el error.
+            })
     }))
-    .catch((error) => {
-        return {fallo: true, error:error};
-    });
+        .catch((error) => {
+            return { fallo: true, error: error };
+        });
 }
 
 export { urlsSwapi, traerDatos, traerMultiplesDatos }
