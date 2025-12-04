@@ -1,23 +1,14 @@
-import { React, useEffect, useState } from 'react';
+import { React } from 'react';
 import { useParams } from 'react-router-dom';
-import { traerDatos } from '../libraries/traerDatos.js';
 import Pelicula from '../components/Peliculas/Pelicula.jsx';
 import cargando from '../assets/cargando.gif';
 
 
 //Página para mostrar una película concreta.
-function PeliculaConcreta() {
+function PeliculaConcreta(props) {
 
-  const { id } = useParams(); //Se pregunta a la API por la película con el id establecido en la url.
-  const [pelicula, setPelicula] = useState({}); //Estado para la película.
-
-  //Se llama a la API en busca de esa película una vez cargue el componente.
-  const recibirDatos = async () => {
-    setPelicula(await traerDatos("films/" + id, false));
-  }
-  useEffect(() => {
-    recibirDatos();
-  }, []);
+  const { id } = useParams(); //Se pregunta por la película con el id establecido en la url.
+  const pelicula = props.peliculas[id] ?? {};
 
   return (
     <>

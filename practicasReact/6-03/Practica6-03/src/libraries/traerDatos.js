@@ -2,7 +2,7 @@ const urlsSwapi = ["https://swapi.info/api/", "https://swapi.dev/api/", "https:/
 
 //Hace una llamada a la API, concretamente la que responda antes, y devuelve los datos formateados.
 const traerDatos = (endpoint, multiple) => { //"endpoint" es el endpoint a partir de la url de la API, y si "multiple" es true aplicará un formateo en caso de devolver un array de objetos.
-    return Promise.race(urlsSwapi.map((url) => {
+    return Promise.any(urlsSwapi.map((url) => { //Se usa la API que responda exitosamente más rápido.
         return fetch(url + endpoint).then((respuesta) => {
             return respuesta.json();
         }).then((respuesta) => {
@@ -26,7 +26,7 @@ const traerMultiplesDatos = (endpoints) => {
     if (!Array.isArray(endpoints) && endpoints.length > 0) {
         return { fallo: true, error: "No se proporcionó un array de endpoints" };
     }
-    return Promise.all(endpoints.map((endpoint) => { //Se busca que todas las promesas terminen sin errores.
+    return Promise.all(endpoints.map((endpoint) => { //Se busca que todas las promesas terminen sin errores (si se usase allSettled, en caso de fallar una promesa habrían datos faltantes en la aplicación).
         return fetch(endpoint)
             .then((respuesta) => {
                 return respuesta.json();

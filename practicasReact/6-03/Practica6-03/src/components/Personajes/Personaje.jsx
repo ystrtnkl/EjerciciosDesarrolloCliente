@@ -14,6 +14,8 @@ function Personaje(props) {
 
   //Llamar a la API para leer las pelĺiculas en las que aparece y guardarlas en el estado (solo con "expandido" en true).
   const leerApariciones = async () => {
+    //Aquí se podría buscar en el array ya descargado de películas, pero lo que devuelve la API en el objeto de personaje es un array de endpoints con las películas en las que aparece.
+    //Por lo tanto aquí si se volvería a pedir a la API los datos de películas (si esta información viniese del array ya descargado podría haber una discrepancia entre ambos datos).
     setAparecionesPersonaje(await traerMultiplesDatos(props.personaje.films));
   }
   useEffect(() => {
