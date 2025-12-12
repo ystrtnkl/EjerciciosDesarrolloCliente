@@ -1,0 +1,12 @@
+.boton-navegacion_enlace {
+    color: rgb(150, 150, 150);
+    text-decoration: underline;
+    margin: 5px;
+    padding: 5px;
+    background-color: rgb(41, 41, 41);
+    border-radius: 3px;
+}
+
+.boton-navegacion_enlace:hover {
+    color:white;
+}

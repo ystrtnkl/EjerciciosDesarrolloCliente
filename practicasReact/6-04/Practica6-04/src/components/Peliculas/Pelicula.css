@@ -1,0 +1,17 @@
+.pelicula {
+    border: 2px solid white;
+    border-radius: 15px;
+    padding: 25px;
+    max-width: 300px;
+    margin: 10px;
+}
+.titulo-pelicula {
+    font-size: 1.3em;
+}
+.titulo-pelicula a {
+    text-decoration: underline;
+    color: white;
+}
+.pelicula-expandida {
+    max-width: 100%;
+}
