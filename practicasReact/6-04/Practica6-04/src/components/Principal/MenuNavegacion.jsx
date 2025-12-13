@@ -11,6 +11,8 @@ function MenuNavegacion() {
         <BotonNavegacion direccion="/" titulo="Inicio" />
         <BotonNavegacion direccion="/peliculas" titulo="Lista de películas" />
         <BotonNavegacion direccion="/personajes" titulo="Lista de personajes" />
+        <BotonNavegacion direccion="/naves" titulo="Lista de naves" />
+        <BotonNavegacion direccion="/vehiculos" titulo="Lista de vehículos" />
       </div>
     </>
   )

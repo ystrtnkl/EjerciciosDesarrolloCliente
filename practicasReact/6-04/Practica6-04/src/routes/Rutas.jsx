@@ -6,6 +6,10 @@ import Peliculas from '../pages/Peliculas.jsx';
 import Personajes from '../pages/Personajes.jsx';
 import PersonajeConcreto from '../pages/PersonajeConcreto.jsx';
 import PeliculaConcreta from '../pages/PeliculaConcreta.jsx';
+import Naves from '../pages/Naves.jsx';
+import NaveConcreta from '../pages/NaveConcreta.jsx';
+import Vehiculos from '../pages/Vehiculos.jsx';
+import VehiculoConcreto from '../pages/VehiculoConcreto.jsx';
 
 //Enrutador que lleva a las distintas páginas de la aplicación, incluyendo un componente en caso de no encontrar la ruta.
 function Rutas() {
@@ -18,6 +22,10 @@ function Rutas() {
         <Route path="/personajes" element={<Personajes />} />
         <Route path="/personaje/:id" element={<PersonajeConcreto />} />
         <Route path="/pelicula/:id" element={<PeliculaConcreta />} />
+        <Route path="/naves" element={<Naves />} />
+        <Route path="/nave/:id" element={<NaveConcreta />} />
+        <Route path="/vehiculos" element={<Vehiculos />} />
+        <Route path="/vehiculo/:id" element={<VehiculoConcreto />} />
         <Route path="/*" element={<Error />} />
       </Routes>
     </>

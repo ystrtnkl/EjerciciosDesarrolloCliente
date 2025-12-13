@@ -5,6 +5,7 @@ import MenuNavegacion from './components/Principal/MenuNavegacion.jsx';
 import Pie from './components/Principal/Pie.jsx';
 import Contenedor from './components/Contenedor.jsx';
 import Contenido from './components/Contenido.jsx';
+import PeliculaProvider from './contexts/PeliculaProvider.jsx';
 
 function App() {
 
@@ -12,8 +13,10 @@ function App() {
     <>
       <Contenedor>
         <Cabecera />
-        <MenuNavegacion />
-        <Contenido />
+        <PeliculaProvider>
+          <MenuNavegacion />
+          <Contenido />
+        </PeliculaProvider>
         <Pie />
       </Contenedor>
     </>
