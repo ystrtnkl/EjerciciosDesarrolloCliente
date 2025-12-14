@@ -7,7 +7,7 @@ function Nave(props) {
   const url = props.nave.url ? props.nave.url.replace(/\//g, "").match(/(\d+)$/)[0] : "";
 
   return (
-    <div className={(props.expandir ? "nave-expandido" : "") + " nave"}>
+    <div className={(props.expandir ? "nave-expandida" : "") + " nave"}>
       {props.nave.fallo
         ? (<p className="error">Parece que ha habido un error al conectar con la(s) API.</p>)
         : (<div>

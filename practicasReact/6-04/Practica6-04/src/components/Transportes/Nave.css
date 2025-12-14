@@ -1,0 +1,20 @@
+.nave {
+    border: 2px solid white;
+    border-radius: 15px;
+    padding: 25px;
+    max-width: 300px;
+    margin: auto;
+    margin-top: 10px;
+}
+.titulo-nave {
+    font-size: 1.3em;
+    font-weight: bolder;
+}
+.nave a {
+    color: white;
+    text-decoration: underline;
+}
+.nave-expandida {
+    max-width: 100%;
+    margin: 10px;
+}

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Personaje.css';
 import ListaPeliculas from '../Peliculas/ListaPeliculas';
 import { traerMultiplesDatos } from '../../libraries/traerDatos.js';
+import ListaPilotables from '../Transportes/ListaPilotables.jsx';
 
 //Componente para mostrar un personaje y las películas en las que sale (solo con el atributo "expandido" en true).
 function Personaje(props) {
@@ -44,6 +45,7 @@ function Personaje(props) {
             {aparecionesPersonaje.fallo
               ? (<p className="error">Parece que ha habido un error al conectar con la(s) API.</p>)
               : (<ListaPeliculas peliculas={aparecionesPersonaje} />) /*Además muestra las películas en las que aparece, solo con el atributo "expandido".*/}
+              <ListaPilotables listaNaves={props.personaje.starships} listaVehiculos={props.personaje.vehicles} />
           </div>)}
         </div>)}
     </div>

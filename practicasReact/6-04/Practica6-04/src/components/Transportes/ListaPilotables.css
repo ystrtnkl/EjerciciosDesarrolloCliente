@@ -1,0 +1,28 @@
+.lista-pilotables-normal {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+}
+.naves-vehiculos {
+    display: flex;
+}
+.naves-vehiculos span, .lista-pilotables button {
+    margin: 10px;
+}
+.lista-pilotables {
+    border: 1px solid white;
+    border-radius: 15px;
+}
+.lista-pilotables h3 {
+    margin: 0;
+}
+.boton-activado {
+    background-color: #EEEEEE;
+    color: #222222;
+}
+.boton-desactivado {
+    background-color: #222222;
+    color: #EEEEEE;
+}

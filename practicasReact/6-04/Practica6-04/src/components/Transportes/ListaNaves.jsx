@@ -5,7 +5,7 @@ import Nave from './Nave.jsx';
 function ListaNaves(props) {
 
   return (
-    <div className="lista-naves">
+    <div className="lista-pilotables-normal">
       {props.naves.length
         ? (props.naves.map((nave, i) => {
           if ((props.limitado && i < props.limitado) || !props.limitado) {

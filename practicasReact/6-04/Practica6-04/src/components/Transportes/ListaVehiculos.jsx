@@ -5,7 +5,7 @@ import Vehiculo from './Vehiculo.jsx';
 function ListaVehiculos(props) {
 
   return (
-    <div className="lista-vehiculos">
+    <div className="lista-pilotables-normal">
       {props.vehiculos.length
         ? (props.vehiculos.map((vehiculo, i) => {
           if ((props.limitado && i < props.limitado) || !props.limitado) {
