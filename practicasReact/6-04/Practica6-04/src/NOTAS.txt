@@ -1,8 +1,11 @@
-Las películas se descargan de la API al principio de la aplicación mediante el contexto, pero los personajes se descargan cada vez que se consulta una película ya que la API no devuelve ni el objeto de los personajes ni sus IDs, si no sus endpoints.
-Lo mismo pasa al ver en que películas aparece cada personaje, como la API(s) devuelve endpoints hay que hacer las peticiones cada vez.
-Descargar todos los personajes de golpe no es posible ya que la API solo devuelve hasta 10, y hay docenas de ellos.
-De esta manera se trata a peliculas como un dato estático que no cambia y a personajes (u otros derivados de película) como datos que van cambiando y es necesario descargarlos cada vez (aunque no sea así).
-Lo mismo que pasa con los personajes, también pasa con las naves y los vehículos.
-Básicamente, si la API devolviese los datos añadiendo el ID o al menos el sub-objeto (ejemplo: devolver los datos de las naves cuando se pide su personaje o al menos su ID) se podrían haber manejado todos los datos igual que se hace con las pelílculas.
+Las películas se descargan de la API al principio de la aplicación mediante el contexto, pero los personajes, naves y vehículos se descargan cada vez que se consulta una película ya que la API no devuelve ni el objeto ni sus IDs, si no sus endpoints.
+Lo mismo pasa al ver en qué películas aparece cada personaje, como la API(s) devuelve endpoints hay que hacer las peticiones cada vez.
+Descargar todos los personajes/naves/vehículos de golpe no es posible ya que la API solo devuelve hasta 10, y hay docenas de ellos.
+De esta manera se trata a películas como un dato estático que no cambia y a personajes/naves/vehículos (u otros derivados de película) como datos que van cambiando y es necesario descargarlos cada vez (aunque no sea así).
+Básicamente, si la API devolviese los datos añadiendo el ID o al menos el sub-objeto (ejemplo: devolver los datos de las naves cuando se pide su personaje o al menos su ID) se podrían haber manejado todos los datos igual que se hace con las películas.
 Una opción habría sido descargar todos los datos posibles al inicio e ir añadiendo nuevos datos según se van descargando (se guardarían en un almacén en un contexto), pero esto no es escalable, ya que si la API manejase miles de objetos la aplicación colapsaría cuando almacene demasiados objetos.
 Por estos motivos, aunque las películas se descargan al principio, los personajes, naves y vehículos se consultan cada vez que se piden.
+
+Por otra parte, los componentes relacionados con naves y vehículos no están tan bien documentados como los relacionados con personajes ya que básicamente son prácticamente copias.
+
+Además, en Visual Studio Code aparecen errores relacionados con el useEffect, que en realidad no son errores como tal sino warnings se eslint (no suponen ningún problema para la aplicación).

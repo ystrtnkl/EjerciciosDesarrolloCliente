@@ -4,7 +4,6 @@ import { traerDatos } from '../libraries/traerDatos.js';
 import Personaje from '../components/Personajes/Personaje.jsx';
 import cargando from '../assets/cargando.gif';
 
-
 //Página para mostrar los detalles de un personaje en concreto.
 function PersonajeConcreto() {
 

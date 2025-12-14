@@ -7,7 +7,6 @@ function Vehiculos() {
   const [fallo, setFallo] = useState(false);
   const [vehiculos, setVehiculos] = useState([]);
 
-
   const recibirDatos = async () => {
     try {
       const vehiculosTraidos = await traerDatos("vehicles", true);
@@ -26,8 +25,6 @@ function Vehiculos() {
       {fallo
         ? (<p className="error">Parece que ha habido un error al conectar con la(s) API.</p> /*Si hay algún error, notifica al usuario.*/)
         : (<ListaVehiculos vehiculos={vehiculos} />)}
-
-
     </>
   )
 }

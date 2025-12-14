@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercico 5.05</title>
+    <link rel="stylesheet" href="./estilos/estilo.css">
+</head>
+<body>
+    <!--En los botones se usa type="button" para evitar que actualicen la página cuando sean pulsados (de normal hacen esto cuando están en un formulario)-->
+    <form name="agregarDisco" id="agregarDisco">
+        <fieldset>
+            
+            <legend>Agregar disco</legend>
+            <label for="nombre">Nombre del disco:</label>
+            <input required type="text" id="nombre" name="nombre" placeholder="Ejemplo"><br>
+            <label for="caratula">Carátula (URL):</label>
+            <input type="url" id="caratula" name="caratula" placeholder="https://example.com/imagen.jpg"><br>
+            <label for="grupo">Grupo o intérprete:</label>
+            <input required type="text" id="grupo" name="grupo" placeholder="Un artista o grupo"><br>
+            <label for="agno">Año de publicación:</label>
+            <input type="number" id="agno" name="agno" placeholder="2025" min="1000" max="9999"><br>
+            <fieldset name="generos" id="generos">
+                <legend>Géneros</legend>
+                <label for="genero-pop">Pop</label>
+                <input type="checkbox" id="genero-pop" name="genero" value="pop"><br>
+                <label for="genero-rock">Rock</label>
+                <input type="checkbox" id="genero-rock" name="genero" value="rock"><br>
+                <label for="genero-metal">Metal</label>
+                <input type="checkbox" id="genero-metal" name="genero" value="metal"><br>
+                <label for="genero-house">House</label>
+                <input type="checkbox" id="genero-house" name="genero" value="house"><br>
+                <label for="genero-clasica">Clásica</label>
+                <input type="checkbox" id="genero-clasica" name="genero" value="clasica"><br>
+                <label for="genero-musical">Musical</label>
+                <input type="checkbox" id="genero-musical" name="genero" value="musical"><br>
+                <label for="genero-country">Country</label>
+                <input type="checkbox" id="genero-country" name="genero" value="country"><br>
+                <label for="genero-oriental">Oriental</label>
+                <input type="checkbox" id="genero-oriental" name="genero" value="oriental"><br>
+                <label for="genero-indie">Indie</label>
+                <input type="checkbox" id="genero-indie" name="genero" value="indie"><br>
+                <label for="genero-opera">Ópera</label>
+                <input type="checkbox" id="genero-opera" name="genero" value="opera"><br>
+                <label for="genero-chiptune">Chiptune</label>
+                <input type="checkbox" id="genero-chiptune" name="genero" value="chiptune"><br>
+                <label for="genero-experimental">Experimental</label>
+                <input type="checkbox" id="genero-experimental" name="genero" value="experimental"><br>
+            </fieldset>
+            <label for="localizacion">Localización (código):</label>
+            <input type="text" id="localizacion" name="localizacion" placeholder="ES-001AA"><br>
+            <label for="localizacion">Prestado:</label>
+            <input type="checkbox" id="prestado" name="prestado"><br> 
+        </fieldset>
+        <ul id="mensajes-error" class="oculto">
+        </ul>
+        <button type="button" id="boton-guardar">Guardar</button>
+        <button type="button" id="boton-mostrar">Mostrar (actualizar lista)</button>
+        <button type="button" id="boton-limpiar">Limpiar formulario</button>
+        <p>La lista solo se actualiza al presionar el botón o al filtrar, no cuando carga la página o se agrega un nuevo disco.</p>
+    </form>
+    
+    <br><hr><br>
+    <div name="lista">
+        
+        <input type="text" name="filtro" id="filtro" placeholder="Filtrar por nombre o grupo">
+        <button type="button" id="boton-filtrar">Buscar</button>
+        <button type="button" id="boton-reset-filtros">Limpiar (reiniciar filtro)</button>
+        <button type="button" id="boton-borrar-lista">Limpiar (borrar todos los discos)</button>
+        <p>Lista de discos:</p>
+        <div id="mostrar-discos">
+        </div>
+    </div>
+    
+    
+    <script src="./main.js" type="module"></script>
+</body>
+</html>

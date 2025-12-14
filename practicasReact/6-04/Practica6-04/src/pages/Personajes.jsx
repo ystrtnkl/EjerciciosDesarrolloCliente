@@ -27,8 +27,6 @@ function Personajes() {
       {fallo
         ? (<p className="error">Parece que ha habido un error al conectar con la(s) API.</p> /*Si hay algún error, notifica al usuario.*/)
         : (<ListaPersonajes personajes={personajes} />)}
-
-
     </>
   )
 }

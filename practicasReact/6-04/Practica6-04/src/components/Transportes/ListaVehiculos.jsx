@@ -2,6 +2,7 @@ import React from 'react';
 import cargando from '../../assets/cargando.gif';
 import Vehiculo from './Vehiculo.jsx';
 
+//Componente que lista los vehículos pasados por props, similar a ListaPersonajes.
 function ListaVehiculos(props) {
 
   return (

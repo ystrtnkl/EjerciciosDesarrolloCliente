@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import { traerMultiplesDatos } from '../../libraries/traerDatos.js';
 import ListaPersonajes from '../Personajes/ListaPersonajes.jsx';
 import './Pelicula.css';
+import { idPorUrl, formatearResumen } from '../../libraries/formateos.js';
 
 //Componente que representa una película, si tiene el atributo "expandido" mostrará también su descripción y sus personajes.
 function Pelicula(props) {
 
-  const [personajesPelicula, setPersonajesPelicula] = useState([]); //Estado con los personajes de la película (permanecerá vacío si el atributo "expandido" no es true)
+  const [personajesPelicula, setPersonajesPelicula] = useState([]); //Estado con los personajes de la película (permanecerá vacío si el atributo "expandido" no es true).
   //El episode_id que proporciona la API no es el id para poner en el endpoint por alguna razón, la única manera de saber el número es sacándolo del atributo url.
-  const url = props.pelicula.url ? props.pelicula.url.replace(/\//g, "").match(/(\d+)$/)[0] : "";
+  const url = props.pelicula.url ? idPorUrl(props.pelicula.url) : "";
 
   //Cuando cargue el componente (y solo con el atributo "expandido"), hará las llamadas necesarias a la API para conseguir los datos de los personajes.
   const leerPersonajes = async () => {
@@ -31,7 +32,7 @@ function Pelicula(props) {
       <div>Fecha de salida: {props.pelicula.release_date ?? "Fecha desconocida"}</div>
       {props.expandir && (
         <div>
-          <p>{props.pelicula.opening_crawl.replaceAll("\\r\\n", "<br>")}</p>
+          <p>{formatearResumen(props.pelicula.opening_crawl) ?? "Sin resumen"}</p>
           <p><strong>Personajes:</strong></p>
           {personajesPelicula.fallo
             ? (<p className="error">Parece que ha habido un error al conectar con la(s) API.</p>)

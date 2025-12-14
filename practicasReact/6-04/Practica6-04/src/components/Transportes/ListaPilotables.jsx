@@ -4,20 +4,21 @@ import { traerMultiplesDatos } from '../../libraries/traerDatos.js';
 import ListaNaves from './ListaNaves.jsx';
 import ListaVehiculos from './ListaVehiculos.jsx';
 
+//Componente para listar ambos naves y vehículos, útil al ponerlo en un personaje para ver que vehículos/naves pilota.
+function ListaPilotables(props) { //Necesita dos arrays de endpoints: vehiulos y naves.
 
-function ListaPilotables(props) {
-
-  const [mostrando, setMostrando] = useState(false);
+  const [mostrando, setMostrando] = useState(false); //Para saber si se están mostrando.
+  //Lista de ambos objetos a listar.
   const [listaNaves, setListaNaves] = useState([]);
   const [listaVehiculos, setListaVehiculos] = useState([]);
-
+  //Funciones para consultar la API para recibir tanto las naves como los vehículos.
   const traerVehiculos = async () => {
     setListaVehiculos(await traerMultiplesDatos(props.listaVehiculos));
   }
   const traerNaves = async () => {
     setListaNaves(await traerMultiplesDatos(props.listaNaves));
   }
-
+  //Función para cambiar si se muestran o no, la primera vez será cuando se descarguen los datos.
   const cambiarMostrando = () => {
     setMostrando(!mostrando);
     props.listaNaves.length && traerNaves();

@@ -10,9 +10,7 @@ function Peliculas() {
       <h2>Peliculas de Star Wars.</h2>
       {peliculas.fallo
         ? (<p className="error">Parece que ha habido un error al conectar con la(s) API.</p> /*Si falla, lo notifica al usuario.*/)
-        : (<ListaPeliculas/>)}
-
-
+        : (<ListaPeliculas />)}
     </>
   )
 }

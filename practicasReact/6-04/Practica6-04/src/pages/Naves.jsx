@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { traerDatos } from '../libraries/traerDatos.js';
 import ListaNaves from '../components/Transportes/ListaNaves.jsx';
 
+//Página para mostrar la lista de naves de la API, similar al componente Personajes.
 function Naves() {
 
   const [fallo, setFallo] = useState(false);
   const [naves, setNaves] = useState([]);
-
 
   const recibirDatos = async () => {
     try {

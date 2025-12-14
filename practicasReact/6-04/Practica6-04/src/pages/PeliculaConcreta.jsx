@@ -9,7 +9,7 @@ function PeliculaConcreta() {
 
   const { peliculas, fallo } = useContext(PeliculaContexto);
   const { id } = useParams(); //Se pregunta por la película con el id establecido en la url.
-  const pelicula = peliculas[id] ?? {};
+  const pelicula = peliculas[id - 1] ?? {}; //Estado con los detalles del personaje.
 
   return (
     <>

@@ -6,7 +6,7 @@ const traerDatos = async (endpoint, multiple) => { //"endpoint" es el endpoint a
     try {
         return await Promise.any(urlsSwapi.map(async (url) => { //Se usa la API que responda exitosamente más rápido.
             try {
-                let respuesta = await fetch(url + endpoint);
+                let respuesta = await fetch(url + endpoint); //Por alguna razón si esta linea falla, muestra un error por la consola por mucho que se use try catch tanto dentro de la función como en sus usos.
                 respuesta = await respuesta.json();
                 respuesta = respuesta.results ? respuesta.results : respuesta; //Se usa el objeto en .results en caso de existir.
                 if (multiple) { //Si multiple es true, aplica un id auxiliar a cada uno de los items.

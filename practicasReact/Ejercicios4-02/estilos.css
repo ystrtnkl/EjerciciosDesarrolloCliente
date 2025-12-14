@@ -1,0 +1,40 @@
+/*Clase para el ejercicio 1.*/
+.censurado {
+    color: red;
+    font-weight: bold;
+    font-style: italic;
+}
+
+/*Clase para el ejercicio 2.*/
+.celda-prima {
+    background-color: red;
+    font-weight: bold;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+/*Clases para el ejercicio 3.*/
+.parrafo {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    min-height: 20px;
+    color: orangered;
+}
+
+/*Clases para el ejercicio 4.*/
+#imagen {
+  width: 256px;
+  height: 256px;
+  object-fit: cover;
+  display: block;
+}
+@keyframes fadeSwap {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+#imagen.animar { /*La animación se aplica cuando se agrega la clase animar (No se puede animar el src).*/
+  animation: fadeSwap 0.5s ease-in-out;
+}

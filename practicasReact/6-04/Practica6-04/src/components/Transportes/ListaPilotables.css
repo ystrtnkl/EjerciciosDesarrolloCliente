@@ -5,17 +5,18 @@
     gap: 10px;
     justify-content: center;
 }
-.naves-vehiculos {
+.naves-vehiculos, .peliculas-personajes {
     display: flex;
+    justify-content: center;
 }
-.naves-vehiculos span, .lista-pilotables button {
+.naves-vehiculos span, .peliculas-personajes span, .lista-pilotables button {
     margin: 10px;
 }
 .lista-pilotables {
     border: 1px solid white;
     border-radius: 15px;
 }
-.lista-pilotables h3 {
+.lista-pilotables h3, .peliculas-personajes h3 {
     margin: 0;
 }
 .boton-activado {
