@@ -1,0 +1,17 @@
+.cabecera_principal {
+    background-color: rgb(32, 32, 32);
+    color: rgb(224, 224, 224);
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    border-radius: 10px;
+    border: 1px solid white;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.cabecera_principal h2 {
+    margin-right: 20px;
+}

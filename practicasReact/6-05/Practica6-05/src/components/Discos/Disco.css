@@ -1,0 +1,25 @@
+.disco {
+    border: 2px solid rgb(226, 226, 226);
+    border-radius: 10px;
+    padding: 8px;
+    margin: 3px;
+}
+.disco-portada {
+    max-width: 256px;
+    max-height: 256px;
+    border-radius: 5px;
+}
+.disco-eliminar img {
+    max-width: 32px;
+    max-height: 32px;
+    margin: 0;
+    padding: 0;
+}
+.disco-eliminar {
+    background-color: rgb(209, 0, 0);
+    padding: 0;
+}
+.disco h2, .disco a {
+    color: white;
+    text-decoration: underline;
+}

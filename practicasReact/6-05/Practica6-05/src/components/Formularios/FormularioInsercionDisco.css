@@ -1,0 +1,19 @@
+label {
+    margin: 5px;
+}
+fieldset {
+    width: 200px;
+    margin: auto;
+    margin-bottom: 5px;
+}
+.mal {
+    color: red;
+    font-weight: bold;
+}
+.oculto {
+    display: none;
+}
+.bien {
+    color: greenyellow;
+    font-weight: bold;
+}

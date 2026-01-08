@@ -1,9 +1,16 @@
 "use strict"
+
+//PDF456
+
 window.onload = () => {
     const str = "234.323";
     const num = 325.234;
+    Math.round(234.5) + Math.ceil(23.6) + Math.floor(34.2);
     str.toLocaleString("es-ES", { style: "unit", unit: "meter", unitDisplay: "narrow" });
     str.toLocaleString("es-ES");
+    str.replaceAll("2", "45");
+    [...str.split(".").sort().join(".")];
+    //str. ...
     console.log(num.toLocaleString("es-ES"));
 
     if (typeof Storage !== "undefined") (async ()=>{
@@ -35,7 +42,7 @@ window.onload = () => {
     console.log(elemento.id);
     console.log(elemento);
     elemento.insertAdjacentElement("afterbegin", "a");
-    console.log(document.forms.nombre.inputnombre);
+    console.log(document.forms?.nombre?.inputnombre.value ?? "");
 
     console.log(location.href);
     console.log(location.host/*...*/);
@@ -61,7 +68,29 @@ window.onload = () => {
     const regexLocalizacion = /^ES-\d{3}[A-Z]{2}$/;
     console.log(regexLocalizacion.test("ES-253"));
 
-    const aaadf = new Date();
+    const ahora = new Date();
+    const fecha = new Date(2025, 12, 15);
+    const momento = new Date(2026, 1, 4, 17, 30, 22, 243); //YYYY-MM-DD HH:mm:ss:ms
+    //momento. ...
+
+    const adfasdf = [];
+    [...adfasdf].map((e) => {}).join(", ");
+    adfasdf.filter((e)=>e===true).every((e)=>e===true).some((e)=>e===true); //via
+    //adfasdf. ...
+    const asdf = {a:1, b:"2"}
+    JSON.parse(JSON.stringify({...asdf}));
+    const {a, b} = asdf;
+    //asdf. ...
+    
+
+    console.log(self.crypto.randomUUID());
+    console.log(Math.random() * 10);//0.000 10.000
+    function getRandomInt(min, max) {
+        const minCeiled = Math.ceil(min);
+        const maxFloored = Math.floor(max);
+        return Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled); // The maximum is exclusive and the minimum is inclusive
+    }
+
 }
 
 
