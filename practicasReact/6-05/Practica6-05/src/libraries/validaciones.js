@@ -1,4 +1,3 @@
-"use strict";
 //Distintas funciones que reciben un dato a usar en la aplicación y lo validan, devuelven false si no cumple los criterios y true o el propio dato si sí.
 
 const regexAgno = /^\d{4}$/;
@@ -42,10 +41,17 @@ const validarLocalizacion = (localizacion) => {
         ? localizacion : false;
 }
 
+//Valida un uuid de 36 carácteres.
+const validarUuid = (uuid) => {
+    return typeof uuid === "string" 
+        && uuid.length === 36;
+}
+
 //Valida el objeto entero de disco, que tiene los campos anteriores (el año y si está prestado son opcionales, pero deben cumplir los criterios si están presentes en el objeto).
 const validarDisco = (disco) => {
     //Los campos que se permite que sean undefinied son los no obligatorios.
     return typeof disco === "object"
+        && validarUuid(disco.id)
         && validarNombreDisco(disco.nombre)
         && validarInterpreteOGrupo(disco.grupo)
         && (disco.agno === undefined || validarAgno(disco.agno) || disco.agno === '')
@@ -55,4 +61,10 @@ const validarDisco = (disco) => {
         ? disco : false;
 }
 
-export { validarNombreDisco, validarInterpreteOGrupo, validarAgno, validarGenero, validarLocalizacion, validarDisco };
+//Valida un array de discos, devuelve todos los discos válidos (o ninguno si no hay).
+const validarDiscos = (discos) => {
+    if (!Array.isArray(discos)) return []
+    return discos.filter((e) => validarDisco(e));
+}
+
+export { validarNombreDisco, validarInterpreteOGrupo, validarAgno, validarGenero, validarLocalizacion, validarDisco, validarUuid, validarDiscos };
