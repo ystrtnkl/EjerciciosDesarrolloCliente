@@ -48,10 +48,10 @@ const validarUuid = (uuid) => {
 }
 
 //Valida el objeto entero de disco, que tiene los campos anteriores (el año y si está prestado son opcionales, pero deben cumplir los criterios si están presentes en el objeto).
-const validarDisco = (disco) => {
+const validarDisco = (disco, omitirUuid) => {
     //Los campos que se permite que sean undefinied son los no obligatorios.
     return typeof disco === "object"
-        && validarUuid(disco.id)
+        && (omitirUuid || validarUuid(disco.uuid)) //En algunos casos se quiere no evaluar el uuid (ya que se genera automáticamente).
         && validarNombreDisco(disco.nombre)
         && validarInterpreteOGrupo(disco.grupo)
         && (disco.agno === undefined || validarAgno(disco.agno) || disco.agno === '')
@@ -61,10 +61,23 @@ const validarDisco = (disco) => {
         ? disco : false;
 }
 
-//Valida un array de discos, devuelve todos los discos válidos (o ninguno si no hay).
-const validarDiscos = (discos) => {
-    if (!Array.isArray(discos)) return []
-    return discos.filter((e) => validarDisco(e));
+//Igual que validarDisco pero si la propiedad no está presente la omite (útil para patch).
+const validarDiscoSoft = (disco, omitirUuid) => {
+    return typeof disco === "object"
+        && (omitirUuid || validarUuid(disco.uuid)) //En algunos casos se quiere no evaluar el uuid (ya que se genera automáticamente).
+        && (disco.nombre ? validarNombreDisco(disco.nombre) : true)
+        && (disco.grupo ? validarInterpreteOGrupo(disco.grupo) : true)
+        && (disco.agno === undefined || validarAgno(disco.agno) || disco.agno === '')
+        && (disco.localizacion ? validarLocalizacion(disco.localizacion) : true)
+        && (disco.genero ? validarGenero(disco.genero) : true)
+        && (typeof disco.prestado === "boolean" || typeof disco.prestado === "undefined")
+        ? disco : false;
 }
 
-export { validarNombreDisco, validarInterpreteOGrupo, validarAgno, validarGenero, validarLocalizacion, validarDisco, validarUuid, validarDiscos };
+//Valida un array de discos, devuelve todos los discos válidos (o ninguno si no hay).
+const validarDiscos = (discos, omitirUuid) => {
+    if (!Array.isArray(discos)) return []
+    return discos.filter((e) => validarDisco(e, omitirUuid));
+}
+
+export { validarNombreDisco, validarDiscoSoft, validarInterpreteOGrupo, validarAgno, validarGenero, validarLocalizacion, validarDisco, validarUuid, validarDiscos };

@@ -2,11 +2,11 @@ import React, { useState, useRef } from 'react';
 import './FormularioInsercionDisco.css';
 import InputCheckCompleto from './InputCheckCompleto.jsx';
 import InputTextCompleto from './InputTextCompleto.jsx';
-import { validarNombreDisco, validarInterpreteOGrupo, validarAgno, validarGenero, validarLocalizacion, validarDisco } from '../../libraries/validaciones.js';
+import { validarNombreDisco, validarInterpreteOGrupo, validarAgno, validarGenero, validarLocalizacion } from '../../libraries/validaciones.js';
 
 const FormularioInsercionDisco = (props) => {
 
-    //Nombres y valores de todos los posibles géneros de música.
+    //Nombres y valores de todos los posibles géneros de música (duplicado por las tildes).
     const posiblesGeneros = ["pop", "rock", "metal", "house", "clasica", "musical", "country", "oriental", "indie", "opera", "chiptune", "experimental"];
     const posiblesGenerosTitulos = ["Pop", "Rock", "Metal", "House", "Clásica", "Musical", "Country", "Oriental", "Indie", "Ópera", "Chiptune", "Experimental"];
     const estadoInicial = { //Como empezará el estado manejador del formulario.
@@ -14,9 +14,9 @@ const FormularioInsercionDisco = (props) => {
         caratula: "",
         grupo: "",
         agno: "",
-        genero: [],
+        genero: props.previo.genero ?? [],
         localizacion: "",
-        prestado: false
+        prestado: props.previo.prestado ?? false
     };
     //useRef para manejar los mensajes volátiles de éxito y error.
     const mensajeExito = useRef(null);
@@ -51,7 +51,7 @@ const FormularioInsercionDisco = (props) => {
 
     //Cuando se clique en guardar.
     const guardar = () => {
-        if (validarDisco(disco)) { //Se guardará solo si el disco entero es válido
+        if (props.validador(disco, true)) { //Se guardará solo si el disco entero es válido
             props.guardar(disco);
             resetear();
             mensajeExito.current.classList.remove("oculto");
@@ -71,11 +71,11 @@ const FormularioInsercionDisco = (props) => {
             {/*Se puede probar la URL de la imágen de la carátula a tiempo real.*/}
             <img src={disco.caratula === "" ? "#" : disco.caratula} alt="" />
             <br />
-            <InputTextCompleto titulo="Localización:" nombre="localizacion" ejemplo="ES-001AA" valor={disco.localizacion} actualizarValor={actualizarDatos} error="La localización debe tener este formato: ES-(tres cifras)(dos letras mayúsculas)" validacion={validarLocalizacion} />
-            <InputTextCompleto titulo="Nombre:" nombre="nombre" ejemplo="Nombre del disco" valor={disco.nombre} actualizarValor={actualizarDatos} error="El nombre debe de tener al menos 5 carácteres." validacion={validarNombreDisco} />
-            <InputTextCompleto titulo="Carátula (URL):" nombre="caratula" ejemplo="https://example.com/1.png" valor={disco.caratula} actualizarValor={actualizarDatos} />
-            <InputTextCompleto titulo="Grupo o intérprete:" nombre="grupo" ejemplo="Nombre del artista o artistas" valor={disco.grupo} actualizarValor={actualizarDatos} error="El nombre debe de tener al menos 5 carácteres." validacion={validarInterpreteOGrupo} />
-            <InputTextCompleto tipo="number" titulo="Año de publicación:" nombre="agno" ejemplo="2025" valor={disco.agno} actualizarValor={actualizarDatos} error="El año debe ser un entero mayor que 999 (o vacío ya que es opcional)." validacion={validarAgno} />
+            <InputTextCompleto titulo="Localización:" nombre="localizacion" ejemplo={props.previo.localizacion ?? "ES-001AA"} valor={disco.localizacion} actualizarValor={actualizarDatos} error="La localización debe tener este formato: ES-(tres cifras)(dos letras mayúsculas)" validacion={validarLocalizacion} />
+            <InputTextCompleto titulo="Nombre:" nombre="nombre" ejemplo={props.previo.nombre ?? "Nombre del disco"} valor={disco.nombre} actualizarValor={actualizarDatos} error="El nombre debe de tener al menos 5 carácteres." validacion={validarNombreDisco} />
+            <InputTextCompleto titulo="Carátula (URL):" nombre="caratula" ejemplo={props.previo.caratula ?? "https://example.com/1.png"} valor={disco.caratula} actualizarValor={actualizarDatos} />
+            <InputTextCompleto titulo="Grupo o intérprete:" nombre="grupo" ejemplo={props.previo.grupo ?? "Nombre del artista o artistas"} valor={disco.grupo} actualizarValor={actualizarDatos} error="El nombre debe de tener al menos 5 carácteres." validacion={validarInterpreteOGrupo} />
+            <InputTextCompleto tipo="number" titulo="Año de publicación:" nombre="agno" ejemplo={props.previo.agno ?? "2025"} valor={disco.agno} actualizarValor={actualizarDatos} error="El año debe ser un entero mayor que 999 (o vacío ya que es opcional)." validacion={validarAgno} />
             <fieldset name="generos" id="generos">
                 <legend>Géneros</legend>
                 {/*Los checkbox de los géneros se agregan dinámicamente a partir del array de géneros*/}

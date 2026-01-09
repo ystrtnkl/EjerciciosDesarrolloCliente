@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import { peticionGenerica } from "../libraries/peticionHttp.js";
-import { validarDisco, validarUuid, validarDiscos } from "../libraries/validaciones.js";
+import { validarDisco, validarUuid, validarDiscos, validarDiscoSoft } from "../libraries/validaciones.js";
 
 const ContextoDiscos = createContext();
 
@@ -29,16 +29,14 @@ const ProveedorDiscos = (props) => {
 
   //Guarda tantos discos como se le pasen en el array (para guardar uno, pasar un array con un solo elemento).
   const guardarDiscos = async (discosNuevos) => {
-    let discosAgregar = validarDiscos(discosNuevos);
+    let discosAgregar = validarDiscos(discosNuevos, true);
     if (!discosAgregar.length) return { fallo: true };
-    //Se suben solo los que no estén repetidos.
-    discosAgregar = discosAgregar.filter(async (e) => {
-      const resultado = await getDisco(e.id).fallo
-      return resultado.fallo ? true : false; //Si falla el GET es que el uuid no está en uso.
-    });
-    console.log(discosAgregar);
+    discosAgregar = discosAgregar.map((e) => {return {...e, id: self.crypto.randomUUID()}}); //El uuid se genera aquí.
     try {
-      return await peticionGenerica(URL_API, "PATCH", { discos: discosAgregar });
+      discosAgregar.map(async (e) => {
+        await peticionGenerica(URL_API, "POST", e)
+      });
+      return true;
     } catch (error) {
       return { fallo: true, error };
     }
@@ -54,55 +52,33 @@ const ProveedorDiscos = (props) => {
     }
   }
 
-  //Borra todos los discos del localStorage.
-  const borrarTodosLosDiscos = async () => {
-    try {
-      return await peticionGenerica(URL_API, "DELETE");
-    } catch (error) {
-      return { fallo: true, error };
-    }
-  }
-
-  //Borra todos los discos almacenados y guarda solo los almacenados por parámetros (se requiere que sean discos enteros y válidos, pero se usa patch porque se altera parcialmente el array de discos).
-  const reemplazarDiscos = async (discosNuevos) => {
-    const discosEditar = validarDiscos(discosNuevos);
-    if (!discosEditar.length) return { fallo: true };
-    try {
-      return await peticionGenerica(URL_API, "PATCH", { discos: discosEditar });
-    } catch (error) {
-      return { fallo: true, error };
-    }
-  }
-
   //Edita los datos de un disco a partir de su uuid, se requiere de un disco entero y válido.
   const editarDisco = async (uuid, discoNuevo) => {
-    if (!validarUuid(uuid)) return { fallo: true };
-    const discosEditar = validarDiscos(discoNuevo);
-    if (!discosEditar.length) return { fallo: true };
+    if (!validarUuid(uuid) || !validarDisco(discoNuevo, true)) return { fallo: true };
     try {
-      return await peticionGenerica(`${URL_API}/${uuid}`, "PUT", { discos: discosEditar });
+      return await peticionGenerica(`${URL_API}/${uuid}`, "PUT", {...discoNuevo, id: uuid}); //PUT porque edita todo el disco.
+    } catch (error) {
+      return { fallo: true, error };
+    }
+  }
+
+  //Edita solo los datos proporcionados a partir de un uuid.
+  const editarDiscoParcial = async (uuid, datosNuevos) => {
+    if (!validarUuid(uuid) || !validarDiscoSoft(datosNuevos, true)) return { fallo: true };
+    try {
+      return await peticionGenerica(`${URL_API}/${uuid}`, "PATCH", datosNuevos); //PATCH porque solo cambia algunos datos.
     } catch (error) {
       return { fallo: true, error };
     }
   }
 
   const datosAProveer = {
-    discosActuales, setDiscosActuales, getDisco, getTodosLosDiscos, guardarDiscos, borrarDisco, borrarTodosLosDiscos, reemplazarDiscos, editarDisco
+    discosActuales, setDiscosActuales, getDisco, getTodosLosDiscos, guardarDiscos, borrarDisco, editarDisco, editarDiscoParcial
   }
 
 
   const cargaInicial = async () => {
     setDiscosActuales(await getTodosLosDiscos());
-    console.log(await guardarDiscos([{
-            "id": "gggc6061-3f07-48bb-96ab-da8e23c4695f",
-            "localizacion": "ES-008CB",
-            "nombre": "Nombre de disco erspecial",
-            "caratula": "https://i.ibb.co/zh7F0HD6/A7.png",
-            "grupo": "Artistas uno",
-            "agno": "2001",
-            "genero": ["pop"],
-            "prestado": true
-        }]));
   }
   useEffect(() => {
     cargaInicial();
