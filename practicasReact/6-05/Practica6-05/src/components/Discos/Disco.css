@@ -9,7 +9,7 @@
     max-height: 256px;
     border-radius: 5px;
 }
-.disco-eliminar img {
+.disco-eliminar img, .disco-editar img {
     max-width: 32px;
     max-height: 32px;
     margin: 0;
@@ -17,6 +17,10 @@
 }
 .disco-eliminar {
     background-color: rgb(209, 0, 0);
+    padding: 0;
+}
+.disco-editar {
+    background-color: rgb(209, 174, 0);
     padding: 0;
 }
 .disco h2, .disco a {

@@ -5,6 +5,7 @@ import Error from '../pages/Error.jsx';
 import InsertarDisco from '../pages/InsertarDisco.jsx';
 import ListarDisco from '../pages/ListarDisco.jsx';
 import DiscoConcreto from '../pages/DiscoConcreto.jsx';
+import EditarDisco from '../pages/EditarDisco.jsx';
 
 //Enrutador que lleva a las distintas páginas de la aplicación, incluyendo un componente en caso de no encontrar la ruta.
 function Rutas() {
@@ -17,6 +18,7 @@ function Rutas() {
         <Route path="/insertarDisco" element={<InsertarDisco />} />
         <Route path="/listarDisco" element={<ListarDisco />} />
         <Route path="/listarDisco/:uuid" element={<DiscoConcreto />} />
+        <Route path="/editarDisco/:uuid" element={<EditarDisco />} />
         <Route path="/*" element={<Error />} />
       </Routes>
     </>

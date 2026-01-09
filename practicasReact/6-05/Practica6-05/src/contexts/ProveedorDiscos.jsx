@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from "react";
+import React, { createContext } from "react";
 import { peticionGenerica } from "../libraries/peticionHttp.js";
 import { validarDisco, validarUuid, validarDiscos, validarDiscoSoft } from "../libraries/validaciones.js";
 
@@ -6,9 +6,9 @@ const ContextoDiscos = createContext();
 
 const ProveedorDiscos = (props) => {
 
-  const [discosActuales, setDiscosActuales] = useState([]);
   const URL_API = "http://localhost:3000/discos";
 
+  //Devuelve un array con todos los discos guardados.
   const getTodosLosDiscos = async () => {
     try {
       return await peticionGenerica(URL_API, "GET");
@@ -31,7 +31,7 @@ const ProveedorDiscos = (props) => {
   const guardarDiscos = async (discosNuevos) => {
     let discosAgregar = validarDiscos(discosNuevos, true);
     if (!discosAgregar.length) return { fallo: true };
-    discosAgregar = discosAgregar.map((e) => {return {...e, id: self.crypto.randomUUID()}}); //El uuid se genera aquí.
+    discosAgregar = discosAgregar.map((e) => { return { ...e, id: self.crypto.randomUUID() } }); //El uuid se genera aquí.
     try {
       discosAgregar.map(async (e) => {
         await peticionGenerica(URL_API, "POST", e)
@@ -56,7 +56,7 @@ const ProveedorDiscos = (props) => {
   const editarDisco = async (uuid, discoNuevo) => {
     if (!validarUuid(uuid) || !validarDisco(discoNuevo, true)) return { fallo: true };
     try {
-      return await peticionGenerica(`${URL_API}/${uuid}`, "PUT", {...discoNuevo, id: uuid}); //PUT porque edita todo el disco.
+      return await peticionGenerica(`${URL_API}/${uuid}`, "PUT", { ...discoNuevo, id: uuid }); //PUT porque edita todo el disco.
     } catch (error) {
       return { fallo: true, error };
     }
@@ -73,16 +73,8 @@ const ProveedorDiscos = (props) => {
   }
 
   const datosAProveer = {
-    discosActuales, setDiscosActuales, getDisco, getTodosLosDiscos, guardarDiscos, borrarDisco, editarDisco, editarDiscoParcial
+    getDisco, getTodosLosDiscos, guardarDiscos, borrarDisco, editarDisco, editarDiscoParcial
   }
-
-
-  const cargaInicial = async () => {
-    setDiscosActuales(await getTodosLosDiscos());
-  }
-  useEffect(() => {
-    cargaInicial();
-  }, []);
 
   return (
     <>

@@ -11,7 +11,7 @@ function InsertarDisco() {
   return (
     <>
       <h2>Formulario para insertar un disco.</h2>
-      <FormularioInsercionDisco guardar={(disco) => {guardarDiscos([disco])}} validador={(disco) => validarDisco(disco, true)} />
+      <FormularioInsercionDisco guardar={(disco) => { guardarDiscos([disco]) }} validador={(disco) => validarDisco(disco, true)} />
     </>
   )
 }

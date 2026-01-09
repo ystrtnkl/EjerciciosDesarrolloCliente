@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './FormularioInsercionDisco.css';
 import InputCheckCompleto from './InputCheckCompleto.jsx';
 import InputTextCompleto from './InputTextCompleto.jsx';
@@ -10,17 +10,17 @@ const FormularioInsercionDisco = (props) => {
     const posiblesGeneros = ["pop", "rock", "metal", "house", "clasica", "musical", "country", "oriental", "indie", "opera", "chiptune", "experimental"];
     const posiblesGenerosTitulos = ["Pop", "Rock", "Metal", "House", "Clásica", "Musical", "Country", "Oriental", "Indie", "Ópera", "Chiptune", "Experimental"];
     const estadoInicial = { //Como empezará el estado manejador del formulario.
-        nombre: "",
-        caratula: "",
-        grupo: "",
-        agno: "",
-        genero: props.previo.genero ?? [],
-        localizacion: "",
-        prestado: props.previo.prestado ?? false
+        nombre: props.previo?.nombre ?? "",
+        caratula: props.previo?.caratula ?? "",
+        grupo: props.previo?.grupo ?? "",
+        agno: props.previo?.agno ?? "",
+        genero: props.previo?.genero ?? [],
+        localizacion: props.previo?.localizacion ?? "",
+        prestado: props.previo?.prestado ?? false
     };
-    //useRef para manejar los mensajes volátiles de éxito y error.
-    const mensajeExito = useRef(null);
-    const mensajeError = useRef(null);
+    //Mensajes temporales de error y éxito.
+    const [mensajeExito, setMensajeExito] = useState(false);
+    const [mensajeError, setMensajeError] = useState(false);
 
     //Estado de un disco, que en realidad son los valores actuales del formulario.
     const [disco, setDisco] = useState(estadoInicial);
@@ -30,7 +30,6 @@ const FormularioInsercionDisco = (props) => {
         if (e.target.type === "checkbox") {
             setDisco({ ...disco, [e.target.name]: e.target.checked === true }); //Si es un checkbox se guarda su checked.
         } else {
-
             setDisco({ ...disco, [e.target.name]: e.target.value }); //Si es otro tipo de input, se guarda su valor.
         }
     }
@@ -51,17 +50,27 @@ const FormularioInsercionDisco = (props) => {
 
     //Cuando se clique en guardar.
     const guardar = () => {
-        if (props.validador(disco, true)) { //Se guardará solo si el disco entero es válido
-            props.guardar(disco);
+        if (props.validador()) { //Se guardará en base al validador pasado por props (puede que valide todo o solo lo que está escrito).
+            if (props.editando) { //En caso de ser un formulario de edición y no de inserción
+                //Los valores "" reemplazarían a los originales en la API, estableciéndolos como undefined hará que no se alteren en la base de datos (método patch).
+                let discoPatch = { ...disco };
+                for (let e in discoPatch) {
+                    if (discoPatch[e] === "") discoPatch[e] = undefined;
+                    if (discoPatch[e] === "NUL") discoPatch[e] = ""; //En caso de querer borrar un valor, se pide al usuario que escriba NUL.
+                }
+                props.guardar(discoPatch);
+            } else {
+                props.guardar(disco); //En caso de ser un formulario de inserción, se guarda el objeto entero.
+            }
             resetear();
-            mensajeExito.current.classList.remove("oculto");
+            setMensajeExito(true);
             setTimeout(() => { //Timeouts tanto en éxito como error para mostrar mensajes volátiles.
-                mensajeExito.current.classList.add("oculto");
+                setMensajeExito(false);
             }, 2000);
         } else {
-            mensajeError.current.classList.remove("oculto");
+            setMensajeError(true);
             setTimeout(() => {
-                mensajeError.current.classList.add("oculto");
+                setMensajeError(false);
             }, 2000);
         }
     }
@@ -71,11 +80,11 @@ const FormularioInsercionDisco = (props) => {
             {/*Se puede probar la URL de la imágen de la carátula a tiempo real.*/}
             <img src={disco.caratula === "" ? "#" : disco.caratula} alt="" />
             <br />
-            <InputTextCompleto titulo="Localización:" nombre="localizacion" ejemplo={props.previo.localizacion ?? "ES-001AA"} valor={disco.localizacion} actualizarValor={actualizarDatos} error="La localización debe tener este formato: ES-(tres cifras)(dos letras mayúsculas)" validacion={validarLocalizacion} />
-            <InputTextCompleto titulo="Nombre:" nombre="nombre" ejemplo={props.previo.nombre ?? "Nombre del disco"} valor={disco.nombre} actualizarValor={actualizarDatos} error="El nombre debe de tener al menos 5 carácteres." validacion={validarNombreDisco} />
-            <InputTextCompleto titulo="Carátula (URL):" nombre="caratula" ejemplo={props.previo.caratula ?? "https://example.com/1.png"} valor={disco.caratula} actualizarValor={actualizarDatos} />
-            <InputTextCompleto titulo="Grupo o intérprete:" nombre="grupo" ejemplo={props.previo.grupo ?? "Nombre del artista o artistas"} valor={disco.grupo} actualizarValor={actualizarDatos} error="El nombre debe de tener al menos 5 carácteres." validacion={validarInterpreteOGrupo} />
-            <InputTextCompleto tipo="number" titulo="Año de publicación:" nombre="agno" ejemplo={props.previo.agno ?? "2025"} valor={disco.agno} actualizarValor={actualizarDatos} error="El año debe ser un entero mayor que 999 (o vacío ya que es opcional)." validacion={validarAgno} />
+            <InputTextCompleto titulo="Localización:" nombre="localizacion" ejemplo={props.previo?.localizacion ?? "ES-001AA"} valor={disco.localizacion} actualizarValor={actualizarDatos} error="La localización debe tener este formato: ES-(tres cifras)(dos letras mayúsculas)" validacion={validarLocalizacion} />
+            <InputTextCompleto titulo="Nombre:" nombre="nombre" ejemplo={props.previo?.nombre ?? "Nombre del disco"} valor={disco.nombre} actualizarValor={actualizarDatos} error="El nombre debe de tener al menos 5 carácteres." validacion={validarNombreDisco} />
+            <InputTextCompleto titulo="Carátula (URL):" nombre="caratula" ejemplo={props.previo?.caratula ?? "https://example.com/1.png"} valor={disco.caratula} actualizarValor={actualizarDatos} />
+            <InputTextCompleto titulo="Grupo o intérprete:" nombre="grupo" ejemplo={props.previo?.grupo ?? "Nombre del artista o artistas"} valor={disco.grupo} actualizarValor={actualizarDatos} error="El nombre debe de tener al menos 5 carácteres." validacion={validarInterpreteOGrupo} />
+            <InputTextCompleto tipo="number" titulo="Año de publicación:" nombre="agno" ejemplo={props.previo?.agno ?? "2025"} valor={disco.agno} actualizarValor={actualizarDatos} error="El año debe ser un entero mayor que 999 (o vacío ya que es opcional)." validacion={validarAgno} />
             <fieldset name="generos" id="generos">
                 <legend>Géneros</legend>
                 {/*Los checkbox de los géneros se agregan dinámicamente a partir del array de géneros*/}
@@ -88,8 +97,9 @@ const FormularioInsercionDisco = (props) => {
             <input type="checkbox" id="prestado" name="prestado" value="prestado" onChange={(e) => { actualizarDatos(e); }} checked={disco.prestado === true} /><br />
             <input type="button" name="guardar" value="Guardar" id="guardar" onClick={guardar} />
             <input type="button" name="reset" value="Reiniciar" id="reset" onClick={resetear} />
-            <p className="bien oculto" ref={mensajeExito}>Disco guardado correctamente.</p>
-            <p className="mal oculto" ref={mensajeError}>El formulario tiene errores, revísalos.</p>
+            {props.editando && (<p>Escribe NUL para dejarlo en blanco</p>)}
+            {mensajeExito && (<p className="bien oculto">Disco guardado correctamente.</p>)}
+            {mensajeError && (<p className="mal oculto">El formulario tiene errores, revísalos.</p>)}
         </form>
     )
 }
