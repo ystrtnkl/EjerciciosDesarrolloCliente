@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import { peticionGenerica } from "../libraries/peticionHttp.js";
-import { validarDisco, validarUuid, validarDiscos, validarDiscoSoft } from "../libraries/validaciones.js";
 
-
+//Hook personalizado para hacer peticiones HTTP a urls, es un hook y no una libreria js normal ya que maneja estados de cargando y error (al ser un hooks, se vuelven únicos para cada uno de sus usuarios al contrario que un contexto).
 export const useAPI = () => {
 
     const [error, setError] = useState(null);
     const [cargando, setCargando] = useState(true);
 
-    const URL_API = "http://localhost:3000/discos";
+    
 
     //Encapsulador de la función de petición genérica para además manejar los estados de error y cargando.
-    const peticion = async (url, metodo = "GET", body, headers) => {
+    const peticion = async (url, metodo = "GET", body = {}, headers = []) => {
         try {
             setError(null);
             setCargando(true);
             const resultado = await peticionGenerica(url, metodo, body, headers);
-            if (!resultado.ok || resultado.code >= 400) throw new Error("La API devolvió un error");
             setCargando(false);
             return resultado;
         } catch (error) {
@@ -28,6 +26,10 @@ export const useAPI = () => {
     }
 
     const leer = async (url) => {
+        return await peticion(url);
+    }
+
+    const leerTodos = async (url) => {
         return await peticion(url);
     }
 
@@ -46,8 +48,7 @@ export const useAPI = () => {
         return await peticion(url, "PUT", body);
     }
 
-
     return {
-        error, cargando, peticion, leer, crear, borrar, editar, actualizar
+        error, cargando, peticion, leer, crear, borrar, editar, actualizar, leerTodos
     }
 }
