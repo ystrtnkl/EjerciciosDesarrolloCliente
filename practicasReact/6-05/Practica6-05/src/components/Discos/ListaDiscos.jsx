@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import './ListaDiscos.css';
 import Disco from './Disco.jsx';
-import imgCargando from '../../assets/cargando.gif';
 import { useNavigate } from 'react-router';
-import useDiscos from '../../hooks/useDiscos.js';
 
 //Componente para listar discos.
 const ListaDiscos = (props) => {
 
-  const { borrarDisco, error, cargando, discosCargados, getTodosLosDiscos } = useDiscos();
   const [discosMostrados, setDiscosMostrados] = useState([]); //Array copia de discos que hace referencia a los que se van a mostrar (no los cargados en la applicación).
   const [buscado, setBuscado] = useState(""); //Lo que se está buscando en los filtros.
   const navegar = useNavigate();
 
   //Función handler para borrar (hace la acción en la base de datos y en la interfaz).
   const borrar = async (uuid) => {
-    await borrarDisco(uuid);
+    await props.borrarDisco(uuid);
     setDiscosMostrados(discosMostrados.filter((e) => e.id !== uuid));
   }
 
@@ -28,40 +25,34 @@ const ListaDiscos = (props) => {
   //Función que se ejecuta cada vez que se escribe algo distinto en los filtros, solo altera los discos mostrados, no los cargados.
   const actualizarBusqueda = (e) => {
     setBuscado(e.target.value);
-    setDiscosMostrados([...discosCargados].filter((ee) => {
+    setDiscosMostrados([...props.discosCargados].filter((ee) => {
       return ee.nombre.toLowerCase().includes(e.target.value.toLowerCase()) || ee.grupo.toLowerCase().includes(e.target.value.toLowerCase());
     }));
   }
 
   //Función para reiniciar los filtros, haciendo que los discos mostrados sean los mismos que los cargados.
   const reiniciarFiltros = () => {
-    setDiscosMostrados(discosCargados);
+    setDiscosMostrados(props.discosCargados);
     setBuscado("");
   }
 
   useEffect(() => {
-    getTodosLosDiscos(true);
-    setDiscosMostrados(discosCargados);
+    setDiscosMostrados(props.discosCargados);
   }, []);
 
   return (
-    <div>
-      {/*Se puede decidir no mostrar las opciones de filtrado.*/}
-      {JSON.stringify(discosCargados)}
-      {JSON.stringify(discosMostrados)}
-      {cargando ? (<img src={imgCargando} alt="Cargando..." />) :
-        (<div>
+      <div>
+        {/*Se puede decidir no mostrar las opciones de filtrado.*/}
           {props.filtros && (<div>
             <input type="text" name="filtro" id="filtro" placeholder='Introduce un nombre, grupo o artista...' value={buscado} onChange={(e) => { actualizarBusqueda(e); }} />
             <input type="button" name="reset-filtros" id="reset-filtros" value="Reiniciar filtros" onClick={reiniciarFiltros} /><br />
           </div>)}
           <div className="lista" onClick={(e) => { botonEnDisco(e); }}>
-            {!error && discosMostrados.length > 0 ? discosMostrados.map((e, i) => {
-              return (<Disco key={i} disco={e} />)
+            {discosMostrados.length > 0 ? discosMostrados.map((e) => {
+              return (<Disco key={e.id} disco={e} />)
             }) : (<p>No se han encontrado discos (o al menos no que coincidan con la búsqueda).</p>)}
           </div>
-        </div>)}
-    </div>
+        </div>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { validarDisco, validarUuid, validarDiscos, validarDiscoSoft } from "../libraries/validaciones.js";
 import { useAPI } from "../hooks/useAPI.js";
 
@@ -7,26 +7,17 @@ const ContextoDiscos = createContext();
 //Contexto encargado del manejo de los discos, usa useAPI para las peticiones.
 const ProveedorDiscos = (props) => {
 
-  const { leer, crear, borrar, editar, actualizar, leerTodos, cargando, error } = useAPI();
+  const { leer, crear, borrar, editar, actualizar, cargando, error } = useAPI();
   const [discosCargados, setDiscosCargados] = useState([]);
-  const URL_API = "http://localhost:3000/discos";
-
-  //Devuelve un array con todos los discos guardados, si carga inicial es true además cambia el estado de discos cargados a esos discos.
-  const getTodosLosDiscos = async (cargaInicial) => {
-    try {
-      const todos = await leerTodos(URL_API);
-      if (cargaInicial) setDiscosCargados(todos);
-      return todos;
-    } catch (error) {
-      return { fallo: true, error };
-    }
-  }
+  const URL_API = "http://localhost:3000/discos/";
 
   //Devuelve el disco que coincida con el uuid si existe.
   const getDisco = async (uuid) => {
-    if (!validarUuid(uuid)) return { fallo: true };
+    if (uuid && !validarUuid(uuid)) return { fallo: true };
     try {
-      return await leer(URL_API + uuid);
+      const resultado = await leer(URL_API + (uuid ?? ''));
+      setDiscosCargados(resultado.length ? resultado : [resultado]);
+      return resultado;
     } catch (error) {
       return { fallo: true, error };
     }
@@ -42,7 +33,7 @@ const ProveedorDiscos = (props) => {
         await crear(URL_API, e)
       });
       setDiscosCargados([...discosCargados, ...discosAgregar]);
-      return true;
+      return discosAgregar;
     } catch (error) {
       return { fallo: true, error };
     }
@@ -52,9 +43,9 @@ const ProveedorDiscos = (props) => {
   const borrarDisco = async (uuid) => {
     if (!validarUuid(uuid)) return { fallo: true };
     try {
-      await borrar(URL_API + uuid);
-      
-      return true;
+      const resultado = await borrar(URL_API + uuid);
+      setDiscosCargados([...discosCargados.filter((e) => {return e.id !== uuid})]);
+      return resultado;
     } catch (error) {
       return { fallo: true, error };
     }
@@ -65,7 +56,7 @@ const ProveedorDiscos = (props) => {
     if (!validarUuid(uuid) || !validarDisco(discoNuevo, true)) return { fallo: true };
     try {
       const resultado = await actualizar(URL_API + uuid, { ...discoNuevo, id: uuid }); //PUT porque edita todo el disco.
-      setDiscosCargados([...discosCargados.filter((e) => {e.id !== uuid}), discoNuevo]);
+      setDiscosCargados([...discosCargados.filter((e) => {return e.id !== uuid}), discoNuevo]);
       return resultado;
     } catch (error) {
       return { fallo: true, error };
@@ -77,16 +68,19 @@ const ProveedorDiscos = (props) => {
     if (!validarUuid(uuid) || !validarDiscoSoft(datosNuevos, true)) return { fallo: true };
     try {
       const resultado = await editar(URL_API + uuid, datosNuevos); //PATCH porque solo cambia algunos datos.
-      setDiscosCargados([...discosCargados.filter((e) => {e.id !== uuid}), resultado]);
+      setDiscosCargados([...discosCargados.filter((e) => {return e.id !== uuid}), resultado]);
       return resultado;
     } catch (error) {
       return { fallo: true, error };
     }
   }
-  
 
+  useEffect(() => {
+    getDisco();
+  }, []);
+  
   const datosAProveer = {
-    getDisco, getTodosLosDiscos, guardarDiscos, borrarDisco, editarDisco, editarDiscoParcial, cargando, error, discosCargados
+    getDisco, guardarDiscos, borrarDisco, editarDisco, editarDiscoParcial, cargando, error, discosCargados
   }
 
   return (

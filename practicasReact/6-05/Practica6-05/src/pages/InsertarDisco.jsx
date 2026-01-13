@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import FormularioInsercionDisco from '../components/Formularios/FormularioInsercionDisco.jsx';
-import { ContextoDiscos } from '../contexts/ProveedorDiscos.jsx';
 import { validarDisco } from '../libraries/validaciones.js';
+import useDiscos from '../hooks/useDiscos.js';
 
 //Página que mostrará un formulario para guardar un nuevo disco.
 function InsertarDisco() {
 
-  const { guardarDiscos } = useContext(ContextoDiscos);
+  const { guardarDiscos } = useDiscos();
 
   return (
     <>
       <h2>Formulario para insertar un disco.</h2>
-      <FormularioInsercionDisco guardar={(disco) => { guardarDiscos([disco]) }} validador={(disco) => validarDisco(disco, true)} />
+      <FormularioInsercionDisco guardar={guardarDiscos} validador={(disco) => validarDisco(disco, true)} />
     </>
   )
 }

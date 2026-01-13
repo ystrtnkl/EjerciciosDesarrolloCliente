@@ -50,7 +50,7 @@ const FormularioInsercionDisco = (props) => {
 
     //Cuando se clique en guardar.
     const guardar = () => {
-        if (props.validador()) { //Se guardará en base al validador pasado por props (puede que valide todo o solo lo que está escrito).
+        if (props.validador(disco)) { //Se guardará en base al validador pasado por props (puede que valide todo o solo lo que está escrito).
             if (props.editando) { //En caso de ser un formulario de edición y no de inserción
                 //Los valores "" reemplazarían a los originales en la API, estableciéndolos como undefined hará que no se alteren en la base de datos (método patch).
                 let discoPatch = { ...disco };
@@ -60,12 +60,14 @@ const FormularioInsercionDisco = (props) => {
                 }
                 props.guardar(discoPatch);
             } else {
-                props.guardar(disco); //En caso de ser un formulario de inserción, se guarda el objeto entero.
+                props.guardar([disco]); //En caso de ser un formulario de inserción, se guarda el objeto entero.
             }
             resetear();
             setMensajeExito(true);
+            console.log("a")
             setTimeout(() => { //Timeouts tanto en éxito como error para mostrar mensajes volátiles.
                 setMensajeExito(false);
+                console.log("b")
             }, 2000);
         } else {
             setMensajeError(true);
