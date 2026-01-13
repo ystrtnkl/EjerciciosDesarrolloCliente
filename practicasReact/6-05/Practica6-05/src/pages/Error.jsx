@@ -1,5 +1,6 @@
 import React from 'react';
 import VolverInicio from '../components/Botones/VolverInicio.jsx';
+import { getError } from '../libraries/traducir.js';
 
 //Página para el error de ruta, en caso de no encontrar dicha ruta.
 function Error() {
@@ -7,7 +8,7 @@ function Error() {
   return (
     <>
         <h2>Error</h2>
-        <p>Parece que la página que buscabas no existe.</p>
+        <p>{getError("es", "paginaNoEncontrada")}</p>
         <VolverInicio />
     </>
   )

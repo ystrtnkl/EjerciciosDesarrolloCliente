@@ -5,38 +5,26 @@ import FormularioInsercionDisco from '../components/Formularios/FormularioInserc
 import { validarDiscoSoft } from '../libraries/validaciones.js';
 import { useNavigate } from 'react-router-dom';
 import useDiscos from '../hooks/useDiscos.js';
+import { getError } from '../libraries/traducir.js';
 
 //Página donde se edita un disco.
 function EditarDisco() {
 
     const { uuid } = useParams(); //Dicho disco se especifica mediante la URL.
     const navegar = useNavigate();
-    const { getDisco, editarDiscoParcial } = useDiscos();
-    const [cargando, setCargando] = useState(true);
+    const { editarDiscoParcial, discosCargados, cargando, error } = useDiscos(); //Usa el hook intermedio para el contexto de discos para apropiarse de los estados.
     //Hacen falta los datos del disco original (para los placeholders y para saber si existe).
-    const [discoOriginal, setDiscoOriginal] = useState(null);
-    const buscarDiscoOriginal = async () => {
-        const discoAEditar = await await getDisco(uuid);
-        if (discoAEditar) {
-            setDiscoOriginal(discoAEditar);
-            setCargando(false);
-        }
-    }
-    useEffect(() => {
-        buscarDiscoOriginal();
-    }, []);
+    const discoOriginal = discosCargados.filter((e) => { return e.id === uuid }); //Se necesita saber como era el disco originalmente para renderizar correctamente el formulario.
 
-    //(cargando > (fallo O formulario))
     return (
         <>
-            {cargando ? (<img src={imgCargando} alt="Cargando..." />) :
-                (<div>
-                    {discoOriginal ? (<FormularioInsercionDisco previo={discoOriginal} editando={true} guardar={(disco) => {
-                        editarDiscoParcial(uuid, disco);
-                        navegar("/listarDisco/" + uuid);
-                    }} validador={validarDiscoSoft} />)
-                        : (<p>El disco a editar no existe</p>)}
-                </div>)}
+            {cargando ? (<img src={imgCargando} alt="Cargando..." />) : (error ? (<p>{getError("es", "errorDiscoEditar")}</p>) : (<div>
+                {discoOriginal[0] ? (<FormularioInsercionDisco previo={discoOriginal[0]} editando={true} guardar={(disco) => {
+                    editarDiscoParcial(uuid, disco);
+                    navegar("/listarDisco/" + uuid);
+                }} validador={(disco) => { return validarDiscoSoft(disco, true); }} />)
+                    : (<p>{getError("es", "errorDiscoEditar")}</p>)}
+            </div>))}
         </>
     )
 }

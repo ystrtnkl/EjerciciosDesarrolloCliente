@@ -37,7 +37,7 @@ const ListaDiscos = (props) => {
   }
 
   useEffect(() => {
-    setDiscosMostrados(props.discosCargados);
+    setDiscosMostrados(props.discosCargados); //De primeras los discos a mostrar serán todos los proporcionados por props.
   }, []);
 
   return (

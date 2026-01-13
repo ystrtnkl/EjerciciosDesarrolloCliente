@@ -1,167 +1,104 @@
 {
-  "discos": [
-    {
-      "id": "9fbc5481-6a71-4698-a1fa-73e3ba3b2bd1",
-      "localizacion": "ES-001AA",
-      "nombre": "Nombre de disco uno",
-      "caratula": "https://i.ibb.co/qLKfzMyd/A0.png",
-      "grupo": "Artistas uno",
-      "agno": "2001",
-      "genero": [
-        "rock",
-        "pop"
-      ],
-      "prestado": true
-    },
-    {
-      "id": "20b4e6fb-534f-4405-a65d-4ce1fce07899",
-      "localizacion": "ES-002AA",
-      "nombre": "Nombre de disco dos",
-      "caratula": "https://i.ibb.co/LX9hVZK9/A1.png",
-      "grupo": "Artistas dos",
-      "agno": "2005",
-      "genero": [
-        "rock"
-      ],
-      "prestado": false
-    },
-    {
-      "id": "85f2d39e-5087-4077-8849-e4330b1aa0f5",
-      "localizacion": "ES-003AB",
-      "nombre": "Nombre de disco tres",
-      "caratula": "https://i.ibb.co/bRjTHkF1/A2.png",
-      "grupo": "Artistas uno",
-      "agno": "2009",
-      "genero": [
-        "rock",
-        "clasica"
-      ],
-      "prestado": true
-    },
-    {
-      "id": "a003f0e2-de0a-4cf1-8d04-34964df8bb05",
-      "localizacion": "ES-004AA",
-      "nombre": "Nombre de disco cuatro",
-      "caratula": "https://i.ibb.co/LztKGkG7/A3.png",
-      "grupo": "Artistas dos",
-      "agno": "1996",
-      "genero": [
-        "house",
-        "pop"
-      ],
-      "prestado": true
-    },
-    {
-      "id": "6e7cff7d-04a9-4eba-8ff6-8436a743b0a4",
-      "localizacion": "ES-005AA",
-      "nombre": "Nombre de disco cinco",
-      "caratula": "https://i.ibb.co/gZZCBvYg/A4.png",
-      "grupo": "Artistas tres",
-      "agno": "2020",
-      "genero": [
-        "rock",
-        "pop"
-      ],
-      "prestado": false
-    },
-    {
-      "id": "af7490c7-25f3-426f-a513-70d630e9f4a1",
-      "localizacion": "ES-006CE",
-      "nombre": "Nombre de disco seis",
-      "caratula": "https://i.ibb.co/B2msPqL4/A5.png",
-      "grupo": "Artistas tres",
-      "agno": "1922",
-      "genero": [
-        "rock"
-      ],
-      "prestado": false
-    },
-    {
-      "id": "aba9f440-a1b7-4048-b772-413c043f72c6",
-      "localizacion": "ES-007TT",
-      "nombre": "Nombre de disco siete",
-      "caratula": "https://i.ibb.co/KczrctpM/A6.png",
-      "grupo": "Artistas tres",
-      "agno": "2011",
-      "genero": [
-        "rock",
-        "pop"
-      ],
-      "prestado": true
-    },
-    {
-      "id": "0f9c6061-3f07-48bb-96ab-da8e23c4695f",
-      "localizacion": "ES-008CA",
-      "nombre": "Nombre de disco ocho",
-      "caratula": "https://i.ibb.co/zh7F0HD6/A7.png",
-      "grupo": "Artistas uno",
-      "agno": "2001",
-      "genero": [
-        "pop"
-      ],
-      "prestado": true
-    },
-    {
-      "id": "e2c68960-09db-4fa8-a7ee-7ce57ff21ad2",
-      "localizacion": "ES-009PE",
-      "nombre": "Nombre de disco nueve",
-      "caratula": "https://i.ibb.co/ym2FnggB/A8.png",
-      "grupo": "Artistas cuatro",
-      "agno": "2007",
-      "genero": [
-        "rock",
-        "pop"
-      ],
-      "prestado": false
-    },
-    {
-      "id": "617592df-bc6b-436b-befd-df9203c32b49",
-      "localizacion": "ES-010PE",
-      "nombre": "Nombre de disco diez",
-      "caratula": "https://i.ibb.co/tMj5nvBr/A9.png",
-      "grupo": "Artistas tres",
-      "agno": "2021",
-      "genero": [
-        "metal",
-        "pop"
-      ],
-      "prestado": true
-    },
-    {
-      "id": "c6232914-0244-4ed8-a6e1-d575beae37ed",
-      "nombre": "ASDFASDF",
-      "caratula": "",
-      "grupo": "ASDFASFD",
-      "agno": "2222",
-      "genero": [
-        "pop"
-      ],
-      "localizacion": "ES-555YY",
-      "prestado": false
-    },
-    {
-      "id": "20385454-f546-4ee4-874e-d9a948803cea",
-      "nombre": "ASDFKASDF",
-      "caratula": "",
-      "grupo": "ASDFASD",
-      "agno": "2222",
-      "genero": [
-        "pop"
-      ],
-      "localizacion": "ES-123YY",
-      "prestado": false
-    },
-    {
-      "id": "a8e6826d-6f5d-4c09-bf25-3b6b790d10a1",
-      "nombre": "ASKDFASDF",
-      "caratula": "ASDFIUASDF",
-      "grupo": "UIGASDIUFG",
-      "agno": "2322",
-      "genero": [
-        "pop"
-      ],
-      "localizacion": "ES-111AA",
-      "prestado": false
-    }
-  ]
+    "discos": [
+        {
+            "id": "9fbc5481-6a71-4698-a1fa-73e3ba3b2bd1",
+            "localizacion": "ES-001AA",
+            "nombre": "Nombre de disco uno",
+            "caratula": "https://i.ibb.co/qLKfzMyd/A0.png",
+            "grupo": "Artistas uno",
+            "agno": "2001",
+            "genero": ["rock", "pop"],
+            "prestado": true
+        }, 
+        {
+            "id": "20b4e6fb-534f-4405-a65d-4ce1fce07899",
+            "localizacion": "ES-002AA",
+            "nombre": "Nombre de disco dos",
+            "caratula": "https://i.ibb.co/LX9hVZK9/A1.png",
+            "grupo": "Artistas dos",
+            "agno": "2005",
+            "genero": ["rock"],
+            "prestado": false
+        }, 
+        {
+            "id": "85f2d39e-5087-4077-8849-e4330b1aa0f5",
+            "localizacion": "ES-003AB",
+            "nombre": "Nombre de disco tres",
+            "caratula": "https://i.ibb.co/bRjTHkF1/A2.png",
+            "grupo": "Artistas uno",
+            "agno": "2009",
+            "genero": ["rock", "clasica"],
+            "prestado": true
+        }, 
+        {
+            "id": "a003f0e2-de0a-4cf1-8d04-34964df8bb05",
+            "localizacion": "ES-004AA",
+            "nombre": "Nombre de disco cuatro",
+            "caratula": "https://i.ibb.co/LztKGkG7/A3.png",
+            "grupo": "Artistas dos",
+            "agno": "1996",
+            "genero": ["house", "pop"],
+            "prestado": true
+        }, 
+        {
+            "id": "6e7cff7d-04a9-4eba-8ff6-8436a743b0a4",
+            "localizacion": "ES-005AA",
+            "nombre": "Nombre de disco cinco",
+            "caratula": "https://i.ibb.co/gZZCBvYg/A4.png",
+            "grupo": "Artistas tres",
+            "agno": "2020",
+            "genero": ["rock", "pop"],
+            "prestado": false
+        }, 
+        {
+            "id": "af7490c7-25f3-426f-a513-70d630e9f4a1",
+            "localizacion": "ES-006CE",
+            "nombre": "Nombre de disco seis",
+            "caratula": "https://i.ibb.co/B2msPqL4/A5.png",
+            "grupo": "Artistas tres",
+            "agno": "1922",
+            "genero": ["rock"],
+            "prestado": false
+        }, 
+        {
+            "id": "aba9f440-a1b7-4048-b772-413c043f72c6",
+            "localizacion": "ES-007TT",
+            "nombre": "Nombre de disco siete",
+            "caratula": "https://i.ibb.co/KczrctpM/A6.png",
+            "grupo": "Artistas tres",
+            "agno": "2011",
+            "genero": ["rock", "pop"],
+            "prestado": true
+        }, 
+        {
+            "id": "0f9c6061-3f07-48bb-96ab-da8e23c4695f",
+            "localizacion": "ES-008CA",
+            "nombre": "Nombre de disco ocho",
+            "caratula": "https://i.ibb.co/zh7F0HD6/A7.png",
+            "grupo": "Artistas uno",
+            "agno": "2001",
+            "genero": ["pop"],
+            "prestado": true
+        }, 
+        {
+            "id": "e2c68960-09db-4fa8-a7ee-7ce57ff21ad2",
+            "localizacion": "ES-009PE",
+            "nombre": "Nombre de disco nueve",
+            "caratula": "https://i.ibb.co/ym2FnggB/A8.png",
+            "grupo": "Artistas cuatro",
+            "agno": "2007",
+            "genero": ["rock", "pop"],
+            "prestado": false
+        }, 
+        {
+            "id": "617592df-bc6b-436b-befd-df9203c32b49",
+            "localizacion": "ES-010PE",
+            "nombre": "Nombre de disco diez",
+            "caratula": "https://i.ibb.co/tMj5nvBr/A9.png",
+            "grupo": "Artistas tres",
+            "agno": "2021",
+            "genero": ["metal", "pop"],
+            "prestado": true
+        }
+    ]
 }

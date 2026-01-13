@@ -5,7 +5,7 @@ function BotonFiltrado(props) {
 
   //Función que se ejecutaría en caso de no pasar ninguna por props.
   const funcionIndefinida = () => {
-    console.log("Este botón no filtra nada.");
+    //console.log("Este botón no filtra nada.");
   };
 
   return (

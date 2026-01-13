@@ -7,9 +7,11 @@ const ContextoDiscos = createContext();
 //Contexto encargado del manejo de los discos, usa useAPI para las peticiones.
 const ProveedorDiscos = (props) => {
 
-  const { leer, crear, borrar, editar, actualizar, cargando, error } = useAPI();
-  const [discosCargados, setDiscosCargados] = useState([]);
+  const { leer, crear, borrar, editar, actualizar, cargando, error } = useAPI(); //Operaciones CRUD básicas de useAPI.
+  const [discosCargados, setDiscosCargados] = useState([]); //Aquí se guardan los discos, este estado se verá alterado por las funciones en este archivo.
   const URL_API = "http://localhost:3000/discos/";
+
+  //Todos estas funciones, no solo devuelven el resultado sino que lo guardan en el estado.
 
   //Devuelve el disco que coincida con el uuid si existe.
   const getDisco = async (uuid) => {
@@ -44,7 +46,7 @@ const ProveedorDiscos = (props) => {
     if (!validarUuid(uuid)) return { fallo: true };
     try {
       const resultado = await borrar(URL_API + uuid);
-      setDiscosCargados([...discosCargados.filter((e) => {return e.id !== uuid})]);
+      setDiscosCargados([...discosCargados.filter((e) => { return e.id !== uuid })]);
       return resultado;
     } catch (error) {
       return { fallo: true, error };
@@ -56,7 +58,7 @@ const ProveedorDiscos = (props) => {
     if (!validarUuid(uuid) || !validarDisco(discoNuevo, true)) return { fallo: true };
     try {
       const resultado = await actualizar(URL_API + uuid, { ...discoNuevo, id: uuid }); //PUT porque edita todo el disco.
-      setDiscosCargados([...discosCargados.filter((e) => {return e.id !== uuid}), discoNuevo]);
+      setDiscosCargados([...discosCargados.filter((e) => { return e.id !== uuid }), discoNuevo]);
       return resultado;
     } catch (error) {
       return { fallo: true, error };
@@ -68,7 +70,7 @@ const ProveedorDiscos = (props) => {
     if (!validarUuid(uuid) || !validarDiscoSoft(datosNuevos, true)) return { fallo: true };
     try {
       const resultado = await editar(URL_API + uuid, datosNuevos); //PATCH porque solo cambia algunos datos.
-      setDiscosCargados([...discosCargados.filter((e) => {return e.id !== uuid}), resultado]);
+      setDiscosCargados([...discosCargados.filter((e) => { return e.id !== uuid }), resultado]);
       return resultado;
     } catch (error) {
       return { fallo: true, error };
@@ -76,9 +78,9 @@ const ProveedorDiscos = (props) => {
   }
 
   useEffect(() => {
-    getDisco();
+    getDisco(); //Por defecto se almacenan todos los discos (al no proporcionar id específico la API los devuelve todos)
   }, []);
-  
+
   const datosAProveer = {
     getDisco, guardarDiscos, borrarDisco, editarDisco, editarDiscoParcial, cargando, error, discosCargados
   }

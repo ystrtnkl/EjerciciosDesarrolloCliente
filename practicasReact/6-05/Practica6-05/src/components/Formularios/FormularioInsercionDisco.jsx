@@ -3,6 +3,7 @@ import './FormularioInsercionDisco.css';
 import InputCheckCompleto from './InputCheckCompleto.jsx';
 import InputTextCompleto from './InputTextCompleto.jsx';
 import { validarNombreDisco, validarInterpreteOGrupo, validarAgno, validarGenero, validarLocalizacion } from '../../libraries/validaciones.js';
+import { getError } from '../../libraries/traducir.js';
 
 const FormularioInsercionDisco = (props) => {
 
@@ -18,9 +19,9 @@ const FormularioInsercionDisco = (props) => {
         localizacion: props.previo?.localizacion ?? "",
         prestado: props.previo?.prestado ?? false
     };
-    //Mensajes temporales de error y éxito.
-    const [mensajeExito, setMensajeExito] = useState(false);
-    const [mensajeError, setMensajeError] = useState(false);
+    //Mensajes temporales de error y éxito (del formulario, no de red).
+    const [mensajeExito, setMensajeExito] = useState("");
+    const [mensajeError, setMensajeError] = useState("");
 
     //Estado de un disco, que en realidad son los valores actuales del formulario.
     const [disco, setDisco] = useState(estadoInicial);
@@ -63,16 +64,14 @@ const FormularioInsercionDisco = (props) => {
                 props.guardar([disco]); //En caso de ser un formulario de inserción, se guarda el objeto entero.
             }
             resetear();
-            setMensajeExito(true);
-            console.log("a")
+            setMensajeExito("Disco guardado correctamente.");
             setTimeout(() => { //Timeouts tanto en éxito como error para mostrar mensajes volátiles.
-                setMensajeExito(false);
-                console.log("b")
+                setMensajeExito("");
             }, 2000);
         } else {
-            setMensajeError(true);
+            setMensajeError(getError("es", "errorFormularioGeneral"));
             setTimeout(() => {
-                setMensajeError(false);
+                setMensajeError("");
             }, 2000);
         }
     }
@@ -80,8 +79,8 @@ const FormularioInsercionDisco = (props) => {
     return (
         <form name="insertarDisco">
             {/*Se puede probar la URL de la imágen de la carátula a tiempo real.*/}
-            {mensajeExito && (<p className="bien">Disco guardado correctamente.</p>)}
-            {mensajeError && (<p className="mal">El formulario tiene errores, revísalos.</p>)}
+            {mensajeExito && (<p className="bien">{mensajeExito}</p>)}
+            {mensajeError && (<p className="mal">{mensajeError}</p>)}
             <img src={disco.caratula === "" ? "#" : disco.caratula} alt="" />
             <br />
             <InputTextCompleto titulo="Localización:" nombre="localizacion" ejemplo={props.previo?.localizacion ?? "ES-001AA"} valor={disco.localizacion} actualizarValor={actualizarDatos} error="La localización debe tener este formato: ES-(tres cifras)(dos letras mayúsculas)" validacion={validarLocalizacion} />

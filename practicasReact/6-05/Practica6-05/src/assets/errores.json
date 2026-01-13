@@ -1,0 +1,22 @@
+{
+    "errores": {
+        "es": {
+            "error": "Error desconocido",
+            "errorDiscosNinguno": "Ha habido un error o no se han encontrado discos",
+            "paginaNoEncontrada": "Parece que la página que buscabas no existe.",
+            "errorDiscoEditar": "Ha habido un error o el disco a editar no existe",
+            "errorAPI": "La API devolvió un error",
+            "errorContexto": "El hook useDiscentes debe ser utilizado dentro de <ProveedorDiscentes>.",
+            "errorFormularioGeneral": "El formulario tiene errores, revísalos."
+        },
+        "en": {
+            "error": "Unknown error",
+            "errorDiscosNinguno": "There was an error or no disks were found",
+            "paginaNoEncontrada": "It seems that the site you were searching doesn't exist.",
+            "errorDiscoEditar": "There was an error or the disk to be editted doesn't exist",
+            "errorAPI": "The API returned an error",
+            "errorContexto": "The hook useDiscentes must be used inside <ProveedorDiscentes>.",
+            "errorFormularioGeneral": "The form has errors, check them."
+        }
+    }
+}
