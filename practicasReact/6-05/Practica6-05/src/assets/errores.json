@@ -7,7 +7,13 @@
             "errorDiscoEditar": "Ha habido un error o el disco a editar no existe",
             "errorAPI": "La API devolvió un error",
             "errorContexto": "El hook useDiscentes debe ser utilizado dentro de <ProveedorDiscentes>.",
-            "errorFormularioGeneral": "El formulario tiene errores, revísalos."
+            "errorFormularioGeneral": "El formulario tiene errores, revísalos.",
+            "errorDiscoBusqueda": "No se han encontrado discos (o al menos no que coincidan con la búsqueda).",
+            "formularioValidacionLocalizacion": "La localización debe tener este formato: ES-(tres cifras)(dos letras mayúsculas).",
+            "formularioValidacionNombre": "El nombre debe de tener al menos 5 carácteres.",
+            "formularioValidacionGrupo": "El nombre del grupo debe de tener al menos 5 carácteres.",
+            "formularioValidacionAgno": "El año debe ser un entero mayor que 999 (o vacío ya que es opcional).",
+            "formularioValidacionGeneros": "Debes elegir al menos un género de música."
         },
         "en": {
             "error": "Unknown error",
@@ -16,7 +22,13 @@
             "errorDiscoEditar": "There was an error or the disk to be editted doesn't exist",
             "errorAPI": "The API returned an error",
             "errorContexto": "The hook useDiscentes must be used inside <ProveedorDiscentes>.",
-            "errorFormularioGeneral": "The form has errors, check them."
+            "errorFormularioGeneral": "The form has errors, check them.",
+            "errorDiscoBusqueda": "No disks were found (or at least not that they coincide with the search)",
+            "formularioValidacionLocalizacion": "Localization must have this format: ES-(three cyphers)(two uppercase letters)",
+            "formularioValidacionNombre": "The name must have at least 5 characters.",
+            "formularioValidacionGrupo": "The group name must have at least 5 characters.",
+            "formularioValidacionAgno": "Year must be an integer greather than 999 (or empty, as it's optional)",
+            "formularioValidacionGeneros": "You must choose at least one music genre."
         }
     }
 }

@@ -83,18 +83,18 @@ const FormularioInsercionDisco = (props) => {
             {mensajeError && (<p className="mal">{mensajeError}</p>)}
             <img src={disco.caratula === "" ? "#" : disco.caratula} alt="" />
             <br />
-            <InputTextCompleto titulo="Localización:" nombre="localizacion" ejemplo={props.previo?.localizacion ?? "ES-001AA"} valor={disco.localizacion} actualizarValor={actualizarDatos} error="La localización debe tener este formato: ES-(tres cifras)(dos letras mayúsculas)" validacion={validarLocalizacion} />
-            <InputTextCompleto titulo="Nombre:" nombre="nombre" ejemplo={props.previo?.nombre ?? "Nombre del disco"} valor={disco.nombre} actualizarValor={actualizarDatos} error="El nombre debe de tener al menos 5 carácteres." validacion={validarNombreDisco} />
+            <InputTextCompleto titulo="Localización:" nombre="localizacion" ejemplo={props.previo?.localizacion ?? "ES-001AA"} valor={disco.localizacion} actualizarValor={actualizarDatos} error={getError("es", "formularioValidacionLocalizacion")} validacion={validarLocalizacion} />
+            <InputTextCompleto titulo="Nombre:" nombre="nombre" ejemplo={props.previo?.nombre ?? "Nombre del disco"} valor={disco.nombre} actualizarValor={actualizarDatos} error={getError("es", "formularioValidacionNombre")} validacion={validarNombreDisco} />
             <InputTextCompleto titulo="Carátula (URL):" nombre="caratula" ejemplo={props.previo?.caratula ?? "https://example.com/1.png"} valor={disco.caratula} actualizarValor={actualizarDatos} />
-            <InputTextCompleto titulo="Grupo o intérprete:" nombre="grupo" ejemplo={props.previo?.grupo ?? "Nombre del artista o artistas"} valor={disco.grupo} actualizarValor={actualizarDatos} error="El nombre debe de tener al menos 5 carácteres." validacion={validarInterpreteOGrupo} />
-            <InputTextCompleto tipo="number" titulo="Año de publicación:" nombre="agno" ejemplo={props.previo?.agno ?? "2025"} valor={disco.agno} actualizarValor={actualizarDatos} error="El año debe ser un entero mayor que 999 (o vacío ya que es opcional)." validacion={validarAgno} />
+            <InputTextCompleto titulo="Grupo o intérprete:" nombre="grupo" ejemplo={props.previo?.grupo ?? "Nombre del artista o artistas"} valor={disco.grupo} actualizarValor={actualizarDatos} error={getError("es", "formularioValidacionGrupo")} validacion={validarInterpreteOGrupo} />
+            <InputTextCompleto tipo="number" titulo="Año de publicación:" nombre="agno" ejemplo={props.previo?.agno ?? "2025"} valor={disco.agno} actualizarValor={actualizarDatos} error={getError("es", "formularioValidacionAgno")} validacion={validarAgno} />
             <fieldset name="generos" id="generos">
                 <legend>Géneros</legend>
                 {/*Los checkbox de los géneros se agregan dinámicamente a partir del array de géneros*/}
                 {posiblesGeneros.map((e, i) => {
                     return (<InputCheckCompleto key={i} idFormateado={"genero-" + e} valor={e} titulo={posiblesGenerosTitulos[i]} actualizarValor={actualizarDatosGenero} estaChecked={disco.genero.includes(e)} />)
                 })}
-                <p className={validarGenero(disco.genero) ? "oculto" : "mal"}>Debes elegir al menos un género de música.</p>
+                <p className={validarGenero(disco.genero) ? "oculto" : "mal"}>{getError("es", "formularioValidacionGeneros")}</p>
             </fieldset>
             <label htmlFor="prestado">Prestado: </label>
             <input type="checkbox" id="prestado" name="prestado" value="prestado" onChange={(e) => { actualizarDatos(e); }} checked={disco.prestado === true} /><br />

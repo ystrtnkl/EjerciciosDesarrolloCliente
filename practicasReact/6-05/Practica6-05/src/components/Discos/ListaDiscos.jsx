@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './ListaDiscos.css';
 import Disco from './Disco.jsx';
 import { useNavigate } from 'react-router';
+import { getError } from '../../libraries/traducir.js';
 
 //Componente para listar discos.
 const ListaDiscos = (props) => {
@@ -50,7 +51,7 @@ const ListaDiscos = (props) => {
           <div className="lista" onClick={(e) => { botonEnDisco(e); }}>
             {discosMostrados.length > 0 ? discosMostrados.map((e) => {
               return (<Disco key={e.id} disco={e} />)
-            }) : (<p>No se han encontrado discos (o al menos no que coincidan con la búsqueda).</p>)}
+            }) : (<p>{getError("es", "errorDiscoBusqueda")}</p>)}
           </div>
         </div>
   )
