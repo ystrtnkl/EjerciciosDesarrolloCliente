@@ -1,17 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ContextoDiscos } from '../contexts/ProveedorDiscos.jsx';
 import imgCargando from '../assets/cargando.gif';
 import FormularioInsercionDisco from '../components/Formularios/FormularioInsercionDisco.jsx';
 import { validarDiscoSoft } from '../libraries/validaciones.js';
 import { useNavigate } from 'react-router-dom';
+import useDiscos from '../hooks/useDiscos.js';
 
 //Página donde se edita un disco.
 function EditarDisco() {
 
     const { uuid } = useParams(); //Dicho disco se especifica mediante la URL.
     const navegar = useNavigate();
-    const { getDisco, editarDiscoParcial } = useContext(ContextoDiscos);
+    const { getDisco, editarDiscoParcial } = useDiscos();
     const [cargando, setCargando] = useState(true);
     //Hacen falta los datos del disco original (para los placeholders y para saber si existe).
     const [discoOriginal, setDiscoOriginal] = useState(null);

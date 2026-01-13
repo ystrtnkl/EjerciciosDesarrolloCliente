@@ -80,6 +80,8 @@ const FormularioInsercionDisco = (props) => {
     return (
         <form name="insertarDisco">
             {/*Se puede probar la URL de la imágen de la carátula a tiempo real.*/}
+            {mensajeExito && (<p className="bien">Disco guardado correctamente.</p>)}
+            {mensajeError && (<p className="mal">El formulario tiene errores, revísalos.</p>)}
             <img src={disco.caratula === "" ? "#" : disco.caratula} alt="" />
             <br />
             <InputTextCompleto titulo="Localización:" nombre="localizacion" ejemplo={props.previo?.localizacion ?? "ES-001AA"} valor={disco.localizacion} actualizarValor={actualizarDatos} error="La localización debe tener este formato: ES-(tres cifras)(dos letras mayúsculas)" validacion={validarLocalizacion} />
@@ -100,8 +102,6 @@ const FormularioInsercionDisco = (props) => {
             <input type="button" name="guardar" value="Guardar" id="guardar" onClick={guardar} />
             <input type="button" name="reset" value="Reiniciar" id="reset" onClick={resetear} />
             {props.editando && (<p>Escribe NUL para dejarlo en blanco</p>)}
-            {mensajeExito && (<p className="bien oculto">Disco guardado correctamente.</p>)}
-            {mensajeError && (<p className="mal oculto">El formulario tiene errores, revísalos.</p>)}
         </form>
     )
 }
