@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { peticionGenerica } from "../libraries/peticionHttp.js";
 
 //Hook personalizado para hacer peticiones HTTP a urls, es un hook y no una libreria js normal ya que maneja estados de cargando y error (al ser un hooks, se vuelven únicos para cada uno de sus usuarios al contrario que un contexto).
-export const useAPI = () => {
+export const useAPI = () => { //AGREGAR PARAMETROS
 
     const [error, setError] = useState(null); //Estado que contiene el error si efectivamente hay un error (o null si no).
     const [cargando, setCargando] = useState(true); //Estado que es true solo mientras está cargando.

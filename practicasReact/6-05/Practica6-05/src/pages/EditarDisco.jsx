@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import imgCargando from '../assets/cargando.gif';
 import FormularioInsercionDisco from '../components/Formularios/FormularioInsercionDisco.jsx';
 import { validarDiscoSoft } from '../libraries/validaciones.js';
 import { useNavigate } from 'react-router-dom';
 import useDiscos from '../hooks/useDiscos.js';
 import { getError } from '../libraries/traducir.js';
+import Cargando from '../components/Principal/Cargando.jsx';
 
 //Página donde se edita un disco.
 function EditarDisco() {
@@ -18,7 +18,7 @@ function EditarDisco() {
 
     return (
         <>
-            {cargando ? (<img src={imgCargando} alt="Cargando..." />) : (error ? (<p>{getError("es", "errorDiscoEditar")}</p>) : (<div>
+            {cargando ? (<Cargando />) : (error ? (<p>{getError("es", "errorDiscoEditar")}</p>) : (<div>
                 {discoOriginal[0] ? (<FormularioInsercionDisco previo={discoOriginal[0]} editando={true} guardar={(disco) => {
                     editarDiscoParcial(uuid, disco);
                     navegar("/listarDisco/" + uuid);
