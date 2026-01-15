@@ -1,0 +1,13 @@
+import React from 'react';
+
+//Página de inicio de la aplicación, accesible desde / y desde /inicio.
+function Inicio() {
+
+  return (
+    <>
+        <h2>Esta es la página de Inicio.</h2>
+    </>
+  )
+}
+
+export default Inicio;
