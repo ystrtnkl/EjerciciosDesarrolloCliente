@@ -10,13 +10,13 @@ function Gestor() {
   const { sesionIniciada, usuarioSesion } = useSesion();
   useEffect(() => {
     //Si no ha iniciado sesión redirige inmediatamente a login.
-    if (!sesionIniciada) navegar("/login");
-  }, []);
+    //if (!sesionIniciada) navegar("/login");
+  }, []); //EXCLUSIVO O NO ¿?¿?¿?¿?¿?¿?
 
   return (
     <>
         <h2>Gestor de listas de la compra</h2>
-        {sesionIniciada && (<GestorListas usuario={usuarioSesion?.user} />)}
+        {sesionIniciada && (<GestorListas usuario={usuarioSesion?.user} logeado={sesionIniciada} />)}
     </>
   )
 }
