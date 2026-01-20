@@ -6,7 +6,10 @@ function GestorListas(props) {
   return (
     <div>
       <p>Gestor de listas, este componente solo es accesible a usuarios con la sesión iniciada.</p>
-      <p>Este será el contenido exclusivo de {props.usuario?.user_metadata?.display_name}.</p>
+      {props.logeado && (<div>
+        <p>Este será el contenido exclusivo de {props.usuario?.user_metadata?.display_name}.</p>
+      </div>)}
+
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSesion from '../hooks/useSesion.js';
 import GestorListas from '../components/Gestor/GestorListas.jsx';
+import ProveedorProductos from '../contexts/ProveedorProductos.jsx';
 
 //Esta página será exclusiva para usuarios con la sesión iniciada.
 function Gestor() {
@@ -16,7 +17,9 @@ function Gestor() {
   return (
     <>
         <h2>Gestor de listas de la compra</h2>
-        {sesionIniciada && (<GestorListas usuario={usuarioSesion?.user} logeado={sesionIniciada} />)}
+        <ProveedorProductos>{/*Los productos solo serán usados aquí.*/}
+        {/*sesionIniciada &&*/ (<GestorListas usuario={usuarioSesion?.user} logeado={sesionIniciada} />)}
+        </ProveedorProductos>
     </>
   )
 }

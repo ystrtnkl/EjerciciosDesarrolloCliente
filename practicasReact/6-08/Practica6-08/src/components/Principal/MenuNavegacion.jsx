@@ -20,6 +20,7 @@ function MenuNavegacion() {
           <BotonNavegacion direccion="/registrarse" titulo="Crear cuenta" />
           <BotonNavegacion direccion="/login" titulo="Iniciar sesión" />
         </>)}
+          <BotonNavegacion direccion="/gestor" titulo="Gestor" />
       </div>
     </>
   )
