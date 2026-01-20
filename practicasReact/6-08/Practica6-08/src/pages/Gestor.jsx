@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useSesion from '../hooks/useSesion.js';
 import GestorListas from '../components/Gestor/GestorListas.jsx';
 import ProveedorProductos from '../contexts/ProveedorProductos.jsx';
+import useProductos from '../hooks/useProductos.js';
 
 //Esta página será exclusiva para usuarios con la sesión iniciada.
 function Gestor() {
