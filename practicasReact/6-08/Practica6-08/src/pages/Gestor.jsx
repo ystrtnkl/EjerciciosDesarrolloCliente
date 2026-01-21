@@ -14,6 +14,7 @@ function Gestor() {
     //Si no ha iniciado sesión redirige inmediatamente a login.
     //if (!sesionIniciada) navegar("/login");
   }, []); //EXCLUSIVO O NO ¿?¿?¿?¿?¿?¿?
+  //CARGA 50 VS CARGA 1 ¿?¿?¿?¿?¿?
 
   return (
     <>

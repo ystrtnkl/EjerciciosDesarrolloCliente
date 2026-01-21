@@ -20,7 +20,7 @@ function GestorListas(props) {
       <span className="seccion seccion-productos">
         <h2>Productos registrados</h2>
         {cargandoProductos ? (<Cargando />) : (errorProductos ? (<CajaError texto="Ha habido un error al cargar los productos" />) : (<>
-          <ListaProductos controles={true} productos={productosCargados} />
+          <ListaProductos controles={true} productos={productosCargados} botonAgnadir={true} />
         </>))}
       </span>
       <span className="seccion seccion-listas">

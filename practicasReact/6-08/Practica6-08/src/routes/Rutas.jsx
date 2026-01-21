@@ -6,6 +6,7 @@ import Registrarse from '../pages/Registrarse.jsx';
 import Logout from '../pages/Logout.jsx';
 import Login from '../pages/Login.jsx';
 import Gestor from '../pages/Gestor.jsx';
+import ProductoConcreto from '../pages/ProductoConcreto.jsx';
 
 //Enrutador que lleva a las distintas páginas de la aplicación, incluyendo un componente en caso de no encontrar la ruta.
 function Rutas() {
@@ -19,6 +20,7 @@ function Rutas() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/login" element={<Login />} />
         <Route path="/gestor" element={<Gestor />} />
+        <Route path="/producto/:uuid" element={<ProductoConcreto />} />
         <Route path="/*" element={<Error />} />
       </Routes>
     </>

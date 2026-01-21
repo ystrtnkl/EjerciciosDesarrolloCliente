@@ -13,4 +13,8 @@ const validarNombreUsuario = (nombre) => {
     return typeof nombre === "string" && nombre.length >= 4 && nombre.length < 20;
 }
 
+
+
+
+
 export { validarContrasegna, validarCorreo, validarNombreUsuario }

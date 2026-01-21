@@ -4,3 +4,10 @@
     margin: 10px;
     padding: 5px;
 }
+.boton-activado {
+    background-color: blanchedalmond;
+    color: black;
+}
+.boton, .boton-activado {
+    margin: 5px;
+}
