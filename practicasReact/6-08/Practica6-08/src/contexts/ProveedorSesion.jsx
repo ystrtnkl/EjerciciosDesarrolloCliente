@@ -50,9 +50,7 @@ const ProveedorSesion = (props) => {
         }
       });
       if (error) throw error;
-      if (data) {
-        setSesionIniciada(true);
-      }
+      if (data) setSesionIniciada(true);
     } catch (e) {
       establecerError("Las credenciales no son correctas o ha habido un error");
     } finally {
