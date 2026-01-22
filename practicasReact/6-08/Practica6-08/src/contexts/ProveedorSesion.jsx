@@ -1,12 +1,13 @@
 import React, { createContext, useState, useEffect } from "react";
 import { supabaseConexion, URL_APP } from '../supabase/supabase.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const ContextoSesion = createContext();
 
 //Contexto encargado del manejo de la sesión de Supabase, usando su SDK personalizado para React.
 const ProveedorSesion = (props) => {
 
+  const ubicacion = useLocation();
   const [cargando, setCargando] = useState(false);
   const [errorSupabase, setErrorSupabase] = useState("");
   const [usuarioSesion, setUsuarioSesion] = useState({}); //Datos de la sesión del usuario.
@@ -50,7 +51,10 @@ const ProveedorSesion = (props) => {
         }
       });
       if (error) throw error;
-      if (data) setSesionIniciada(true);
+      if (data) {
+        setSesionIniciada(true);
+        navegar("/gestor");
+      }
     } catch (e) {
       establecerError("Las credenciales no son correctas o ha habido un error");
     } finally {
@@ -94,7 +98,7 @@ const ProveedorSesion = (props) => {
     const suscripcion = supabaseConexion.auth.onAuthStateChange(
       (event, session) => {
         if (session) {
-          navegar("/gestor");
+          if (ubicacion.pathname === "/login" || ubicacion.pathname === "/registrarse") navegar("/gestor");
           setSesionIniciada(true);
           obtenerUsuario();
         } else {
@@ -106,7 +110,7 @@ const ProveedorSesion = (props) => {
   }, []);
 
   const datosProveer = {
-    crearCuenta, iniciarSesion, cerrarSesion, usuarioSesion, sesionIniciada, cargando, errorSupabase
+    crearCuenta, iniciarSesion, cerrarSesion, usuarioSesion, sesionIniciada, cargando, errorSupabase, supabaseConexion
   }
 
   return (

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSesion from '../hooks/useSesion.js';
+import Cargando from '../components/Principal/Cargando.jsx';
 
 //Esta página no tiene contenido realmente.
 function Logout() {
@@ -18,6 +19,7 @@ function Logout() {
 
   return (
     <>
+      <Cargando />
     </>
   )
 }

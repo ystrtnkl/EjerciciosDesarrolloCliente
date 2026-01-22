@@ -20,7 +20,7 @@ function Rutas() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/login" element={<Login />} />
         <Route path="/gestor" element={<Gestor />} />
-        <Route path="/producto/:uuid" element={<ProductoConcreto />} />
+        <Route path="/producto/:uuidProducto" element={<ProductoConcreto />} />
         <Route path="/*" element={<Error />} />
       </Routes>
     </>

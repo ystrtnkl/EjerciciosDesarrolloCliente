@@ -6,17 +6,20 @@ import Pie from './components/Principal/Pie.jsx';
 import Contenedor from './components/Contenedor.jsx';
 import Contenido from './components/Contenido.jsx';
 import ProveedorSesion from './contexts/ProveedorSesion.jsx';
+import ProveedorProductos from './contexts/ProveedorProductos.jsx';
 
 function App() {
 
   return (
     <>
       <Contenedor>
-          <ProveedorSesion>
-            <Cabecera />
-            <MenuNavegacion />
+        <ProveedorSesion>
+          <Cabecera />
+          <MenuNavegacion />
+          <ProveedorProductos>
             <Contenido />
-          </ProveedorSesion>
+          </ProveedorProductos>
+        </ProveedorSesion>
         <Pie />
       </Contenedor>
     </>

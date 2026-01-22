@@ -2,6 +2,7 @@ import React from 'react';
 import './Producto.css';
 import { Link } from 'react-router-dom';
 
+//Componente que representa un producto.
 const Producto = (props) => {
 
   return (

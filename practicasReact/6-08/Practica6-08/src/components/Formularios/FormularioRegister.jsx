@@ -4,6 +4,7 @@ import Cargando from '../Principal/Cargando.jsx';
 import InputBasico from './InputBasico.jsx';
 import { manejadorInput } from '../../libraries/manejadorInput.js';
 import { validarContrasegna, validarCorreo, validarNombreUsuario } from '../../libraries/validaciones.js';
+import CajaError from '../Principal/CajaError.jsx';
 
 //Formulario para registrarse con un usuario nuevo.
 function FormularioRegister() {
@@ -40,7 +41,7 @@ function FormularioRegister() {
         <button onClick={enviar}>Crear cuenta</button>
       </form>
       {cargando && (<Cargando />)}
-      {errorSupabase && <p className="error">{errorSupabase}</p>}
+      {errorSupabase && (<CajaError texto={errorSupabase} />)}
     </>
   )
 }

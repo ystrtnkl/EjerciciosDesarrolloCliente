@@ -13,8 +13,9 @@ const validarNombreUsuario = (nombre) => {
     return typeof nombre === "string" && nombre.length >= 4 && nombre.length < 20;
 }
 
+//Valida un UUID.
+const validarUuid = (uuid) => {
+    return typeof uuid === "string" && uuid.length === 36;
+}
 
-
-
-
-export { validarContrasegna, validarCorreo, validarNombreUsuario }
+export { validarContrasegna, validarCorreo, validarNombreUsuario, validarUuid }

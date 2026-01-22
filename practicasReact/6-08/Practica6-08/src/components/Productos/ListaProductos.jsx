@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Producto from './Producto';
+import Producto from './Producto.jsx';
+import CajaError from '../Principal/CajaError.jsx';
 
+//Componente que lista los productos.
 const ListaProductos = (props) => {
 
   const criteriosControles = ["nombre", "peso", "precio"];
@@ -10,12 +12,14 @@ const ListaProductos = (props) => {
   const [ordenInverso, setOrdenInverso] = useState(false);
   const [productosMostrados, setProductosMostrados] = useState([]);
 
+  //Cuando se presione el botón de añadir a la lista.
   const clickAgnadirProducto = (e) => {
     if (e.target.classList.contains("boton-agnadir")) {
-      const uuidAgnadir = e.target.id.replaceAll("p_", ""); //Esto será usado más tarde
+      const uuidAgnadir = e.target.id.replaceAll("p_", ""); //Esto será usado más tarde.
     }
   }
 
+  //Reestablece los filtros y muestra todos los productos.
   const resetControles = () => {
     setFiltradoActual(criteriosControles[0]);
     setOrdenInverso(false);
@@ -24,9 +28,7 @@ const ListaProductos = (props) => {
     setProductosMostrados(props.productos);
   }
   useEffect(() => {
-    resetControles();
-  }, []);
-  useEffect(() => {
+    //Aplicar filtros y ordenanzas.
     setProductosMostrados(props.productos.sort((a, b) => {
       const objA = ordenInverso ? b : a;
       const objB = ordenInverso ? a : b;
@@ -39,10 +41,13 @@ const ListaProductos = (props) => {
         : e[filtradoActual] <= textoFiltrado;
     }));
   }, [ordenInverso, ordenanzaActual, filtradoActual, textoFiltrado]);
+  useEffect(() => {
+    resetControles();
+  }, []);
 
   return (
     <div>
-      {props.controles && (<div>
+      {/*Los usuarios sin la sesión iniciada no pueden ver esta parte.*/ props.controles && (<div>
         <input type="text" value={textoFiltrado} onChange={(e) => { setTextoFiltrado(e.target.value) }} /><br />
         {criteriosControles.map((e, i) => {
           //Se está usando un evento onClick aquí, como siempre habrán solo 3 botones de filtrado el cambiar el evento onClick al elemento padre apenas mejorará el rendimiento, la diferencia será minima. Por otra parte complicaría bastante más el código.
@@ -65,15 +70,15 @@ const ListaProductos = (props) => {
           (productosMostrados?.reduce((a, e) => {
             return a + (e.precio ?? 0)
           }, 0) / productosMostrados?.length).toLocaleString('es-ES', { style: 'currency', currency: 'EUR' })}</p>)
-          : (<p>No se puede calcular el precio medio</p>)}
+          : (<CajaError texto="No se puede calcular el precio medio" />)}
       </div>)}
 
-      {props.botonAgnadir && (<div onClick={clickAgnadirProducto}>
-        {productosMostrados ? productosMostrados
+      <div onClick={props.botonAgnadir && clickAgnadirProducto}>
+        {productosMostrados.length ? productosMostrados
           .map((e) => {
-            return (<Producto key={e.uuid} producto={e} agnadir={true} />)
-          }) : (<p>No se han encontrado productos (al menos no que coincidan con los criterios)</p>)}
-      </div>)}
+            return (<Producto key={e.uuid} producto={e} agnadir={props.controles} />)
+          }) : (<CajaError texto="No se han encontrado productos (al menos no que coincidan con los criterios)" />)}
+      </div>
     </div>
   )
 }

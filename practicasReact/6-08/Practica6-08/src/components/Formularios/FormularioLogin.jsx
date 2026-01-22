@@ -3,6 +3,7 @@ import useSesion from '../../hooks/useSesion.js';
 import Cargando from '../Principal/Cargando.jsx';
 import InputBasico from './InputBasico.jsx';
 import { manejadorInput } from '../../libraries/manejadorInput.js';
+import CajaError from '../Principal/CajaError.jsx';
 
 //Formulario de login.
 function FormularioLogin() {
@@ -27,7 +28,7 @@ function FormularioLogin() {
         <button onClick={enviar}>Iniciar sesión</button>
       </form>
       {cargando && (<Cargando />)}
-      {errorSupabase && <p className="error">{errorSupabase}</p>}
+      {errorSupabase && (<CajaError texto={errorSupabase} />)}
     </>
   )
 }
