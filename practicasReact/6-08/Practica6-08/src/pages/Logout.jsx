@@ -8,7 +8,7 @@ function Logout() {
 
   const { cerrarSesion } = useSesion();
   const navegar = useNavigate();
-  //En su lugar cierra la sesión y redirige al inicio.
+  //En su lugar cierra la sesión y redirige al inicio, inmediatamente.
   const cerrarSesionAsincrono = async () => {
     await cerrarSesion();
     navegar("/");

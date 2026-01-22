@@ -12,6 +12,7 @@ const Producto = (props) => {
       <p>Peso: {props.producto.peso ?? 0}g</p>
       <p>Precio: <strong>{props.producto.precio?.toLocaleString('es-ES', { style: 'currency', currency: 'EUR' }) ?? "0.00€"}</strong></p>
       <p>{props.producto.descripcion ?? "Sin descripción"}</p>
+      {/*En caso de ver el componente en una página única o sin tener cuenta, no se debería ver el botón de añadir a la lista.*/}
       {props.agnadir && (<button className="boton-agnadir" id={"p_" + props.producto.uuid}>Añadir a la lista</button>)}
     </div>
   )

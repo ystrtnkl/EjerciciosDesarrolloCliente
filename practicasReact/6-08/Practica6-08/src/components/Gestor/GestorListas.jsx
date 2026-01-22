@@ -8,6 +8,7 @@ import ListaProductos from '../Productos/ListaProductos.jsx';
 //Este componente está pensado que sea la parte privada de la app, osea que solo los usuarios con la sesión iniciada puedan verlo.
 function GestorListas(props) {
 
+  //De normal descarga 50 productos al inicio, y estos son los que se mostrarán. En caso de que la aplicación tenga muchos más habría que implementar un sistema de paginación.
   const { cargandoProductos, errorProductos, productosCargados } = useProductos();
 
   //Cualquier usuario puede ver los productos, pero solo los que tienen la sesión iniciada pueden ver sus listas y filtrar los productos.
@@ -23,9 +24,11 @@ function GestorListas(props) {
         {props.logeado && (<>
           <span className="seccion seccion-listas">
             <h2>Tus listas</h2>
+            {/*Aquí aparecerán las listas guardadas en la cuenta del usuario.*/}
           </span>
           <span className="seccion seccion-lista-seleccionada">
             <h2>Lista seleccionada</h2>
+            {/*Aquí aparecerá el formulario de crear/editar lista, así como la lista seleccionada (en la cual se añaden y quitan productos).*/}
           </span>
         </>)}
       </div>

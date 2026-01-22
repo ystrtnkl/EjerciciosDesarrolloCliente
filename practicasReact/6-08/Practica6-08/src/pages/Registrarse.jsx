@@ -1,6 +1,7 @@
 import React from 'react';
 import FormularioRegister from '../components/Formularios/FormularioRegister.jsx';
 
+//Página con el formulario para registrarse.
 function Registrarse() {
 
   return (

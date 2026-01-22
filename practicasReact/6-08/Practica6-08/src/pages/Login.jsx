@@ -1,6 +1,7 @@
 import React from 'react';
-import FormularioLogin from '../components/Formularios/FormularioLogin';
+import FormularioLogin from '../components/Formularios/FormularioLogin.jsx';
 
+//Página con el formulario para hacer login
 function Login() {
 
   return (

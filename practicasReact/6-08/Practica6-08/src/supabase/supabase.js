@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js"; //CUIDADO: se está usando una versión específica del SDK, no la más nueva.
 
 const URL_APP = "http://localhost:5173";
 

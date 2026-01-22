@@ -15,7 +15,7 @@ const ListaProductos = (props) => {
   //Cuando se presione el botón de añadir a la lista.
   const clickAgnadirProducto = (e) => {
     if (e.target.classList.contains("boton-agnadir")) {
-      const uuidAgnadir = e.target.id.replaceAll("p_", ""); //Esto será usado más tarde.
+      const uuidAgnadir = e.target.id.replaceAll("p_", ""); //Esto será usado más tarde a la hora de añadir productos a x lista.
     }
   }
 

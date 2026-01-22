@@ -18,4 +18,6 @@ const validarUuid = (uuid) => {
     return typeof uuid === "string" && uuid.length === 36;
 }
 
+//No se validan los productos porque no son objetos que se puedan crear desde esta aplicación.
+
 export { validarContrasegna, validarCorreo, validarNombreUsuario, validarUuid }
