@@ -12,10 +12,8 @@ const ProveedorProductos = (props) => {
   //Además, los productos son una entidad que no solo NO se van editando/borrando/añadiendo rápidamente, sino que solo un administrador podría hacer esto. Así que se tratan como si fuesen un dato inmutable.
   //Además no se hacen validaciones sobre productos porque no es una entidad que se pueda crear en el frontend.
 
-  const [cargandoProductos, setCargandoProductos] = useState(false);
-  const [errorProductos, setErrorProductos] = useState("");
   const [productosCargados, setProductosCargados] = useState([]); //Los productos actualmente cargados (para la magnitud de la aplicación, se descargan 50 al inicio y ya).
-  const { obtenerProductos } = useSupabase(); //Por cuestiones de dividir el código, las funciones que hacen operaciones sobre la base de datos en Supabase están en un hook aparte.
+  const { obtenerProductos, errorSupabase, cargandoSupabase } = useSupabase(); //Por cuestiones de dividir el código, las funciones que hacen operaciones sobre la base de datos en Supabase están en un hook aparte.
 
   //Devuelve un producto en concreto. Si ya está en el estado lo devuelve, si no lo descarga de Supaabse y lo añade al estado.
   //Esta carga está optimizada en caso de que puedan llegar a haber millones de productos (no se confía en que el producto a buscar esté en el estado del contexto, pero si lo está pues mejor porque así se ahorra una petición).
@@ -26,28 +24,20 @@ const ProveedorProductos = (props) => {
     if (!productoBuscar) {
       productoBuscar = await obtenerProductos(1, { propiedad: "nombre", descendente: true }, { propiedad: "uuid", valor: uuid });
       setProductosCargados([...productosCargados, productoBuscar]);
-    } 
+    }
     return productoBuscar ?? []; //Aún puede darse el caso de que no devuelva nada porque el producto no existe. (siempre se devuelve envuelto en un array para compatibilidad con otros componentes).
   }
 
   const cargaInicial = async () => {
-    setCargandoProductos(true);
-    setErrorProductos("");
-    try {
-      //Carga inicial de la base de datos.
-      setProductosCargados(await obtenerProductos(50, { propiedad: "nombre", descendente: true })); //Esta función viene de un hook;
-    } catch (e) {
-      setErrorProductos(e?.message);
-    } finally {
-      setCargandoProductos(false);
-    }
+    //Carga inicial de la base de datos.
+    setProductosCargados(await obtenerProductos(50, { propiedad: "uuid", descendente: true })); //Esta función viene de un hook;
   }
   useEffect(() => {
     cargaInicial();
   }, []);
 
   const datosProveer = {
-    cargandoProductos, errorProductos, productosCargados, obtenerProductos, getProductoConcreto
+    cargandoSupabase, errorSupabase, productosCargados, obtenerProductos, getProductoConcreto
   }
 
   return (

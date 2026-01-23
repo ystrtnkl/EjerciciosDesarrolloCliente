@@ -9,7 +9,7 @@ import ListaProductos from '../Productos/ListaProductos.jsx';
 function GestorListas(props) {
 
   //De normal descarga 50 productos al inicio, y estos son los que se mostrarán. En caso de que la aplicación tenga muchos más habría que implementar un sistema de paginación.
-  const { cargandoProductos, errorProductos, productosCargados } = useProductos();
+  const { cargandoSupabase, errorSupabase, productosCargados } = useProductos();
 
   //Cualquier usuario puede ver los productos, pero solo los que tienen la sesión iniciada pueden ver sus listas y filtrar los productos.
   return (
@@ -17,7 +17,7 @@ function GestorListas(props) {
       <div className="secciones">
         <span className="seccion seccion-productos">
           <h2>Productos registrados</h2>
-          {cargandoProductos ? (<Cargando />) : (errorProductos ? (<CajaError texto="Ha habido un error al cargar los productos" />) : (<>
+          {cargandoSupabase ? (<Cargando />) : (errorSupabase ? (<CajaError texto="Ha habido un error al cargar los productos" />) : (<>
             <ListaProductos controles={props.logeado} productos={productosCargados} botonAgnadir={true} />
           </>))}
         </span>

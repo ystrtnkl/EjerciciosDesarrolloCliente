@@ -65,7 +65,7 @@ const ListaProductos = (props) => {
         })}
 
         {/*Estéticamente, esta información queda mejor al principio para no tener que bajar hasta abajo del todo.*/}
-        <p>Hay {productosMostrados?.length ?? 0} productos</p>
+        <p>Hay {productosMostrados?.length ?? 0} productos cargados</p>
         {productosMostrados.length ? (<p>El precio medio es {
           (productosMostrados?.reduce((a, e) => {
             return a + (e.precio ?? 0)

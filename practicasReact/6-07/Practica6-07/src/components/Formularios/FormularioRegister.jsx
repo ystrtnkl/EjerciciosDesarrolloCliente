@@ -11,7 +11,7 @@ function FormularioRegister() {
   //Se necesita el nombre, el correo (que luego se verifica) y la contraseña (2 veces por si acaso).
   const datosOriginales = { correo: "", contrasegna: "", contrasegna2: "", nombre: "", verContrasegna: false }
   const [datosAutenticacion, setDatosAutenticacion] = useState(datosOriginales);
-  const { crearCuenta, errorSupabase, cargando } = useSesion();
+  const { crearCuenta, errorAutenticacion, cargandoAutenticacion } = useSesion();
 
   //Valida los datos antes de enviar, aunque también se validan cada vez que cambian.
   const validar = () => {
@@ -39,8 +39,8 @@ function FormularioRegister() {
         <InputBasico nombre="verContrasegna" titulo="Ver contraseña" tipo="checkbox" estaChecked={datosAutenticacion.verContrasegna} />
         <button onClick={enviar}>Crear cuenta</button>
       </form>
-      {cargando && (<Cargando />)}
-      {errorSupabase && <p className="error">{errorSupabase}</p>}
+      {cargandoAutenticacion && (<Cargando />)}
+      {errorAutenticacion && <p className="error">{errorAutenticacion}</p>}
     </>
   )
 }

@@ -11,3 +11,8 @@
 .boton, .boton-activado {
     margin: 5px;
 }
+
+.producto img {
+    max-width: 128px;
+    max-height: 128px;
+}

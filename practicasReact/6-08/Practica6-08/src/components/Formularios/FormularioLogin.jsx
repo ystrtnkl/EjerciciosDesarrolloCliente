@@ -11,7 +11,7 @@ function FormularioLogin() {
   //Para iniciar sesión pide tanto el correo como la contraseña.
   const datosOriginales = { correo: "", contrasegna: "", verContrasegna: false }
   const [datosAutenticacion, setDatosAutenticacion] = useState(datosOriginales);
-  const { iniciarSesion, errorSupabase, cargando } = useSesion();
+  const { iniciarSesion, errorAutenticacion, cargandoAutenticacion } = useSesion();
 
   const enviar = async (e) => {
     e.preventDefault();
@@ -27,8 +27,8 @@ function FormularioLogin() {
         <InputBasico nombre="verContrasegna" titulo="Ver contraseña" tipo="checkbox" estaChecked={datosAutenticacion.verContrasegna} />
         <button onClick={enviar}>Iniciar sesión</button>
       </form>
-      {cargando && (<Cargando />)}
-      {errorSupabase && (<CajaError texto={errorSupabase} />)}
+      {cargandoAutenticacion && (<Cargando />)}
+      {errorAutenticacion && (<CajaError texto={errorAutenticacion} />)}
     </>
   )
 }
