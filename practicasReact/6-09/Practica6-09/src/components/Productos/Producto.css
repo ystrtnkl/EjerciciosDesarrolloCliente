@@ -1,0 +1,44 @@
+.producto {
+    border: 1px solid white;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 5px;
+}
+.boton-activado {
+    background-color: blanchedalmond;
+    color: black;
+}
+.boton, .boton-activado {
+    margin: 5px;
+}
+
+.boton-producto>img, img.boton-producto {
+    width: 32px;
+    height: 32px;
+    margin: 0;
+}
+.boton-producto {
+    padding: 5px;
+    margin: 5px;
+}
+.boton-agnadir {
+    background-color: lime;
+}
+.boton-editar {
+    background-color: yellow;
+}
+.boton-borrar {
+    background-color: red;
+}
+.boton-nuevo-producto {
+    background-color: cyan;
+}
+
+.producto img {
+    max-width: 128px;
+    max-height: 128px;
+}
+
+/*.lista-productos {
+    display: flex;
+}*/
