@@ -8,6 +8,8 @@ CREATE TABLE PRODUCTOS (
   peso INTEGER DEFAULT 0,
   precio FLOAT DEFAULT 0 NOT NULL,
   url_imagen VARCHAR(127) DEFAULT 'https://i.ibb.co/8SQJtJ1/sinportada.jpg',
+  --uuid_duegno VARCHAR(36) REFERENCES USER(uuid),
+  duegno VARCHAR(36) DEFAULT 'admin',
   descripcion VARCHAR(511)
 );
 
