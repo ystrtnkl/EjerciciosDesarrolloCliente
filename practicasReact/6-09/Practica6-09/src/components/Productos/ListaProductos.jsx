@@ -27,6 +27,7 @@ const ListaProductos = (props) => {
       } else if (e.target.id.startsWith("b_")) { //Botón de borrar producto.
         const uuid = e.target.id.replaceAll("b_", "");
         await eliminarProducto(uuid);
+        if (!props.controles) navegar("/gestor");
       } else if (e.target.id.startsWith("e_")) { //Botón de editar producto.
         const uuid = e.target.id.replaceAll("e_", "");
         navegar("/editarProducto/" + uuid);

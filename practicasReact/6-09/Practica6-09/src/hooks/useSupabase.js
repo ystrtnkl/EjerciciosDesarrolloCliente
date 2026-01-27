@@ -35,7 +35,7 @@ const useSupabase = () => {
         setCargandoSupabase(true);
         try {
             if (!validarDatosProducto(producto) || !validarDuegno(duegno)) throw new Error("Los datos de inserción no son válidos");
-            const datos = {...producto, duegno, uuid: self.crypto.randomUUID()};
+            const datos = { ...producto, duegno, uuid: self.crypto.randomUUID() }; //Aquí es donde se genera el UUID.
             const { data, error } = await supabaseConexion.from("productos").insert(datos);
             if (error) throw error;
             if (data) return data;
@@ -54,11 +54,11 @@ const useSupabase = () => {
         try {
             //No se permite cambiar de uuid o de dueño.
             if (!validarDatosProducto(nuevo) || !validarUuid(uuid) || nuevo.uuid || nuevo.duegno) throw new Error("Los datos de edición no son válidos");
-            const datos = {...nuevo};
+            const datos = { ...nuevo };
             const { data, error } = await supabaseConexion.from("productos").update(datos).eq("uuid", uuid);
             if (error) throw error;
             if (data) return data;
-            return datos;
+            return { ...datos, uuid };
         } catch (e) {
             setErrorSupabase(e?.message || "No se ha podido editar el producto (puede que no exista, que los datos no sean válidos o no tengas permisos)");
         } finally {
@@ -84,7 +84,7 @@ const useSupabase = () => {
     }
 
     //En principio un usuario no debería poder ver/editar/borrar los productos de otro, pero esa restricción se deja para más adelante.
-    
+
     return { obtenerProductos, cargandoSupabase, errorSupabase, insertarProducto, editarProducto, borrarProducto };
 };
 

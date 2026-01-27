@@ -62,3 +62,7 @@ textarea {
 button {
   margin: 5px;
 }
+a *, a {
+  color: white;
+  text-decoration: underline;
+}
