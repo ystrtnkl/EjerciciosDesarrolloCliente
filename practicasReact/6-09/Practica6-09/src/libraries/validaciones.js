@@ -18,19 +18,21 @@ const validarUuid = (uuid) => {
     return typeof uuid === "string" && uuid.length === 36;
 }
 
-//Valida el nombre de un producto, que debe tener menos de 128 carácteres.
+//Valida el nombre de un producto, que debe tener menos de 128 carácteres y al menos 4.
 const validarNombreProducto = (nombre) => {
-    return typeof nombre === "string" && nombre.length < 128;
+    return typeof nombre === "string" && nombre.length < 128 && nombre.length >= 4;
 }
 
 //Valida el peso de un producto, que tiene que ser un número positivo.
 const validarPesoProducto = (peso) => {
-    return typeof peso === "number" && peso >= 0;
+    peso = parseFloat(peso);
+    return typeof peso === "number" && !isNaN(peso) && peso >= 0;
 }
 
 //Valida el precio de un producto, que tiene que ser un número positivo.
 const validarPrecioProducto = (precio) => {
-    return typeof peso === "number" && precio >= 0;
+    precio = parseFloat(precio);
+    return typeof precio === "number" && !isNaN(precio) && precio >= 0;
 }
 
 //Valida una URL, por ejemplo la de la foto de un producto. Es permisivo, se pide que simplemente empieze por un protocolo válido y sea hasta 127 carácteres.

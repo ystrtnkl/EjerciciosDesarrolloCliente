@@ -24,7 +24,7 @@ function ProductoConcreto() {
   }
   useEffect(() => {
     cargaInicial();
-  }, [productosCargados]); //Empieza la búsqueda una vez el contexto ha cargado los 50 primeros (para aprovechar en caso de que el producto a buscar esté ahí). Esto es porque el usuario podría entrar a la aplicación a través de la página propia de un producto, momento en el cual podrían no haberse cargado los productos iniciales.
+  }, []); //Empieza la búsqueda una vez el contexto ha cargado los 50 primeros (para aprovechar en caso de que el producto a buscar esté ahí). Esto es porque el usuario podría entrar a la aplicación a través de la página propia de un producto, momento en el cual podrían no haberse cargado los productos iniciales.
 
   return (
     <>

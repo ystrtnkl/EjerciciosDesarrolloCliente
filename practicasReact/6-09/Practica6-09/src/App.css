@@ -47,3 +47,18 @@
   margin: 10px;
 }
 
+button img {
+  pointer-events: none;
+}
+
+img, input {
+  max-width: 128px;
+  max-height: 128px;
+}
+textarea {
+  max-width: 512px;
+  max-height: 128px;
+}
+button {
+  margin: 5px;
+}

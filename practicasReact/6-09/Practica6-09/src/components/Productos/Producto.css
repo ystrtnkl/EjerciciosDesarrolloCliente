@@ -33,6 +33,9 @@
 .boton-nuevo-producto {
     background-color: cyan;
 }
+.boton-recargar-productos {
+    background-color: orange;
+}
 
 .producto img {
     max-width: 128px;

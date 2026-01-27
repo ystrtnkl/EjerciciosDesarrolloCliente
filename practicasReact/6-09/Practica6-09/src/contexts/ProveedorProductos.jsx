@@ -21,41 +21,50 @@ const ProveedorProductos = (props) => {
     //Primero mira si el producto ya ha sido cargado por la carga inicial del contexto (que de normal carga 50 al inicio).
     let productoBuscar = productosCargados.filter((e) => { return e.uuid === uuid });
     //Si no está cargado, entonces manda una petición para buscar ese producto en concreto (puede ser que el producto a buscar no esté entre los 50 ya descargados).
-    if (!productoBuscar) {
+    if (!productoBuscar.length) {
       productoBuscar = await obtenerProductos(1, { propiedad: "nombre", descendente: true }, { propiedad: "uuid", valor: uuid });
+      console.log(productoBuscar, uuid)
       setProductosCargados([...productosCargados, productoBuscar]);
     }
     return productoBuscar ?? []; //Aún puede darse el caso de que no devuelva nada porque el producto no existe. (siempre se devuelve envuelto en un array para compatibilidad con otros componentes).
   }
 
   //Llama a guardar un nuevo producto a la base de datos, y si todo va bien se suma a la lista de productos cargados.
-  const nuevoProducto = async (producto, duegno) => {
+  const nuevoProducto = async (producto, duegno = "") => {
     const nuevo = await insertarProducto(producto, duegno);
-    if (nuevo?.uuid?.length) setProductosCargados([...productosCargados], nuevo);
+    if (nuevo?.uuid?.length) {
+      setProductosCargados([...productosCargados], {...nuevo, uuid: nuevo.uuid});
+      return nuevo?.uuid ?? true;
+    }
   }
 
   //Llama a editar un producto, y si todo va bien aplica dichos cambios en los productos cargados.
   const cambiarProducto = async (uuid, nuevo) => {
     const resultado = await editarProducto(uuid, nuevo);
-    if (resultado?.uuid?.length) setProductosCargados([...productosCargados.filter((e) => {return e.uuid !== uuid}), resultado]);
+    if (resultado?.uuid?.length) {
+      setProductosCargados([...productosCargados.filter((e) => {return e.uuid !== uuid}), resultado]);
+      return true;
+    }
   }
 
   //Lama a eliminar un producto, y si todo va bien también lo quita de los productos cargados.
   const eliminarProducto = async (uuid) => {
     const resultado = await borrarProducto(uuid);
-    if (resultado) setProductosCargados(productosCargados.filter((e) => {return e.uuid !== uuid}));
+    //if (resultado) setProductosCargados(productosCargados.filter((e) => {return e.uuid !== uuid})); //Versión óptima en la que no vuelve a descargar los productos de la base de datos PERO el usuario verá 49 en lugar de 50.
+    if (resultado) await cargaInicial(); //Versión no tan optimizada en la que cuando se borra un producto se re-descargan los 50 iniciales PERO al menos el usuario tendrá una mejor experiencia pudiendo ver 50.
+    //Ambas maneras son solo soluciones temporales, más adelante se usarán WebSockets para ver los datos a tiempo real (el servidor avisaría al usuario cuando un producto que está viendo es eliminado o editado).
   }
 
   const cargaInicial = async () => {
     //Carga inicial de la base de datos.
-    setProductosCargados(await obtenerProductos(50, { propiedad: "uuid", descendente: true })); //Esta función viene de un hook.
+    setProductosCargados(await obtenerProductos(50, { propiedad: "nombre", descendente: true })); //Esta función viene de un hook.
   }
   useEffect(() => {
     cargaInicial();
   }, []);
 
   const datosProveer = {
-    cargandoSupabase, errorSupabase, productosCargados, obtenerProductos, getProductoConcreto, nuevoProducto, cambiarProducto, eliminarProducto
+    cargandoSupabase, errorSupabase, productosCargados, obtenerProductos, getProductoConcreto, nuevoProducto, cambiarProducto, eliminarProducto, cargaInicial
   }
 
   return (

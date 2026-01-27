@@ -9,15 +9,16 @@ function InputBasico(props) {
   return (
     <div className="input-basico">
       <label htmlFor={props.nombre}>{props.titulo}</label>
-      {props.tipo === "textarea" ? (
+      {props.tipo === "textarea" ? (<><br />
         <textarea
-          cols="80" rows="300"
+          cols="30" rows="300"
           name={props.nombre ?? ''} id={props.nombre ?? ''}
           onChange={(e) => { setCorrecto(funcionValidadora(e.target.value) ?? true) }}
           value={props.valor ?? ''} />
+          </>
       ) : (
         <input
-          onChange={(e) => { setCorrecto(funcionValidadora(e.target.value) ?? true) }}
+          onChange={(e) => { setCorrecto(funcionValidadora(props.tipo === "number" ? parseFloat(e.target.value) : e.target.value) ?? true) }}
           type={props.tipo ?? "text"}
           value={props.valor ?? ''}
           name={props.nombre ?? ''}
