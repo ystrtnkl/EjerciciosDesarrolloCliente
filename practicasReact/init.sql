@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS LISTA_PRODUCTO;
 DROP TABLE IF EXISTS LISTAS;
 DROP TABLE IF EXISTS PRODUCTOS;
+--usuarios no manejada aqui
 
 CREATE TABLE PRODUCTOS (
   uuid VARCHAR(36) PRIMARY KEY,
@@ -19,11 +20,13 @@ CREATE TABLE LISTAS (
   uuid_usuario VARCHAR(36) NOT NULL,
   fecha VARCHAR(15),
   descripcion VARCHAR(127)
+  --precio y coche calculados en runtime
 );
 
 CREATE TABLE LISTA_PRODUCTO (
-  uuid VARCHAR(36) PRIMARY KEY,
-  uuid_lista VARCHAR(36) REFERENCES LISTAS(uuid) NOT NULL,
-  uuid_producto VARCHAR(36) REFERENCES PRODUCTOS(uuid) NOT NULL,
-  cantidad INTEGER DEFAULT 0
+  uuid_lista VARCHAR(36) REFERENCES LISTAS(uuid),
+  uuid_producto VARCHAR(36) REFERENCES PRODUCTOS(uuid),
+  uuid_usuario VARCHAR(36),
+  cantidad INTEGER DEFAULT 0,
+  PRIMARY KEY (uuid_lista, uuid_producto, uuid_usuario)
 );
