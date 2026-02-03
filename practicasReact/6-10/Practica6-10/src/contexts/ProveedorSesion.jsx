@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { supabaseConexion, URL_APP } from '../supabase/supabase.js';
+import { supabaseConexion } from '../supabase/supabase.js';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAutenticacionSupabase from "../hooks/useAutenticacionSupabase.js";
 

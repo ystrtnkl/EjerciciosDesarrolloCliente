@@ -13,6 +13,11 @@ const validarNombreUsuario = (nombre) => {
     return typeof nombre === "string" && nombre.length >= 4 && nombre.length < 20;
 }
 
+//Valida un nombre de lista, de 4 a 20 caracteres.
+const validarNombreLista = (nombre) => {
+    return typeof nombre === "string" && nombre.length >= 4 && nombre.length < 20;
+}
+
 //Valida un UUID.
 const validarUuid = (uuid) => {
     return typeof uuid === "string" && uuid.length === 36;
@@ -45,6 +50,11 @@ const validarDescripcionProducto = (descripcion) => {
     return typeof descripcion === "string" && descripcion.length < 512;
 }
 
+//Valida la descripción de una lista, que debe tener menos de 512 carácteres.
+const validarDescripcionLista = (descripcion) => {
+    return typeof descripcion === "string" && descripcion.length < 512;
+}
+
 //Valida los datos de un producto (solo los que se usan para insertar, no el dueño ni el uuid).
 const validarDatosProducto = (producto) => {
     return typeof producto === "object"
@@ -62,4 +72,12 @@ const validarDuegno = (duegno, permisivo = true) => {
     return validarUuid(duegno);
 }
 
-export { validarContrasegna, validarCorreo, validarNombreUsuario, validarUuid, validarDescripcionProducto, validarNombreProducto, validarPesoProducto, validarPrecioProducto, validarUrl, validarDatosProducto, validarDuegno }
+//Valida los datos de una lista.
+const validarDatosLista = (lista) => {
+    return typeof lista === "object"
+        && validarNombreLista(lista.nombre)
+        && validarDescripcionLista(lista.descripcion)
+        && Array.isArray(lista.productos);
+}
+
+export { validarContrasegna, validarDatosLista, validarDescripcionLista, validarNombreLista, validarCorreo, validarNombreUsuario, validarUuid, validarDescripcionProducto, validarNombreProducto, validarPesoProducto, validarPrecioProducto, validarUrl, validarDatosProducto, validarDuegno }

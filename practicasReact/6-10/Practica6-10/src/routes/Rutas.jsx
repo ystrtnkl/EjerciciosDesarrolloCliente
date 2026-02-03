@@ -9,7 +9,6 @@ import Gestor from '../pages/Gestor.jsx';
 import ProductoConcreto from '../pages/ProductoConcreto.jsx';
 import NuevoProducto from '../pages/NuevoProducto.jsx';
 import EditarProducto from '../pages/EditarProducto.jsx';
-import ListaConcreta from '../pages/ListaConcreta.jsx';
 
 //Enrutador que lleva a las distintas páginas de la aplicación, incluyendo un componente en caso de no encontrar la ruta.
 function Rutas() {
@@ -26,7 +25,7 @@ function Rutas() {
         <Route path="/nuevoProducto" element={<NuevoProducto />} />
         <Route path="/producto/:uuidProducto" element={<ProductoConcreto />} />
         <Route path="/editarProducto/:uuidProducto" element={<EditarProducto />} />
-        <Route path="/lista/:uuidLista" element={<ListaConcreta />} />
+        {/*<Route path="/lista/:uuidLista" element={<ListaConcreta />} /> Estaría interesante que hubiese una página de solo lectura para una lista, pero viendo que las listas son privadas para cada usuario y que además se muestran en el componente Gestor, se decidió no añadir esto. */}
         <Route path="/*" element={<Error />} />
       </Routes>
     </>

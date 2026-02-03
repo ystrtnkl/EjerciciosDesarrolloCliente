@@ -23,8 +23,8 @@ const ListaProductos = (props) => {
   const clickProducto = async (e) => {
     if (e.target.classList.contains("boton-producto")) {
       if (e.target.id.startsWith("a_")) { //Botón de añadir a la lista.
-        const uuid = e.target.id.replaceAll("a_", ""); //Esto será usado más adelante cuando se implemente la funcionalidad de la lista.
-        
+        const uuid = e.target.id.replaceAll("a_", "");
+        props.agregar(uuid);
       } else if (e.target.id.startsWith("b_")) { //Botón de borrar producto.
         const uuid = e.target.id.replaceAll("b_", "");
         await eliminarProducto(uuid);

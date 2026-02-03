@@ -16,11 +16,9 @@ with check (
  true
 );
 
-create policy "select-productos"
+alter policy "select-productos"
 on "public"."productos"
-as PERMISSIVE
-for SELECT
-to authenticated
+to public
 using (
  true
 );

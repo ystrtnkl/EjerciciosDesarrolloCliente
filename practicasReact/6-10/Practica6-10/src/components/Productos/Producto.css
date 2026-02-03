@@ -12,25 +12,26 @@
     margin: 5px;
 }
 
-.boton-producto>img, img.boton-producto {
+.boton-producto>img, img.boton-producto, .boton-lista>img, img.boton-lista {
     width: 32px;
     height: 32px;
     margin: 0;
+    padding: 0;
 }
-.boton-producto {
+.boton-producto, .boton-lista {
     padding: 5px;
     margin: 5px;
 }
 .boton-agnadir {
     background-color: lime;
 }
-.boton-editar {
+.boton-editar, .boton-aceptar {
     background-color: yellow;
 }
 .boton-borrar {
     background-color: red;
 }
-.boton-nuevo-producto {
+.boton-nuevo-producto, .boton-nueva-lista {
     background-color: cyan;
 }
 .boton-recargar-productos {

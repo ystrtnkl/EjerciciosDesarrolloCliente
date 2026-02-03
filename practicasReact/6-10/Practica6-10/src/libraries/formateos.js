@@ -6,6 +6,7 @@ const floatAPrecio = (numero) => {
 
 //Formatea un timestamp a una fecha española.
 const timestampAFecha = (timestamp) => {
+    timestamp = parseInt(timestamp);
     if (isNaN(timestamp)) return "???";
     const fecha = new Date(timestamp);
     return fecha?.toLocaleDateString('es-ES', {year: 'numeric',month: 'long',day: 'numeric'});

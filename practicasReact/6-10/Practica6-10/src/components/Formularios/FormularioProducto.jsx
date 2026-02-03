@@ -31,7 +31,7 @@ function FormularioProducto(props) {
         const resultado = await cambiarProducto(props.uuid, { ...datosProducto, peso: parseFloat(datosProducto.peso), precio: parseFloat(datosProducto.precio) });
         if (resultado) navegar("/gestor");
       } else {
-        const resultado = await nuevoProducto({ ...datosProducto, peso: parseFloat(datosProducto.peso), precio: parseFloat(datosProducto.precio), duegno: "" });
+        const resultado = await nuevoProducto({ ...datosProducto, peso: parseFloat(datosProducto.peso), precio: parseFloat(datosProducto.precio)});
         if (resultado) navegar("/producto/" + resultado);
       }
     }
