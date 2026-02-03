@@ -21,6 +21,14 @@ function GestorListas(props) {
 
   }
 
+  //Función para cuando se seleccione una lista pulsando al botón.
+  const seleccionar = (e) => {
+    if (e.target.classList.contains("minilista-boton")) {
+      const uuid = e.target.id.replaceAll("ag_", "");
+      seleccionarLista(uuid);
+    }
+  }
+
   //Cualquier usuario puede ver los productos, pero solo los que tienen la sesión iniciada pueden ver sus listas y filtrar los productos.
   return (
     <div className="gestor-listas">
@@ -35,7 +43,7 @@ function GestorListas(props) {
           <span className="seccion seccion-listas">
             <h2>Tus listas</h2>
             {cargandoListas ? (<Cargando />) : (errorListas ? (<CajaError texto="Ha habido un error al cargar las listas" />) : (<>
-              <ListaListas listas={listasCargadas} botonNuevo={() => { seleccionarLista("") }} />
+              <ListaListas seleccionar={seleccionar} listas={listasCargadas} botonNuevo={() => { seleccionarLista(""); }} />
             </>))}
           </span>
           <span className="seccion seccion-lista-seleccionada">

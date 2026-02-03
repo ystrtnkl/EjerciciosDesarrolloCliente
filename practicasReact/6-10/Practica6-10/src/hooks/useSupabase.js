@@ -18,7 +18,7 @@ const useSupabase = () => {
     //Parámetro de orden: un objeto con "propiedad" que indica la propiedad con la que ordenar, y "descendente" en true o false para alterar el orden.
     //Parámetro de filtros: un objeto con "propiedad" que indica la propiedad a filtrar y "valor" que indica como deberá de ser.
     //Parámetro de sentenciaSelect: por si se quiere recibir propiedades concretas o hacer un join.
-    const obtenerPublico = async (tabla, limite, orden = { propiedad: "nombre", descendente: true }, filtros = { propiedad: "uuid", valor: "%" }, sentenciaSelect = "*") => {
+    const obtenerPublico = async (tabla, limite, orden = { propiedad: "uuid", descendente: true }, filtros = { propiedad: "uuid", valor: "%" }, sentenciaSelect = "*") => {
         setErrorSupabase("");
         setCargandoSupabase(true);
         try {
@@ -94,7 +94,7 @@ const useSupabase = () => {
     //Parámetro de orden: un objeto con "propiedad" que indica la propiedad con la que ordenar, y "descendente" en true o false para alterar el orden.
     //Parámetro de filtros: un objeto con "propiedad" que indica la propiedad a filtrar y "valor" que indica como deberá de ser.
     //Parámetro de sentenciaSelect: por si se quiere recibir propiedades concretas o hacer un join.
-    const obtenerPrivado = async (uuidUsuario, tabla, limite, orden = { propiedad: "nombre", descendente: true }, filtros = { propiedad: "uuid", valor: "%" }, sentenciaSelect = "*") => {
+    const obtenerPrivado = async (uuidUsuario, tabla, limite, orden = { propiedad: "uuid", descendente: true }, filtros = { propiedad: "uuid", valor: "%" }, sentenciaSelect = "*") => {
         setErrorSupabase("");
         setCargandoSupabase(true);
         try {

@@ -1,0 +1,7 @@
+.minilista {
+    min-width: 100%;
+    margin: 0 5px;
+}
+.minilista strong {
+    pointer-events: none;
+}

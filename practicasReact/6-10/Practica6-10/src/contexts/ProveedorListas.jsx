@@ -15,10 +15,10 @@ const ProveedorListas = (props) => {
 
   //Manda a seleccionar una lista a partir de su uuid, tiene que estar cargada.
   const seleccionarLista = (uuid) => {
-    if (!sesionIniciada) return false;
-    if (listasCargadas.filter((e) => { return e.uuid === uuid }).length) {
+    if (uuid === "") {
+      setUuidListaSeleccionada("");
+    } else if (listasCargadas.filter((e) => { return e.uuid === uuid }).length) {
       setUuidListaSeleccionada(uuid);
-      return true;
     }
   }
 
@@ -32,35 +32,36 @@ const ProveedorListas = (props) => {
   const guardarLista = async (uuid, datos) => {
     if (!validarDatosLista(datos) || !sesionIniciada) return false;
     if (uuid === "") {
-      const nuevo = await insertarPrivado(usuarioSesion?.uuid, "listas", datos);
+      const nuevo = await insertarPrivado(usuarioSesion?.user?.id, "listas", {...datos, productos: undefined, uuid_usuario: usuarioSesion.uuid, fecha: Date.now()});
       if (nuevo?.uuid?.length) {
-        setProductosCargados([...productosCargados], { ...nuevo, uuid: nuevo.uuid });
+        setListasCargadas([...listasCargadas], { ...nuevo, uuid: nuevo.uuid });
         return nuevo?.uuid ?? true;
       }
     } else {
-
-    }//ldfjkhsefuhsufghsuikhfg
-
-
-
-
-    const nuevo = await insertarPublico("productos", producto);
-    if (nuevo?.uuid?.length) {
-      setProductosCargados([...productosCargados], { ...nuevo, uuid: nuevo.uuid });
-      return nuevo?.uuid ?? true;
+      const nuevo = await editarPrivado(usuarioSesion?.user?.id, "listas", uuid, {datos, uuid: undefined, productos: undefined, uuid_usuario: usuarioSesion.uuid, fecha: Date.now()});
+      if (nuevo?.uuid?.length) {
+        setListasCargadas([...listasCargadas], { ...nuevo, uuid: nuevo.uuid });
+        return nuevo?.uuid ?? true;
+      }
     }
+
+    //GUARDAR PRODUCTOS
+  }
+
+  const borrarLista = async (uuid) => {
+
   }
 
   const cargaInicial = async () => {
     //Descarga todas las listas que pueda (solo las que sean del usuario) (solo si la sesión está iniciada).
-    if (sesionIniciada) setListasCargadas(await obtenerPrivado(usuarioSesion?.uuid, "listas"));
+    if (sesionIniciada) setListasCargadas(await obtenerPrivado(usuarioSesion?.user?.id, "listas"));
   }
   useEffect(() => {
     cargaInicial();
   }, []);
 
   const datosProveer = {
-    seleccionarLista, cargandoSupabase, errorSupabase, listasCargadas, uuidListaSeleccionada, getListaSeleccionada, guardarLista
+    seleccionarLista, cargandoSupabase, errorSupabase, listasCargadas, uuidListaSeleccionada, getListaSeleccionada, guardarLista, borrarLista
   }
 
   return (

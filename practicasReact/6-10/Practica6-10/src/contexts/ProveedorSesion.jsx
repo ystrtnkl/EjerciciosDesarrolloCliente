@@ -64,7 +64,7 @@ const ProveedorSesion = (props) => {
   return (
     <>
       <ContextoSesion.Provider value={datosProveer}>
-        {props.children}
+        {cargandoAutenticacion || props.children}
       </ContextoSesion.Provider>
     </>
   );

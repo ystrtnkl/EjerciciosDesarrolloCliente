@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { validarDescripcionLista, validarNombreLista } from '../../libraries/validaciones.js';
 import InputBasico from '../Formularios/InputBasico.jsx';
 import { manejadorInput } from '../../libraries/manejadorInput.js';
 import { timestampAFecha } from '../../libraries/formateos.js';
 import imgAceptar from '../../assets/aceptar.png';
 import imgBorrar from '../../assets/eliminar.png';
+import useListas from '../../hooks/useListas.js';
+import Cargando from '../Principal/Cargando.jsx';
+import CajaError from '../Principal/CajaError.jsx';
 
 //Vista de una lista, muestra sus datos, sus productos y permite editar ambos.
 const Lista = (props) => {
 
-  const [listaActual, setListaActual] = useState(props.nuevo ? {nombre: "", descripcion: ""} : props.lista);
+  const { cargandoSupabase, errorSupabase, guardarLista, getListaSeleccionada, uuidListaSeleccionada } = useListas();
+  const [listaActual, setListaActual] = useState({nombre: "", descripcion: ""});
+  //const [listaActual, setListaActual] = useState({nombre: "hola", descripcion: "holalfh"});
+  const [productos, setProductos] = useState([]);
 
   const validar = () => {
     return typeof listaActual !== "undefined"
@@ -19,12 +25,20 @@ const Lista = (props) => {
 
   const guardar = async () => {
     if (validar()) {
-
+      const resultado = await guardarLista(props.nuevo ? "" : props.uuid, {...listaActual, productos});
     }
   }
 
+  useEffect(() => {
+    if (!props.nuevo) setListaActual(getListaSeleccionada());
+  }, [uuidListaSeleccionada]);
+
   return (
-    <div>
+    <>
+      {JSON.stringify(props.lista) + "aaa"} <br /><br />
+      {JSON.stringify(listaActual) + "bbb"}
+      {errorSupabase ? (<CajaError texto={errorSupabase} />) : ((cargandoSupabase || typeof listaActual === "undefined") ? (<Cargando />) : (<div>
+      {props.nuevo && <p>Estás creando una nueva lista</p>}
       <form onChange={(e) => { manejadorInput(e, setListaActual, listaActual) }}>
         <InputBasico nombre="nombre" titulo="Nombre:" tipo="text" valor={listaActual.nombre} validador={validarNombreLista} mensajeError="El nombre de la lista debe tener entre 4 y 20 carácteres" />
         <InputBasico nombre="descripcion" titulo="Descripción:" tipo="textarea" valor={listaActual.descripcion} validador={validarDescripcionLista} mensajeError="La descripción del prudocto debe tener menos de 512 carácteres" />
@@ -34,9 +48,10 @@ const Lista = (props) => {
       <div className="productos-en-lista" onClick={() => {}}>
 
       </div>
-      <button className="boton-lista boton-borrar" onClick={()=>{}}><img src={imgBorrar} alt="Borrar" /></button>
-      <button className="boton-lista boton-aceptar" onClick={()=>{}}><img src={imgAceptar} alt="Aceptar" /></button>
-    </div>
+      {props.nuevo || <button className="boton-lista boton-borrar" onClick={()=>{}}><img src={imgBorrar} alt="Borrar" /></button>}
+      <button className="boton-lista boton-aceptar" onClick={guardar}><img src={imgAceptar} alt="Aceptar" /></button>
+    </div>))}
+    </>
   )
 }
 
