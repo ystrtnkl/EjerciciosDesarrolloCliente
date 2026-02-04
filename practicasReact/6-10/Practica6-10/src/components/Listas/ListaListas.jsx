@@ -10,7 +10,6 @@ const ListaListas = (props) => {
 
   return (
     <div>
-      {JSON.stringify(props.listas)}
       <button onClick={props.botonNuevo} className="boton-lista boton-nueva-lista"><img src={imgAgnadir} alt="Agregar producto" /></button>
       {props.listas.length ? (<>
         <div onClick={props.seleccionar}>

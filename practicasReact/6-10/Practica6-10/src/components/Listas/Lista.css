@@ -1,7 +1,14 @@
 .minilista {
     min-width: 100%;
-    margin: 0 5px;
+    margin: 5px 0 10px 10px;
+    text-align: left;
 }
-.minilista strong {
+.minilista strong, .minilista img {
     pointer-events: none;
+}
+.minilista-boton-borrar {
+    padding: 0;
+}
+.minilista-boton {
+    padding: 0;
 }

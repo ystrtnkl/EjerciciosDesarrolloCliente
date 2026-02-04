@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { supabaseConexion } from '../supabase/supabase.js';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAutenticacionSupabase from "../hooks/useAutenticacionSupabase.js";
+import Cargando from "../components/Principal/Cargando.jsx";
 
 const ContextoSesion = createContext();
 
@@ -9,7 +10,7 @@ const ContextoSesion = createContext();
 const ProveedorSesion = (props) => {
 
   const ubicacion = useLocation();
-  const [usuarioSesion, setUsuarioSesion] = useState({}); //Datos de la sesión del usuario.
+  const [usuarioSesion, setUsuarioSesion] = useState({user: false}); //Datos de la sesión del usuario.
   const [sesionIniciada, setSesionIniciada] = useState(false); //true si el usuario ha iniciado sesión.
   const navegar = useNavigate();
   const { cargandoAutenticacion, errorAutenticacion, crearCuentaSupabase, iniciarSesionSupabase, cerrarSesionSupabase, obtenerUsuarioSupabase } = useAutenticacionSupabase();
@@ -32,6 +33,7 @@ const ProveedorSesion = (props) => {
   const cerrarSesion = async () => {
     if (await cerrarSesionSupabase()) {
       setSesionIniciada(false);
+      setUsuarioSesion({user: false});
       navegar("/");
     }
   }
@@ -64,7 +66,7 @@ const ProveedorSesion = (props) => {
   return (
     <>
       <ContextoSesion.Provider value={datosProveer}>
-        {cargandoAutenticacion || props.children}
+        {(!cargandoAutenticacion && typeof usuarioSesion?.user !== "undefined") ? props.children : (<Cargando />)}
       </ContextoSesion.Provider>
     </>
   );

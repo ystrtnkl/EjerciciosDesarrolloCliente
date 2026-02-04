@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { validarDescripcionLista, validarNombreLista } from '../../libraries/validaciones.js';
 import InputBasico from '../Formularios/InputBasico.jsx';
 import { manejadorInput } from '../../libraries/manejadorInput.js';
@@ -12,11 +12,8 @@ import CajaError from '../Principal/CajaError.jsx';
 //Vista de una lista, muestra sus datos, sus productos y permite editar ambos.
 const Lista = (props) => {
 
-  const { cargandoSupabase, errorSupabase, guardarLista, getListaSeleccionada, uuidListaSeleccionada } = useListas();
-  const [listaActual, setListaActual] = useState({nombre: "", descripcion: ""});
-  //const [listaActual, setListaActual] = useState({nombre: "hola", descripcion: "holalfh"});
-  const [productos, setProductos] = useState([]);
-
+  const { cargandoSupabase, errorSupabase, guardarLista, getListaSeleccionada, uuidListaSeleccionada, borrarLista, seleccionarLista, listaActual, setListaActual } = useListas();
+  
   const validar = () => {
     return typeof listaActual !== "undefined"
       && validarDescripcionLista(listaActual.descripcion) 
@@ -25,18 +22,22 @@ const Lista = (props) => {
 
   const guardar = async () => {
     if (validar()) {
-      const resultado = await guardarLista(props.nuevo ? "" : props.uuid, {...listaActual, productos});
+      await guardarLista(props.nuevo ? "" : props.uuid, listaActual);
     }
   }
 
+  const borrarEsta = async () => {
+    await borrarLista(props.uuid);
+    seleccionarLista("");
+  }
+
   useEffect(() => {
-    if (!props.nuevo) setListaActual(getListaSeleccionada());
+    setListaActual(getListaSeleccionada());
   }, [uuidListaSeleccionada]);
 
   return (
     <>
-      {JSON.stringify(props.lista) + "aaa"} <br /><br />
-      {JSON.stringify(listaActual) + "bbb"}
+      {JSON.stringify(listaActual)}
       {errorSupabase ? (<CajaError texto={errorSupabase} />) : ((cargandoSupabase || typeof listaActual === "undefined") ? (<Cargando />) : (<div>
       {props.nuevo && <p>Estás creando una nueva lista</p>}
       <form onChange={(e) => { manejadorInput(e, setListaActual, listaActual) }}>
@@ -46,9 +47,9 @@ const Lista = (props) => {
       {listaActual.fecha && (<p>Fecha: {timestampAFecha(listaActual.fecha)}</p>)}
       <h3>Productos: </h3>
       <div className="productos-en-lista" onClick={() => {}}>
-
+        {JSON.stringify(listaActual.productos)}
       </div>
-      {props.nuevo || <button className="boton-lista boton-borrar" onClick={()=>{}}><img src={imgBorrar} alt="Borrar" /></button>}
+      {props.nuevo || <button className="boton-lista boton-borrar" onClick={borrarEsta}><img src={imgBorrar} alt="Borrar" /></button>}
       <button className="boton-lista boton-aceptar" onClick={guardar}><img src={imgAceptar} alt="Aceptar" /></button>
     </div>))}
     </>
