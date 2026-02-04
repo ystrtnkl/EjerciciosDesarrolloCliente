@@ -5,6 +5,10 @@ import imgCarrito from '../../assets/carrito.png';
 import imgPapelera from '../../assets/eliminar.png';
 import imgLapiz from '../../assets/editar.png';
 import { floatAPrecio } from '../../libraries/formateos.js';
+import mas1 from '../../assets/agnadir1.png';
+import mas10 from '../../assets/agnadir10.png';
+import menos1 from '../../assets/eliminar1.png';
+import menos10 from '../../assets/eliminar10.png';
 
 //Componente que representa un producto.
 const Producto = (props) => {
@@ -20,6 +24,13 @@ const Producto = (props) => {
       {props.agnadir && (<button className="boton-producto boton-agnadir" id={"a_" + props.producto.uuid}><img src={imgCarrito} alt="Añadir al carrito" /></button>)}
       {props.borrar && (<button className="boton-producto boton-borrar" id={"b_" + props.producto.uuid}><img src={imgPapelera} alt="Borrar" /></button>)}
       {props.editar && (<button className="boton-producto boton-editar" id={"e_" + props.producto.uuid}><img src={imgLapiz} alt="Editar" /></button>)}
+      {props.enLista && (<> {/*Esto aparecerá cuando el producto sea representado en una lista.*/}
+        <button id={"ac_" + props.producto.uuid} className="eliminar-10 alterar-cantidad"><img src={menos10} alt="-10" /></button>
+        <button id={"ac?_" + props.producto.uuid} className="eliminar-1 alterar-cantidad"><img src={menos1} alt="-1" /></button>
+        <strong>{props.producto.cantidad}</strong>
+        <button id={"ac??_" + props.producto.uuid} className="agnadir-1 alterar-cantidad"><img src={mas1} alt="+1" /></button>
+        <button id={"ac???_" + props.producto.uuid} className="agnadir-10 alterar-cantidad"><img src={mas10} alt="+10" /></button>
+      </>)}
     </div>
   )
 }

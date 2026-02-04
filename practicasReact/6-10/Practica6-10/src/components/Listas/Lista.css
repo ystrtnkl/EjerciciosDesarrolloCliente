@@ -12,3 +12,6 @@
 .minilista-boton {
     padding: 0;
 }
+.productos-en-lista {
+    display: block;
+}

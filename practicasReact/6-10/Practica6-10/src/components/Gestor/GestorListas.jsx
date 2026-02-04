@@ -14,15 +14,23 @@ function GestorListas() {
 
   const { sesionIniciada, usuarioSesion } = useSesion();
   //De normal descarga 50 productos al inicio, y estos son los que se mostrarán. En caso de que la aplicación tenga muchos más habría que implementar un sistema de paginación.
-  const { cargandoSupabase: cargandoProductos, errorSupabase: errorProductos, productosCargados } = useProductos();
+  const { cargandoSupabase: cargandoProductos, errorSupabase: errorProductos, productosCargados, getProductoConcreto } = useProductos();
   //También es necesario tener la información de las listas (en este caso se descargan todas).
   const { listasCargadas, errorSupabase: errorListas, cargandoSupabase: cargandoListas, seleccionarLista, uuidListaSeleccionada, borrarLista, listaActual, setListaActual } = useListas();
   
-
-
   //Función (usada por ListaProductos) que añade ese producto a la lista seleccionada.
-  const agregarProducto = (uuid) => {
-    setListaActual({...listaActual, productos: [...listaActual.productos, uuid]}); //dsoihfsouifhydkfjhskjdfh
+  const agregarProducto = async (uuid) => {
+    let productoAgnadir = await getProductoConcreto(uuid);
+    if (!productoAgnadir.length) return false;
+    productoAgnadir = productoAgnadir[0];
+    if (listaActual.productos.map((e) => {return e.uuid}).includes(uuid)) {
+      console.log("a", {...listaActual, productos: [...listaActual.productos.filter((e) => {return e.uuid !== uuid}), {uuid, ...productoAgnadir, cantidad: listaActual.productos.filter((e) => {return e.uuid === uuid})[0].cantidad + 1}]})
+      setListaActual({...listaActual, productos: [...listaActual.productos.filter((e) => {return e.uuid !== uuid}), {uuid, ...productoAgnadir, cantidad: listaActual.productos.filter((e) => {return e.uuid === uuid})[0].cantidad + 1}]});
+    } else {
+      console.log("b", {...listaActual, productos: [...listaActual.productos, {uuid, ...productoAgnadir, cantidad: 1}]})
+      console.log("c", )
+      setListaActual({...listaActual, productos: [...listaActual.productos, {uuid, ...productoAgnadir, cantidad: 1}]});
+    }
   }
 
   //Función para cuando se seleccione una lista pulsando al botón.
