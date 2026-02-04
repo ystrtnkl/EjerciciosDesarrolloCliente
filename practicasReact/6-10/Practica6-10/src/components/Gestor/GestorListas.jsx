@@ -10,6 +10,7 @@ import Lista from '../Listas/Lista.jsx';
 import useSesion from '../../hooks/useSesion.js';
 
 //Este componente está pensado que sea la parte privada de la app, osea que solo los usuarios con la sesión iniciada puedan verlo.
+//Aquí además se gestiona la lógica que involucra a las tres columnas a la vez.
 function GestorListas() {
 
   const { sesionIniciada, usuarioSesion } = useSesion();
@@ -24,11 +25,8 @@ function GestorListas() {
     if (!productoAgnadir.length) return false;
     productoAgnadir = productoAgnadir[0];
     if (listaActual.productos.map((e) => {return e.uuid}).includes(uuid)) {
-      console.log("a", {...listaActual, productos: [...listaActual.productos.filter((e) => {return e.uuid !== uuid}), {uuid, ...productoAgnadir, cantidad: listaActual.productos.filter((e) => {return e.uuid === uuid})[0].cantidad + 1}]})
       setListaActual({...listaActual, productos: [...listaActual.productos.filter((e) => {return e.uuid !== uuid}), {uuid, ...productoAgnadir, cantidad: listaActual.productos.filter((e) => {return e.uuid === uuid})[0].cantidad + 1}]});
     } else {
-      console.log("b", {...listaActual, productos: [...listaActual.productos, {uuid, ...productoAgnadir, cantidad: 1}]})
-      console.log("c", )
       setListaActual({...listaActual, productos: [...listaActual.productos, {uuid, ...productoAgnadir, cantidad: 1}]});
     }
   }

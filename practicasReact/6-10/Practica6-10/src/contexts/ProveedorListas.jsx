@@ -34,9 +34,7 @@ const ProveedorListas = (props) => {
 
   //Manda a guardar/editar una lista.
   const guardarLista = async (uuid, datos) => {
-    console.log("llega", datos)
     if (!validarDatosLista(datos) || !sesionIniciada) return false;
-    console.log(datos.productos)
     if (uuid === "") { //Nueva lista.
       const nuevo = await insertarPrivado(usuarioSesion?.user?.id, "listas", {...datos, productos: undefined, uuid_usuario: usuarioSesion.uuid, fecha: Date.now()});
       if (nuevo?.uuid?.length) {

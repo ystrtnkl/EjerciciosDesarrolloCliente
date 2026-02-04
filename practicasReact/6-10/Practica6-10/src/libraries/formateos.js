@@ -12,6 +12,18 @@ const timestampAFecha = (timestamp) => {
     return fecha?.toLocaleDateString('es-ES', {year: 'numeric',month: 'long',day: 'numeric'});
 }
 
+//Formatea un número a gramos, en formato español.
+const floatAGramos = (peso) => {
+    return (peso + "g").replaceAll(".", ",");
+}
+
+const FUERZA_SUPUESTA = 15000; //El peso en gramos máximo para no tener que recomendar llevarlo en coche.
+//Devuelve un texto informativo en función si un peso a cargar es lo suficientemente pesado como para que sea recomendable llevarlo en coche (solo una recomendación).
+const pesaMucho = (peso) => {
+    if (isNaN(peso)) return false;
+    return `${floatAGramos(peso)}, ${peso > FUERZA_SUPUESTA ? "se recomienda hacer la compra en coche" : "podrías levantarlo sin problemas"}`;
+}
+
 //Es en este archivo en el que estaría interesante implementar el manejo de distintos idiomas.
 
-export { floatAPrecio, timestampAFecha }
+export { floatAPrecio, timestampAFecha, pesaMucho, floatAGramos }

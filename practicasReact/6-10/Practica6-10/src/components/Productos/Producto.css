@@ -3,6 +3,7 @@
     border-radius: 15px;
     margin: 10px;
     padding: 5px;
+    background-color: rgb(42, 42, 42);
 }
 .boton-activado {
     background-color: blanchedalmond;
@@ -28,7 +29,7 @@
 .boton-editar, .boton-aceptar {
     background-color: yellow;
 }
-.boton-borrar, .minilista-boton-borrar, .eliminar-1 {
+.boton-borrar, .minilista-boton-borrar, .eliminar-1, .boton-borrar-lista {
     background-color: red;
 }
 .boton-nuevo-producto, .boton-nueva-lista {
@@ -61,4 +62,8 @@
 }
 .agnadir-1, .eliminar-1, .agnadir-10, .eliminar-10 {
     padding: 2px;
+}
+.indicador-cantidad {
+    display: inline;
+    margin: 0 10px;
 }
