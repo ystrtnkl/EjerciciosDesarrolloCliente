@@ -48,6 +48,7 @@ function GestorListas() {
   return (
     <div className="gestor-listas">
       <div className="secciones">
+        {/*Layout de 3 columnas: productos en la base de datos | listas del usuario | datos de la lista seleccionada.*/}
         <span className="seccion seccion-productos">
           <h2>Productos registrados</h2>
           {cargandoProductos ? (<Cargando />) : (errorProductos ? (<CajaError texto="Ha habido un error al cargar los productos" />) : (<>
@@ -57,7 +58,6 @@ function GestorListas() {
         {(sesionIniciada && usuarioSesion?.user?.id) && (<>
           <span className="seccion seccion-listas">
             <h2>Tus listas</h2>
-            {JSON.stringify(listasCargadas)}
             {cargandoListas ? (<Cargando />) : (errorListas ? (<CajaError texto="Ha habido un error al cargar las listas" />) : (<>
               <ListaListas seleccionar={seleccionar} listas={listasCargadas} botonNuevo={() => { seleccionarLista(""); }} />
             </>))}

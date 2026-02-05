@@ -16,6 +16,7 @@ const ProveedorSesion = (props) => {
 
   //Las siguientes funciones hacen uso de las de useAutenticacionSupabase pero además estableciendo los estados propios del contexto.
 
+  //Inicia sesión con un correo y una contraseña.
   const iniciarSesion = async (correo, contrasegna) => {
     const resultado = await iniciarSesionSupabase(correo, contrasegna);
     if (typeof resultado !== "undefined") {
@@ -25,10 +26,12 @@ const ProveedorSesion = (props) => {
     }
   }
 
+  //Mandar a crear una cuenta (tocará mirar el correo).
   const crearCuenta = async (nombre, correo, contrasegna) => {
     await crearCuentaSupabase(nombre, correo, contrasegna);
   }
 
+  //Función para cerrar la sesión y borrar los datos e sesión.
   const cerrarSesion = async () => {
     if (await cerrarSesionSupabase()) {
       setSesionIniciada(false);

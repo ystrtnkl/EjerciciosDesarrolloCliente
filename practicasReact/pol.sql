@@ -97,13 +97,15 @@ using (
   ((uuid_usuario)::text = (auth.uid())::text)
 );
 
+--cascade delete productos -> lista_producto
 create policy "delete-lista_producto"
 on "public"."lista_producto"
 as PERMISSIVE
 for DELETE
 to authenticated
 using (
-  ((uuid_usuario)::text = (auth.uid())::text)
+  --((uuid_usuario)::text = (auth.uid())::text)
+  true
 );
 
 

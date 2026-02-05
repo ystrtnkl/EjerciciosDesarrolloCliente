@@ -4,13 +4,13 @@ DELETE FROM PRODUCTOS;
 
 -- 1. PRODUCTOS (10 entries)
 INSERT INTO PRODUCTOS (uuid, nombre, peso, precio, url_imagen, descripcion) 
-VALUES ('5f9b4001-1111-4a01-a001-001000000001', 'Yunque', 45000.0, 149.99, 'https://i.ibb.co/gZZCBvYg/A4.png', 'Literalmente un yunque para testear el peso');
+VALUES ('0f9b4001-1111-4a01-a001-001000000001', 'Yunque', 45000.0, 149.99, 'https://i.ibb.co/gZZCBvYg/A4.png', 'Literalmente un yunque para testear el peso');
 
 INSERT INTO PRODUCTOS (uuid, nombre, peso, precio, url_imagen, descripcion) 
-VALUES ('5f9b4001-1111-4a01-a001-000000030001', 'Coche', 1400000.0, 15000, 'https://i.ibb.co/qLKfzMyd/A0.png', 'Un coche genérico para probar valores');
+VALUES ('0f9b4001-1111-4a01-a001-000000030001', 'Coche', 1400000.0, 15000, 'https://i.ibb.co/qLKfzMyd/A0.png', 'Un coche genérico para probar valores');
 
 INSERT INTO PRODUCTOS (uuid, nombre, peso, precio, url_imagen, descripcion) 
-VALUES ('5f9b4001-1111-4a01-a001-000000777001', 'AMD Ryzen 9 9950X', 80.0, 619.99, 'https://i.ibb.co/bRjTHkF1/A2.png', 'El último procesador');
+VALUES ('0f9b4001-1111-4a01-a001-000000777001', 'AMD Ryzen 9 9950X', 80.0, 619.99, 'https://i.ibb.co/bRjTHkF1/A2.png', 'El último procesador');
 
 INSERT INTO PRODUCTOS (uuid, nombre, peso, precio, url_imagen, descripcion) 
 VALUES ('5f9b4002-2222-4a02-a002-000000000002', 'Leche Entera', 1030.0, 1.20, 'https://i.ibb.co/LX9hVZK9/A1.png', 'Cartón de 1L');
@@ -38,6 +38,18 @@ VALUES ('5f9b4009-9999-4a09-a009-000000000009', 'Pasta Penne', 500.0, 0.85, 'htt
 
 INSERT INTO PRODUCTOS (uuid, nombre, peso, precio, url_imagen, descripcion) 
 VALUES ('5f9b4010-0000-4a10-a010-000000000010', 'Yogur Natural', 500.0, 2.10, 'https://i.ibb.co/tMj5nvBr/A9.png', 'Pack de 4');
+
+
+
+
+
+
+
+
+
+
+
+
 
 -- 2. LISTAS (5 entries)
 INSERT INTO LISTAS (uuid, nombre, uuid_usuario, fecha, descripcion) 

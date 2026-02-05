@@ -3,7 +3,7 @@ import './Lista.css';
 import imgPapelera from '../../assets/eliminar.png';
 import imgOjo from '../../assets/ver.png';
 
-//Miniatura de una lista
+//Miniatura de una lista seleccionable.
 const MiniLista = (props) => {
 
   return (

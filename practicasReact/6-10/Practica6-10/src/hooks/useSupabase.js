@@ -34,6 +34,8 @@ const useSupabase = () => {
     }
 
     //Inserta un objeto en una tabla pública especificando además su dueño (uuid) (esto puede estar vacío ya que pueden haber objetos sin dueño).
+    //Parámetro tabla: nombre de la tabla en la que insertar.
+    //Parámetro datosInsercion: objeto con los datos a insertar en la tabla, importante incluir todos los campos y no añadir ninguno extra.
     const insertarPublico = async (tabla, datosInsercion) => {
         setErrorSupabase("");
         setCargandoSupabase(true);
@@ -51,6 +53,9 @@ const useSupabase = () => {
     }
 
     //Edita los datos de un objeto (método patch) a partir de un uuid (que exista).
+    //Parámetro tabla: nombre de la tabla a editar los datos.
+    //Parámetro uuid: filtra por el uuid para editar 1 inserción.
+    //Parámetro nuevo: objeto con los datos a editar en modo patch.
     const editarPublico = async (tabla, uuid, nuevo) => {
         setErrorSupabase("");
         setCargandoSupabase(true);
@@ -69,6 +74,9 @@ const useSupabase = () => {
     }
 
     //Borra un objeto a partir de su uuid, si existe.
+    //Parámetro tabla: nombre de la tabla donde borrar la fila.
+    //Parámetro uuid: uuid de la fila a borrar.
+    //Parámetro campoPersonalizado: buscar por otro campo que no sea "uuid".
     const borrarPublico = async (tabla, uuid, campoPersonalizado) => {
         setErrorSupabase("");
         setCargandoSupabase(true);
@@ -99,7 +107,6 @@ const useSupabase = () => {
         setCargandoSupabase(true);
         try {
             const { data, error } = await supabaseConexion.from(tabla).select(sentenciaSelect ?? "*").limit(limite ?? 50).order(orden?.propiedad ?? "uuid", orden?.descendente).ilike(filtros?.propiedad, filtros?.valor).eq("uuid_usuario", uuidUsuario);
-            console.log(data, error)
             if (error) throw error;
             if (data) return data;
             return []; //En caso de no devolver nada.
@@ -111,13 +118,15 @@ const useSupabase = () => {
     }
 
     //Crea un nuevo objeto asignado al usuario iniciado sesión.
+    //Parámetro tabla: nombre de la tabla donde insertar.
+    //Parámetro datosInsercion, similar a insertarPublico, los datos a insertar.
+    //Parámetro omitirUuid: es posible no querer incluir el uuid porque la fila se identifica por otro campo.
     const insertarPrivado = async (uuidUsuario, tabla, datosInsercion, omitirUuid) => {
         setErrorSupabase("");
         setCargandoSupabase(true);
         try {
             const datos = { ...datosInsercion, uuid: omitirUuid ? undefined : self.crypto.randomUUID(), uuid_usuario: uuidUsuario };
             const { data, error } = await supabaseConexion.from(tabla).insert(datos);
-            console.log(data, error);
             if (error) throw error;
             if (data) return data;
             return datos ?? true;
@@ -129,6 +138,9 @@ const useSupabase = () => {
     }
 
     //Actualiza los datos de un objeto privado (si tiene permisos).
+    //Parámetro tabla: nombre de la tabla donde editar.
+    //Parámetro uuid: uuid de la fila a editar.
+    //Parámetro nuevo: objeto con los datos a editar en modo patch,
     const editarPrivado = async (uuidUsuario, tabla, uuid, nuevo) => {
         setErrorSupabase("");
         setCargandoSupabase(true);
@@ -146,6 +158,9 @@ const useSupabase = () => {
     }
 
     //Borra un objeto privado (si tiene permisos).
+    //Parámetro tabla: nombre de la tabla donde borrar.
+    //Parámetro uuid: uuid con la fila a borrar.
+    //Parámetro campoPersonalizado: buscar por otro campo que no sea "uuid".
     const borrarPrivado = async (uuidUsuario, tabla, uuid, campoPersonalizado) => {
         setErrorSupabase("");
         setCargandoSupabase(true);

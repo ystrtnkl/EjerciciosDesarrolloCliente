@@ -60,19 +60,19 @@ const useAutenticacionSupabase = () => {
     }
 
     //Recoje los datos del usuario a partir de la sesión activa.
-      const obtenerUsuarioSupabase = async () => {
+    const obtenerUsuarioSupabase = async () => {
         setCargandoAutenticacion(true);
         setErrorAutenticacion("");
         try {
-          const { data, error } = await supabaseConexion.auth.getUser();
-          if (error) throw error;
-          return data;
+            const { data, error } = await supabaseConexion.auth.getUser();
+            if (error) throw error;
+            return data;
         } catch (error) {
-          setErrorAutenticacion(error.message);
+            setErrorAutenticacion(error.message);
         } finally {
-          setCargandoAutenticacion(false);
+            setCargandoAutenticacion(false);
         }
-      }
+    }
 
     return { cargandoAutenticacion, errorAutenticacion, crearCuentaSupabase, iniciarSesionSupabase, cerrarSesionSupabase, obtenerUsuarioSupabase };
 };
