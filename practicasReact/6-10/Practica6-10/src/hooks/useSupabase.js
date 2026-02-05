@@ -99,6 +99,7 @@ const useSupabase = () => {
         setCargandoSupabase(true);
         try {
             const { data, error } = await supabaseConexion.from(tabla).select(sentenciaSelect ?? "*").limit(limite ?? 50).order(orden?.propiedad ?? "uuid", orden?.descendente).ilike(filtros?.propiedad, filtros?.valor).eq("uuid_usuario", uuidUsuario);
+            console.log(data, error)
             if (error) throw error;
             if (data) return data;
             return []; //En caso de no devolver nada.

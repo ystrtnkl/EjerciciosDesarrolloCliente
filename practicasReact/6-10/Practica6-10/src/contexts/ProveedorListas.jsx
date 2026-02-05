@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import useSupabase from "../hooks/useSupabase.js";
 import useSesion from "../hooks/useSesion.js";
 import { validarDatosLista } from "../libraries/validaciones.js";
+import useProductos from '../hooks/useProductos.js';
 
 const ContextoListas = createContext();
 
@@ -13,6 +14,7 @@ const ProveedorListas = (props) => {
   const { cargandoSupabase, errorSupabase, obtenerPrivado, insertarPrivado, editarPrivado, borrarPrivado } = useSupabase();
   const { usuarioSesion, sesionIniciada } = useSesion(); //Se necesita saber los datos del usuario antes de manipular las listas.
   const [listaActual, setListaActual] = useState({nombre: "", descripcion: "", productos: []}); //Datos de la lista a manipular.
+  const { getProductoConcreto } = useProductos();
 
   //Manda a seleccionar una lista a partir de su uuid, tiene que estar cargada.
   const seleccionarLista = (uuid) => {
@@ -70,8 +72,14 @@ const ProveedorListas = (props) => {
     //Descarga todas las listas que pueda (solo las que sean del usuario) (solo si la sesión está iniciada).
     if (sesionIniciada) {
       const resultado = await obtenerPrivado(usuarioSesion?.user?.id, "listas");
-      //Fowehfwfhdfjhksjdfhljkfhsdjkfhskdjf 
-      setListasCargadas(resultado.map((e) => {return {...e, productos: []}}));
+      //¿?¿?¿?¿?¿?¿
+      setListasCargadas(resultado.map(async (e) => {
+        const productosEnLista = await obtenerPrivado(usuarioSesion?.user?.id, "lista_producto", 50, {propiedad: "uuid_producto", descendente: true}, {propiedad: "uuid_lista", valor: e.uuid});
+        return await {...e, productos: productosEnLista.length ? await Promise.all(productosEnLista.map(async (ee) => {
+        const producto = await getProductoConcreto(ee.uuid_producto);
+        return { ...producto, cantidad: ee.cantidad };
+      })) : []}
+      }));
     }
   }
   useEffect(() => {

@@ -65,8 +65,8 @@ const Lista = (props) => {
       </form>
       {listaActual.fecha && (<p>Fecha: {timestampAFecha(listaActual.fecha)}</p>)}
       <h3>Productos: </h3>
-      <h4>Peso total: {pesaMucho(listaActual.productos.map((e) => {return e.peso * e.cantidad}).reduce((a, e) => {return a + e}, 0))}</h4>
-      <h4>Precio total: {floatAPrecio(listaActual.productos.map((e) => {return e.precio * e.cantidad}).reduce((a, e) => {return a + e}, 0))}</h4>
+      <p>Peso total: {pesaMucho(listaActual.productos.map((e) => {return e.peso * e.cantidad}).reduce((a, e) => {return a + e}, 0))}</p>
+      <p>Precio total: {floatAPrecio(listaActual.productos.map((e) => {return e.precio * e.cantidad}).reduce((a, e) => {return a + e}, 0))}</p>
       <div className="productos-en-lista lista-productos" onClick={productoMasOMenos}>
         {listaActual.productos.length ? (<>{listaActual.productos.sort((a,b) => {return a.uuid.localeCompare(b.uuid)}).map((e) => {
           return (<Producto key={e.uuid} producto={e} enLista={true} cantidad={e.cantidad} />)

@@ -69,6 +69,44 @@ using (
  (select auth.uid()) = uuid_usuario
 );
 
+
+create policy "select-lista_producto"
+on "public"."lista_producto"
+as PERMISSIVE
+for SELECT
+to authenticated
+using (
+  ((uuid_usuario)::text = (auth.uid())::text)
+);
+
+create policy "insert-lista_producto"
+on "public"."lista_producto"
+as PERMISSIVE
+for INSERT
+to authenticated
+with check (
+  ((uuid_usuario)::text = (auth.uid())::text)
+);
+
+create policy "update-lista_producto"
+on "public"."lista_producto"
+as PERMISSIVE
+for UPDATE
+to authenticated
+using (
+  ((uuid_usuario)::text = (auth.uid())::text)
+);
+
+create policy "delete-lista_producto"
+on "public"."lista_producto"
+as PERMISSIVE
+for DELETE
+to authenticated
+using (
+  ((uuid_usuario)::text = (auth.uid())::text)
+);
+
+
 --uuid_usuario = auth.uid()::text
 --(select auth.uid()) = uuid_usuario
 --((select auth.uid())::text = uuid_usuario::text)

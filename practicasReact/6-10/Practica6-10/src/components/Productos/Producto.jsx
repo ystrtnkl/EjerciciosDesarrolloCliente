@@ -30,9 +30,9 @@ const Producto = (props) => {
         <h2 className="indicador-cantidad">{props.producto.cantidad}</h2>
         <button id={"ac_??" + props.producto.uuid} className="agnadir-1 alterar-cantidad"><img src={mas1} alt="+1" /></button>
         <button id={"ac_???" + props.producto.uuid} className="agnadir-10 alterar-cantidad"><img src={mas10} alt="+10" /></button>
-        <br />
+        {/*<br />
         <button className="boton-producto boton-borrar-lista alterar-cantidad" id={"ac_????" + props.producto.uuid}><img src={imgPapelera} alt="Borrar" /></button>
-        <input type="text" /><button>a</button>
+        <input type="text" /><button>a</button>*/}
       </>)}
     </div>
   )

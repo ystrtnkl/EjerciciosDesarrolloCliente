@@ -47,6 +47,8 @@ const ProveedorProductos = (props) => {
     const resultado = await borrarPublico("lista_producto", uuid, "uuid_producto"); //De momento se hace el borrado en cascada de tal manera que también se borran las inserciones en lista_producto aunque el usuario que lo borre no sea el dueño de las listas en las que aparece ese producto. Esto se solucionará más adelante con la funcionalidad de los permisos.
     const resultado2 = await borrarPublico("productos", uuid);
     //if (resultado) setProductosCargados(productosCargados.filter((e) => {return e.uuid !== uuid})); //Versión óptima en la que no vuelve a descargar los productos de la base de datos PERO el usuario verá 49 en lugar de 50.
+    //Borrar coincidencias de ese producto en cada una de las listas.
+    await borrarPrivado(usuarioSesion?.user?.id, "lista_producto", resultado?.uuid, "uuid_producto");
     if (resultado && resultado2) await cargaInicial(); //Versión no tan optimizada en la que cuando se borra un producto se re-descargan los 50 iniciales PERO al menos el usuario tendrá una mejor experiencia pudiendo ver 50.
     //Ambas maneras son solo soluciones temporales, más adelante se usarán WebSockets para ver los datos a tiempo real (el servidor avisaría al usuario cuando un producto que está viendo es eliminado o editado).
   }

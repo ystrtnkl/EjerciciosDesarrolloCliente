@@ -2,7 +2,6 @@ import React, { createContext, useState, useEffect } from "react";
 import { supabaseConexion } from '../supabase/supabase.js';
 import { useNavigate, useLocation } from 'react-router-dom';
 import useAutenticacionSupabase from "../hooks/useAutenticacionSupabase.js";
-import Cargando from "../components/Principal/Cargando.jsx";
 
 const ContextoSesion = createContext();
 
@@ -66,7 +65,8 @@ const ProveedorSesion = (props) => {
   return (
     <>
       <ContextoSesion.Provider value={datosProveer}>
-        {(!cargandoAutenticacion && typeof usuarioSesion?.user !== "undefined") ? props.children : (<Cargando />)}
+        {/*(!cargandoAutenticacion && typeof usuarioSesion?.user !== "undefined") ? props.children : (<Cargando />) Es posible que haga falta usar esta línea si está pensado usarse con conexiones muy lentas*/}
+        {props.children}
       </ContextoSesion.Provider>
     </>
   );
