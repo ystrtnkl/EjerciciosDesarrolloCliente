@@ -110,15 +110,16 @@ const useSupabase = () => {
     }
 
     //Crea un nuevo objeto asignado al usuario iniciado sesión.
-    const insertarPrivado = async (uuidUsuario, tabla, datosInsercion) => {
+    const insertarPrivado = async (uuidUsuario, tabla, datosInsercion, omitirUuid) => {
         setErrorSupabase("");
         setCargandoSupabase(true);
         try {
-            const datos = { ...datosInsercion, uuid: self.crypto.randomUUID(), uuid_usuario: uuidUsuario };
+            const datos = { ...datosInsercion, uuid: omitirUuid ? undefined : self.crypto.randomUUID(), uuid_usuario: uuidUsuario };
             const { data, error } = await supabaseConexion.from(tabla).insert(datos);
+            console.log(data, error);
             if (error) throw error;
             if (data) return data;
-            return datos;
+            return datos ?? true;
         } catch (e) {
             setErrorSupabase(e?.message || "No se ha podido crear el objeto");
         } finally {

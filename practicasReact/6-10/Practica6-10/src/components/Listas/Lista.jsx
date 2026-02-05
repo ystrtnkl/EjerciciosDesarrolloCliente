@@ -68,7 +68,7 @@ const Lista = (props) => {
       <h4>Peso total: {pesaMucho(listaActual.productos.map((e) => {return e.peso * e.cantidad}).reduce((a, e) => {return a + e}, 0))}</h4>
       <h4>Precio total: {floatAPrecio(listaActual.productos.map((e) => {return e.precio * e.cantidad}).reduce((a, e) => {return a + e}, 0))}</h4>
       <div className="productos-en-lista lista-productos" onClick={productoMasOMenos}>
-        {listaActual.productos.length ? (<>{listaActual.productos.map((e) => {
+        {listaActual.productos.length ? (<>{listaActual.productos.sort((a,b) => {return a.uuid.localeCompare(b.uuid)}).map((e) => {
           return (<Producto key={e.uuid} producto={e} enLista={true} cantidad={e.cantidad} />)
         })}</>) : (<p>Esta lista está vacía</p>)}
       </div>

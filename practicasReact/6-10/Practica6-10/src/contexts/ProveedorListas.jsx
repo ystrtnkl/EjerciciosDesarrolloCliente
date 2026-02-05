@@ -37,6 +37,9 @@ const ProveedorListas = (props) => {
     if (!validarDatosLista(datos) || !sesionIniciada) return false;
     if (uuid === "") { //Nueva lista.
       const nuevo = await insertarPrivado(usuarioSesion?.user?.id, "listas", {...datos, productos: undefined, uuid_usuario: usuarioSesion.uuid, fecha: Date.now()});
+      if (nuevo) datos.productos.forEach(async (e) => { //Agregar las relaciones producto-lista.
+        await insertarPrivado(usuarioSesion?.user?.id, "lista_producto", {uuid_lista: nuevo.uuid, uuid_producto: e.uuid, cantidad: e.cantidad}, true);
+      });
       if (nuevo?.uuid?.length) {
         setListasCargadas([...listasCargadas, { ...nuevo, uuid: nuevo.uuid }]);
         return nuevo?.uuid ?? true;
@@ -44,6 +47,10 @@ const ProveedorListas = (props) => {
     } else { //Editar lista.
       const edicion = {...datos, uuid: undefined, productos: undefined, uuid_usuario: usuarioSesion.uuid, fecha: Date.now()};
       const nuevo = await editarPrivado(usuarioSesion?.user?.id, "listas", uuid, edicion);
+      await borrarPrivado(usuarioSesion?.user?.id, "lista_producto", uuid, "uuid_lista"); //Eliminar relaciones anteriores.
+      if (nuevo) datos.productos.forEach(async (e) => { //Agregar las relaciones producto-lista.
+        await insertarPrivado(usuarioSesion?.user?.id, "lista_producto", {uuid_lista: uuid, uuid_producto: e.uuid, cantidad: e.cantidad}, true);
+      });
       if (nuevo.length) {
         setListasCargadas([...listasCargadas.filter((e) => {return e.uuid !== uuid}), {...edicion, uuid}]);
         return nuevo?.uuid ?? true;

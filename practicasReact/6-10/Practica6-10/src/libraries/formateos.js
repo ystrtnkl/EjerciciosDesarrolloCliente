@@ -14,7 +14,8 @@ const timestampAFecha = (timestamp) => {
 
 //Formatea un número a gramos, en formato español.
 const floatAGramos = (peso) => {
-    return (peso + "g").replaceAll(".", ",");
+    if (isNaN(peso)) return false;
+    return (parseFloat(peso) >= 1000 ? (parseFloat(peso) / 1000) + "Kg" : peso + "g" ).replaceAll(".", ",");
 }
 
 const FUERZA_SUPUESTA = 15000; //El peso en gramos máximo para no tener que recomendar llevarlo en coche.
