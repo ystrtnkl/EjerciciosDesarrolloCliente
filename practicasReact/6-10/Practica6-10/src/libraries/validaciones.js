@@ -40,9 +40,9 @@ const validarPrecioProducto = (precio) => {
     return typeof precio === "number" && !isNaN(precio) && precio >= 0;
 }
 
-//Valida una URL, por ejemplo la de la foto de un producto. Es permisivo, se pide que simplemente empieze por un protocolo válido y sea hasta 127 carácteres.
+//Valida una URL.
 const validarUrl = (url) => {
-    return typeof url === "string" && (url.startsWith("http://") || url.startsWith("https://")) && url.length < 128;
+    return typeof url === "string" && /(?:http[s]?:\/\/.)?(?:www\.)?[-a-zA-Z0-9@%._+~#=]{2,256}\.[a-z]{2,6}\b(?:[-a-zA-Z0-9@:%_+.~#?&//=]*)/.test(url);
 }
 
 //Valida la descripción de un producto, que debe tener menos de 512 carácteres.

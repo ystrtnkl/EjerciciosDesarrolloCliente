@@ -12,17 +12,17 @@ const useSupabase = () => {
 
     //Funciones para objetos públicos (no requieren del uuid del usuario para autenticar la operación):
 
-    //Función unificada para recibir datos públicos (que no requieran uuid de usuario).
-    //Parámetro de tabla: nombre de la tabla, en este caso tiene que ser una cuyos items no estén privados para cada usuario.
+    //Función unificada para recibir datos públicos (que no requieran uuid de usuario), sus parámetros están envueltos en un objeto con estas propiedades:
+    //Parámetro de tabla (este NO está dentro del objeto, es un parametro aparte): nombre de la tabla, en este caso tiene que ser una cuyos items no estén privados para cada usuario.
     //Parámetro de limite: el límite máximo de objetos que se recibirán.
     //Parámetro de orden: un objeto con "propiedad" que indica la propiedad con la que ordenar, y "descendente" en true o false para alterar el orden.
     //Parámetro de filtros: un objeto con "propiedad" que indica la propiedad a filtrar y "valor" que indica como deberá de ser.
     //Parámetro de sentenciaSelect: por si se quiere recibir propiedades concretas o hacer un join.
-    const obtenerPublico = async (tabla, limite, orden = { propiedad: "uuid", descendente: true }, filtros = { propiedad: "uuid", valor: "%" }, sentenciaSelect = "*") => {
+    const obtenerPublico = async (tabla, opciones = { limite: 50, orden: { propiedad: "uuid", descendente: true }, filtros: { propiedad: "uuid", valor: "-" }, sentenciaSelect: "*" }) => {
         setErrorSupabase("");
         setCargandoSupabase(true);
         try {
-            const { data, error } = await supabaseConexion.from(tabla).select(sentenciaSelect ?? "*").limit(limite ?? 50).order(orden?.propiedad ?? "uuid", orden?.descendente).ilike(filtros?.propiedad, filtros?.valor);
+            const { data, error } = await supabaseConexion.from(tabla).select(opciones?.sentenciaSelect ?? "*").limit(opciones?.limite ?? 50).order(opciones?.orden?.propiedad ?? "uuid", opciones?.orden?.descendente).ilike(opciones?.filtros?.propiedad ?? "uuid", opciones?.filtros?.valor ?? "%");
             if (error) throw error;
             if (data) return data;
             return []; //En caso de no devolver nada.
@@ -96,17 +96,18 @@ const useSupabase = () => {
 
     //Funciones para objetos privados (requieren el uuid del usuario para autenticar la operación):
 
-    //Función unificada para recibir datos privados (que requieran uuid de usuario).
-    //Parámetro de tabla: nombre de la tabla, en este caso tiene que ser una cuyos items no estén privados para cada usuario.
+    //Función unificada para recibir datos privados (que requieran uuid de usuario) (recibe un objeto de opciones con estas propiedades):
+    //parámetro de uuidUsuario (parámetro normal, NO en el objeto): el uuid del usuario con el cual autenticar la operación.
+    //Parámetro de tabla (parámetro normal, NO en el objeto): nombre de la tabla, en este caso tiene que ser una cuyos items no estén privados para cada usuario.
     //Parámetro de limite: el límite máximo de objetos que se recibirán.
     //Parámetro de orden: un objeto con "propiedad" que indica la propiedad con la que ordenar, y "descendente" en true o false para alterar el orden.
     //Parámetro de filtros: un objeto con "propiedad" que indica la propiedad a filtrar y "valor" que indica como deberá de ser.
     //Parámetro de sentenciaSelect: por si se quiere recibir propiedades concretas o hacer un join.
-    const obtenerPrivado = async (uuidUsuario, tabla, limite, orden = { propiedad: "uuid", descendente: true }, filtros = { propiedad: "uuid", valor: "%" }, sentenciaSelect = "*") => {
+    const obtenerPrivado = async (uuidUsuario, tabla, opciones = { limite: 50, orden: { propiedad: "uuid", descendente: true }, filtros: { propiedad: "uuid", valor: "%" }, sentenciaSelect: "*" }) => {
         setErrorSupabase("");
         setCargandoSupabase(true);
         try {
-            const { data, error } = await supabaseConexion.from(tabla).select(sentenciaSelect ?? "*").limit(limite ?? 50).order(orden?.propiedad ?? "uuid", orden?.descendente).ilike(filtros?.propiedad, filtros?.valor).eq("uuid_usuario", uuidUsuario);
+            const { data, error } = await supabaseConexion.from(tabla).select(opciones?.sentenciaSelect ?? "*").limit(opciones?.limite ?? 50).order(opciones?.orden?.propiedad ?? "uuid", opciones?.orden?.descendente).ilike(opciones?.filtros?.propiedad ?? "uuid", opciones?.filtros?.valor ?? "%").eq("uuid_usuario", uuidUsuario);
             if (error) throw error;
             if (data) return data;
             return []; //En caso de no devolver nada.

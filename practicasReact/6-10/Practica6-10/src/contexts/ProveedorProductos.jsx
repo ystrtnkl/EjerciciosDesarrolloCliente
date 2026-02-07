@@ -24,7 +24,7 @@ const ProveedorProductos = (props) => {
     let productoBuscar = productosCargados.filter((e) => { return e.uuid === uuid });
     //Si no está cargado, entonces manda una petición para buscar ese producto en concreto (puede ser que el producto a buscar no esté entre los 50 ya descargados).
     if (!productoBuscar.length) {
-      productoBuscar = await obtenerPublico("productos", 1, { propiedad: "nombre", descendente: true }, { propiedad: "uuid", valor: uuid });
+      productoBuscar = await obtenerPublico("productos", { limite: 1, orden: { propiedad: "nombre", descendente: true }, filtros: { propiedad: "uuid", valor: uuid } });
       setProductosCargados([...productosCargados, ...productoBuscar]);
       if (!productosCargados.length) await cargaInicial(); //En caso de que esta búsqueda se haga antes de la carga inicial, provocarla igualmente.
     }
@@ -67,7 +67,7 @@ const ProveedorProductos = (props) => {
 
   const cargaInicial = async () => {
     //Carga inicial de la base de datos.
-    setProductosCargados([...await obtenerPublico("productos", TAMAGNO_INICIAL, { propiedad: "nombre", descendente: true })]); //Esta función viene de un hook.
+    setProductosCargados([...(await obtenerPublico("productos", { limite: TAMAGNO_INICIAL, orden: { propiedad: "nombre", descendente: true } }))]); //Esta función viene de un hook.
   }
   useEffect(() => {
     cargaInicial();

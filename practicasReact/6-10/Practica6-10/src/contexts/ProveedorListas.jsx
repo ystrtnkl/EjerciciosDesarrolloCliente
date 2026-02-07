@@ -74,7 +74,7 @@ const ProveedorListas = (props) => {
       const resultado = await obtenerPrivado(usuarioSesion?.user?.id, "listas");
       //Descarga todas las listas del usuario, por cada una descarga todas las instancias intermedias de pertenencia en lista_producto, y busca la información de dichos productos para añadirla. Es algo más eficiente que una subconsulta.
       const informacionListas = await Promise.all(resultado.map(async (e) => {
-        const intermedios = await obtenerPrivado(usuarioSesion?.user?.id, "lista_producto", 50, { propiedad: "uuid_producto", descendente: true }, { propiedad: "uuid_lista", valor: e.uuid });
+        const intermedios = await obtenerPrivado(usuarioSesion?.user?.id, "lista_producto", { orden: { propiedad: "uuid_producto", descendente: true }, filtros: { propiedad: "uuid_lista", valor: e.uuid } });
         const productosEnLista = intermedios.length ? await Promise.all(intermedios.map(async (ee) => {
           const elProducto = await getProductoConcreto(ee.uuid_producto);
           return { ...elProducto[0], cantidad: ee.cantidad };
