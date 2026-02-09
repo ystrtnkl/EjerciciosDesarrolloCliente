@@ -114,3 +114,56 @@ using (
 --((select auth.uid())::text = uuid_usuario::text)
 
 
+
+
+create policy "select-roles"
+on "public"."roles"
+as PERMISSIVE
+for SELECT
+to authenticated
+using (
+ true
+);
+
+create policy "update-roles"
+on "public"."roles"
+as PERMISSIVE
+for UPDATE
+to authenticated
+using (
+ public.is_admin_user()
+) with check (
+ public.is_admin_user()
+);
+
+
+
+
+
+create policy "select-perfil"
+on "public"."perfil"
+as PERMISSIVE
+for SELECT
+to public
+using (
+ true
+);
+
+create policy "update-perfil"
+on "public"."perfil"
+as PERMISSIVE
+for UPDATE
+to authenticated
+using (
+ ((id_usuario)::text = (auth.uid())::text)
+);
+
+create policy "insert-perfil"
+on "public"."perfil"
+as PERMISSIVE
+for INSERT
+to authenticated
+with check (
+ ( (select auth.uid())::text = id_usuario::text )
+);
+

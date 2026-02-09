@@ -1,0 +1,17 @@
+.minilista {
+    min-width: 100%;
+    margin: 5px 0 10px 10px;
+    text-align: left;
+}
+.minilista strong, .minilista img {
+    pointer-events: none;
+}
+.minilista-boton-borrar {
+    padding: 0;
+}
+.minilista-boton {
+    padding: 0;
+}
+.productos-en-lista {
+    display: block;
+}
