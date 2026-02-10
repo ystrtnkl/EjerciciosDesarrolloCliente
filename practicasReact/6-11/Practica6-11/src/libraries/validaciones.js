@@ -10,7 +10,7 @@ const validarContrasegna = (contrasegna) => {
 
 //Valida un nombre de usuario, de 4 a 20 caracteres.
 const validarNombreUsuario = (nombre) => {
-    return typeof nombre === "string" && nombre.length >= 4 && nombre.length < 20;
+    return typeof nombre === "string" && nombre.length >= 4 && nombre.length < 20 ;
 }
 
 //Valida un nombre de lista, de 4 a 20 caracteres.

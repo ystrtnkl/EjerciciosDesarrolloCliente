@@ -58,7 +58,7 @@ function FormularioProducto(props) {
         {/*Permite ver la imágen a tiempo real según se escribe la URL.*/}
         <img src={datosProducto.url_imagen ?? "https://i.ibb.co/8SQJtJ1/sinportada.jpg"} alt="Sin portada" />
         <InputBasico nombre="url_imagen" titulo="URL de la imágen:" tipo="text" valor={datosProducto.url_imagen} validador={validarUrl} mensajeError="Debes poner una URL válida" />
-        <InputBasico nombre="descripcion" titulo="Descripción:" tipo="textarea" valor={datosProducto.descripcion} validador={validarDescripcionProducto} mensajeError="La descripción del prudocto debe tener menos de 512 carácteres" />
+        <InputBasico nombre="descripcion" titulo="Descripción:" tipo="textarea" valor={datosProducto.descripcion} validador={validarDescripcionProducto} mensajeError="La descripción del producto debe tener menos de 512 carácteres" />
         <button onClick={enviar}>{props.editar ? "Editar producto" : "Registrar producto"}</button>
         <button onClick={reset}>Reiniciar</button>
       </form>

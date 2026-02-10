@@ -65,7 +65,7 @@ const Lista = (props) => {
         {props.nuevo && <p>Estás creando una nueva lista</p>}
         <form onChange={(e) => { manejadorInput(e, setListaActual, listaActual) }}>
           <InputBasico nombre="nombre" titulo="Nombre:" tipo="text" valor={listaActual.nombre} validador={validarNombreLista} mensajeError="El nombre de la lista debe tener entre 4 y 20 carácteres" />
-          <InputBasico nombre="descripcion" titulo="Descripción:" tipo="textarea" valor={listaActual.descripcion} validador={validarDescripcionLista} mensajeError="La descripción del prudocto debe tener menos de 512 carácteres" />
+          <InputBasico nombre="descripcion" titulo="Descripción:" tipo="textarea" valor={listaActual.descripcion} validador={validarDescripcionLista} mensajeError="La descripción del producto debe tener menos de 512 carácteres" />
         </form>
         {listaActual.fecha && (<p>Fecha: {timestampAFecha(listaActual.fecha)}</p>)}
         <h3>Productos: </h3>

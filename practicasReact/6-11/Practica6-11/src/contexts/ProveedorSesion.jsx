@@ -9,7 +9,7 @@ const ContextoSesion = createContext();
 const ProveedorSesion = (props) => {
 
   const ubicacion = useLocation();
-  const [usuarioSesion, setUsuarioSesion] = useState({user: false}); //Datos de la sesión del usuario.
+  const [usuarioSesion, setUsuarioSesion] = useState({ user: false }); //Datos de la sesión del usuario.
   const [sesionIniciada, setSesionIniciada] = useState(false); //true si el usuario ha iniciado sesión.
   const navegar = useNavigate();
   const { cargandoAutenticacion, errorAutenticacion, crearCuentaSupabase, iniciarSesionSupabase, cerrarSesionSupabase, obtenerUsuarioSupabase, getAdmin, setAdmin, getPerfil, setPerfil, listarRoles } = useAutenticacionSupabase();
@@ -25,12 +25,8 @@ const ProveedorSesion = (props) => {
     if (typeof resultado !== "undefined") {
       setUsuarioSesion(resultado);
       setSesionIniciada(true);
-
-
       setDatosPerfil(await getPerfil(resultado?.user?.id));
       setSoyAdmin(await getAdmin(resultado?.user?.id)); //En la interfaz, solo se aplican los cambios de permisos cuando se inicia sesión, pero la base de datos está protegida siempre.
-
-
       navegar("/gestor");
     }
   }
@@ -44,7 +40,7 @@ const ProveedorSesion = (props) => {
   const cerrarSesion = async () => {
     if (await cerrarSesionSupabase()) {
       setSesionIniciada(false);
-      setUsuarioSesion({user: false});
+      setUsuarioSesion({ user: false });
       setDatosPerfil({});
       setSoyAdmin(false);
       navegar("/");
@@ -59,11 +55,12 @@ const ProveedorSesion = (props) => {
   //Cambia el perfil del usuario actual.
   const cambiarPerfil = async (datos) => {
     if (!sesionIniciada) return false;
-    const resultado = await setPerfil(datos);
+    const resultado = await setPerfil(usuarioSesion?.user?.id, datos);
     if (resultado) {
       setDatosPerfil(datos);
       return true;
-    };
+    }
+    return false;
   }
 
   //Convierte a admin a un usuario a partir de su correo, solo disponible para admins.
@@ -71,9 +68,9 @@ const ProveedorSesion = (props) => {
     if (!sesionIniciada || !soyAdmin) return false;
     const resultado = await setAdmin(datos?.correo, datos?.poner);
     if (resultado) {
-      const rolCambiar = rolesCargados.filter((e) => {return e.correo === datos.correo})[0];
+      const rolCambiar = rolesCargados.filter((e) => { return e.correo === datos.correo })[0];
       rolCambiar.rol = datos.poner ? "admin" : "usuario";
-      setRolesCargados([...rolesCargados.filter((e) => {return e.correo !== datos.correo}), rolCambiar]);
+      setRolesCargados([...rolesCargados.filter((e) => { return e.correo !== datos.correo }), rolCambiar]);
       return true;
     }
     return false;
@@ -88,6 +85,7 @@ const ProveedorSesion = (props) => {
       setRolesCargados([]);
     }
     setSoyAdmin(soyAdminAhora);
+    if (typeof usuarioSesion.user === "object") setDatosPerfil(await getPerfil(usuarioSesion?.user?.id));
   }
   useEffect(() => {
     cargarRoles();

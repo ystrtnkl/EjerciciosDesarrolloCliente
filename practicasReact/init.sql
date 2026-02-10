@@ -34,14 +34,18 @@ CREATE TABLE LISTA_PRODUCTO (
 );
 
 CREATE TABLE ROLES (
-  id_rol VARCHAR(36) PRIMARY KEY,
+  id_rol UUID PRIMARY KEY,
   correo VARCHAR(127) UNIQUE,
-  rol VARCHAR(8) DEFAULT 'usuario'
+  rol VARCHAR(8) DEFAULT 'usuario',
+  CONSTRAINT pertenencia_usuario_rol FOREIGN KEY (id_rol)
+    REFERENCES auth.users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE PERFIL (
-  id_usuario VARCHAR(36) PRIMARY KEY,
-  avatar VARCHAR(127) DEFAULT 'https://i.ibb.co/8SQJtJ1/sinportada.jpg',
+  id_usuario UUID PRIMARY KEY,
+  avatar VARCHAR(127) DEFAULT 'https://i.ibb.co/q30wzvtk/sinavatar.png',
   nombre_completo VARCHAR(63),
-  descripcion VARCHAR(511)
-)
+  descripcion VARCHAR(511) DEFAULT '',
+  CONSTRAINT pertenencia_usuario_perfil FOREIGN KEY (id_usuario)
+    REFERENCES auth.users (id) ON DELETE CASCADE
+);

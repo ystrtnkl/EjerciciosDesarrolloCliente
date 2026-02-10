@@ -96,7 +96,7 @@ const useAutenticacionSupabase = () => {
         setErrorAutenticacion("");
         try {
             if (typeof correo !== 'string') throw new Error("No se ha encontrado el usuario");
-            const { data, error } = await supabaseConexion.from("roles").update({rol: permisos ? "admin" : "usuario"}).eq("correo", correo);
+            const { data, error } = await supabaseConexion.from("roles").update({ rol: permisos ? "admin" : "usuario" }).eq("correo", correo);
             if (error) throw error;
             //if (data?.length !== 1) throw new Error("No se ha encontrado el usuario"); //Opción antigua que seleccionaba el número de filas editadas.
             return true;
@@ -133,7 +133,7 @@ const useAutenticacionSupabase = () => {
         try {
             const { data, error } = await supabaseConexion.from("perfil").select("*").limit(1).eq("id_usuario", uuid);
             if (error) throw error;
-            if (data.length) return data;
+            if (data.length) return data[0];
             return [];
         } catch (error) {
             setErrorAutenticacion(error.message);
@@ -145,7 +145,21 @@ const useAutenticacionSupabase = () => {
 
     //Cambia los datos del perfil del usuario
     const setPerfil = async (uuid, datos) => {
-
+        setCargandoAutenticacion(true);
+        setErrorAutenticacion("");
+        try {
+            const { data: data1, error: error1 } = await supabaseConexion.from("perfil").update({ ...datos, id_usuario: undefined }).eq("id_usuario", uuid);
+            if (error1) throw error1;
+            //if (data?.length !== 1) throw new Error("No se ha encontrado el usuario"); //Opción antigua que seleccionaba el número de filas editadas.
+            const { data: data2, error: error2 } = await supabaseConexion.auth.updateUser({ user_metadata: { display_name: datos.nombre_completo } }); //Es posible que para que se actualice el display_name del schema auth (options.data.display_name) haya que cerrar e iniciar sesión, sin embargo el de la tabla perfiles se edita correctamente.
+            if (error2) throw error2;
+            return true;
+        } catch (e) {
+            setErrorAutenticacion(e?.message ?? "No se ha podido editar el perfil");
+            return false;
+        } finally {
+            setCargandoAutenticacion(false);
+        }
     }
 
     return { cargandoAutenticacion, errorAutenticacion, crearCuentaSupabase, iniciarSesionSupabase, cerrarSesionSupabase, obtenerUsuarioSupabase, getAdmin, setAdmin, getPerfil, setPerfil, listarRoles };
