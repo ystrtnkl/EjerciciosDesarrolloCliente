@@ -12,9 +12,10 @@ const ProveedorSesion = (props) => {
   const [usuarioSesion, setUsuarioSesion] = useState({user: false}); //Datos de la sesión del usuario.
   const [sesionIniciada, setSesionIniciada] = useState(false); //true si el usuario ha iniciado sesión.
   const navegar = useNavigate();
-  const { cargandoAutenticacion, errorAutenticacion, crearCuentaSupabase, iniciarSesionSupabase, cerrarSesionSupabase, obtenerUsuarioSupabase, getAdmin, setAdmin, getPerfil, setPerfil } = useAutenticacionSupabase();
+  const { cargandoAutenticacion, errorAutenticacion, crearCuentaSupabase, iniciarSesionSupabase, cerrarSesionSupabase, obtenerUsuarioSupabase, getAdmin, setAdmin, getPerfil, setPerfil, listarRoles } = useAutenticacionSupabase();
   const [datosPerfil, setDatosPerfil] = useState({}); //Datos del perfil del usuario.
   const [soyAdmin, setSoyAdmin] = useState(false); //Si el usuario es admin o no.
+  const [rolesCargados, setRolesCargados] = useState([]); //Lista de los roles cargados (para admins).
 
   //Las siguientes funciones hacen uso de las de useAutenticacionSupabase pero además estableciendo los estados propios del contexto.
 
@@ -26,8 +27,8 @@ const ProveedorSesion = (props) => {
       setSesionIniciada(true);
 
 
-      setDatosPerfil(await getPerfil());
-      setSoyAdmin(await getAdmin());
+      setDatosPerfil(await getPerfil(resultado?.user?.id));
+      setSoyAdmin(await getAdmin(resultado?.user?.id)); //En la interfaz, solo se aplican los cambios de permisos cuando se inicia sesión, pero la base de datos está protegida siempre.
 
 
       navegar("/gestor");
@@ -55,6 +56,43 @@ const ProveedorSesion = (props) => {
     if (typeof resultado !== "undefined") setUsuarioSesion(resultado);
   }
 
+  //Cambia el perfil del usuario actual.
+  const cambiarPerfil = async (datos) => {
+    if (!sesionIniciada) return false;
+    const resultado = await setPerfil(datos);
+    if (resultado) {
+      setDatosPerfil(datos);
+      return true;
+    };
+  }
+
+  //Convierte a admin a un usuario a partir de su correo, solo disponible para admins.
+  const cambiarAdmin = async (datos) => {
+    if (!sesionIniciada || !soyAdmin) return false;
+    const resultado = await setAdmin(datos?.correo, datos?.poner);
+    if (resultado) {
+      const rolCambiar = rolesCargados.filter((e) => {return e.correo === datos.correo})[0];
+      rolCambiar.rol = datos.poner ? "admin" : "usuario";
+      setRolesCargados([...rolesCargados.filter((e) => {return e.correo !== datos.correo}), rolCambiar]);
+      return true;
+    }
+    return false;
+  }
+
+  //Descarga la lista de roles de la base de datos (solo para admins) (también funciona para establecer el estado de soyAdmin si se recarga la página).
+  const cargarRoles = async () => {
+    const soyAdminAhora = typeof usuarioSesion.user !== "object" ? false : await getAdmin(usuarioSesion?.user?.id);
+    if (soyAdminAhora) {
+      setRolesCargados(await listarRoles());
+    } else {
+      setRolesCargados([]);
+    }
+    setSoyAdmin(soyAdminAhora);
+  }
+  useEffect(() => {
+    cargarRoles();
+  }, [usuarioSesion]);
+
   useEffect(() => {
     //Listener para manejar los cambios de sesión, así como redirigir correctamente cuando se use el enlace en el correo de confirmación del email.
     const suscripcion = supabaseConexion.auth.onAuthStateChange(
@@ -69,27 +107,11 @@ const ProveedorSesion = (props) => {
         }
       }
     );
+    cargarRoles();
   }, []);
 
-  //Convierte a admin a un usuario a partir de su correo, solo disponible para admins.
-  const cambiarAdmin = async (correo) => {
-    if (!sesionIniciada || !soyAdmin) return false;
-    const resultado = await setAdmin(correo, true);
-    if (resultado) return true;
-  }
-
-  //Cambia el perfil del usuario actual.
-  const cambiarPerfil = async (datos) => {
-    if (!sesionIniciada) return false;
-    const resultado = await setPerfil(datos);
-    if (resultado) {
-      setDatosPerfil(datos);
-      return true;
-    };
-  }
-
   const datosProveer = {
-    crearCuenta, iniciarSesion, cerrarSesion, usuarioSesion, sesionIniciada, cargandoAutenticacion, errorAutenticacion, supabaseConexion, datosPerfil, soyAdmin, cambiarAdmin, cambiarPerfil
+    crearCuenta, iniciarSesion, cerrarSesion, usuarioSesion, sesionIniciada, cargandoAutenticacion, errorAutenticacion, supabaseConexion, datosPerfil, soyAdmin, cambiarAdmin, cambiarPerfil, rolesCargados, cargarRoles
   }
 
   return (

@@ -16,9 +16,12 @@ function MenuNavegacion() {
         {sesionIniciada ? (<>
           <BotonNavegacion direccion="/gestor" titulo="Gestor de listas" />
           <BotonNavegacion direccion="/logout" titulo="Cerrar sesión" />
-          <BotonNavegacion direccion="/nuevoProducto" titulo="Nuevo producto" />
           <BotonNavegacion direccion="/miPerfil" titulo="Mi perfil" />
-          {soyAdmin && (<BotonNavegacion direccion="/gestorRoles" titulo="Gestor de roles" />)}
+          {soyAdmin && (<>
+            {/*Páginas solo disponibles para admins.*/}
+            <BotonNavegacion direccion="/gestorRoles" titulo="Gestor de roles" />
+            <BotonNavegacion direccion="/nuevoProducto" titulo="Nuevo producto" />
+          </>)}
         </>) : (<>
           <BotonNavegacion direccion="/registrarse" titulo="Crear cuenta" />
           <BotonNavegacion direccion="/login" titulo="Iniciar sesión" />

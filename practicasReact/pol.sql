@@ -4,7 +4,7 @@ as PERMISSIVE
 for DELETE
 to authenticated
 using (
- true
+ public.is_admin_user()
 );
 
 create policy "insert-productos"
@@ -13,7 +13,7 @@ as PERMISSIVE
 for INSERT
 to authenticated
 with check (
- true
+ public.is_admin_user()
 );
 
 alter policy "select-productos"
@@ -29,7 +29,7 @@ as PERMISSIVE
 for UPDATE
 to authenticated
 using (
- true
+ public.is_admin_user()
 );
 
 

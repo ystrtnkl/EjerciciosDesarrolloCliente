@@ -7,13 +7,13 @@ import useSesion from '../../hooks/useSesion.js';
 function Cabecera() {
 
   //Dependiendo de si está iniciado sesión o no, te saluda de una manera distinta.
-  const { sesionIniciada, usuarioSesion } = useSesion();
+  const { sesionIniciada, usuarioSesion, soyAdmin } = useSesion();
 
   return (
     <>
       <div className="cabecera_principal">
         <h2>Gestor de listas de la compra.</h2>
-        {sesionIniciada ? (<p>Hola de nuevo {usuarioSesion?.user?.user_metadata?.display_name ?? "desconocido"}</p>) : (<p>Hola invitado, autentícate</p>)}
+        {sesionIniciada ? (<p>Hola de nuevo {usuarioSesion?.user?.user_metadata?.display_name ?? "desconocido"} {soyAdmin && "ADMIN"}</p>) : (<p>Hola invitado, autentícate</p>)}
         <VolverInicio />
       </div>
     </>

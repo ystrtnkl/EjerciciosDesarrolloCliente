@@ -10,7 +10,6 @@ function NuevoProducto() {
   return (
     <>
       <h2>Agregar nuevo producto</h2>
-      <p>ATENCIÓN: conforme está hecha la aplicación ahora mismo, el resto de usuarios podrán ver/editar/borrar tu producto</p> {/*Esto cambiará más adelante.*/}
       {sesionIniciada ? (<FormularioProducto />) : (<p>Posiblemente no tengas permisos para agregar nuevos productos</p>)}
     </>
   )

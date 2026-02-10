@@ -68,7 +68,7 @@ const ListaProductos = (props) => {
   return (
     <div>
       {/*Los usuarios sin la sesión iniciada no pueden ver esta parte.*/ props.controles && (<div>
-        <button onClick={() => {navegar("/nuevoProducto")}} className="boton-producto boton-nuevo-producto"><img src={imgAgnadir} alt="Agregar producto" /></button>
+        {props.editarProductos && (<button onClick={() => {navegar("/nuevoProducto")}} className="boton-producto boton-nuevo-producto"><img src={imgAgnadir} alt="Agregar producto" /></button>)}
         {/*<button onClick={cargaInicial} className="boton-producto boton-recargar-productos"><img src={imgRecargar} alt="Recargar" /></button><br />*/} {/*Anteriormente había un botón para re-descargar los productos manualmente, está deshabilitado pero no se borra porque podría ser útil más adelante.*/}
         <input type="text" value={textoFiltrado} onChange={(e) => { setTextoFiltrado(e.target.value) }} /><br />
         {criteriosControles.map((e, i) => {

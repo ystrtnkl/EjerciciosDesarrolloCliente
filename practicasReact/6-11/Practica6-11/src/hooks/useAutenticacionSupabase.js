@@ -74,30 +74,81 @@ const useAutenticacionSupabase = () => {
         }
     }
 
-    //Devuelve true si el usuario actual es administrador.
-    const getAdmin = async () => {
-
+    //Devuelve true si el usuario es administrador.
+    const getAdmin = async (uuid) => {
+        setCargandoAutenticacion(true);
+        try {
+            const { data, error } = await supabaseConexion.from("roles").select("*").limit(1).eq("id_rol", uuid);
+            if (error) throw error;
+            if (data.length) return data[0]?.rol === "admin";
+            return false;
+        } catch (e) {
+            return false;
+        } finally {
+            setCargandoAutenticacion(false);
+        }
     }
 
     //Hace que el usuario con x correo se vuelva admin, esto solo lo pueden hacerl os administradores.
     const setAdmin = async (correo, permisos) => {
         if (await !getAdmin()) return false;
+        setCargandoAutenticacion(true);
+        setErrorAutenticacion("");
+        try {
+            if (typeof correo !== 'string') throw new Error("No se ha encontrado el usuario");
+            const { data, error } = await supabaseConexion.from("roles").update({rol: permisos ? "admin" : "usuario"}).eq("correo", correo);
+            if (error) throw error;
+            //if (data?.length !== 1) throw new Error("No se ha encontrado el usuario"); //Opción antigua que seleccionaba el número de filas editadas.
+            return true;
+        } catch (e) {
+            setErrorAutenticacion(e?.message ?? "No se han podido alterar los permisos");
+            return false;
+        } finally {
+            setCargandoAutenticacion(false);
+        }
+    }
 
+    //Devuelve los datos de la tabla de roles, se usa para que el administrador edite los roles de los usuarios.
+    const listarRoles = async () => {
+        setCargandoAutenticacion(true);
+        setErrorAutenticacion("");
+        try {
+            //Por ahora la plicación está pensada en magnitudes pequeñas, así que esta función devuelve los permisos de todos los usuarios (con un límite de 100). Para mejor escalabilidad habría que implementar una paginación y una búsqueda.
+            const { data, error } = await supabaseConexion.from("roles").select("*").limit(100);
+            if (error) throw error;
+            if (data) return data;
+            return [];
+        } catch (error) {
+            setErrorAutenticacion(error.message);
+            return []
+        } finally {
+            setCargandoAutenticacion(false);
+        }
+    }
 
+    //Devuelve los datos del perfil del usuario.
+    const getPerfil = async (uuid) => {
+        setCargandoAutenticacion(true);
+        setErrorAutenticacion("");
+        try {
+            const { data, error } = await supabaseConexion.from("perfil").select("*").limit(1).eq("id_usuario", uuid);
+            if (error) throw error;
+            if (data.length) return data;
+            return [];
+        } catch (error) {
+            setErrorAutenticacion(error.message);
+            return []
+        } finally {
+            setCargandoAutenticacion(false);
+        }
+    }
+
+    //Cambia los datos del perfil del usuario
+    const setPerfil = async (uuid, datos) => {
 
     }
 
-    //Devuelve los datos del perfil del usuario actual.
-    const getPerfil = async () => {
-
-    }
-
-    //Cambia los datos del perfil del usuario actual
-    const setPerfil = async (datos) => {
-
-    }
-
-    return { cargandoAutenticacion, errorAutenticacion, crearCuentaSupabase, iniciarSesionSupabase, cerrarSesionSupabase, obtenerUsuarioSupabase, getAdmin, setAdmin, getPerfil, setPerfil };
+    return { cargandoAutenticacion, errorAutenticacion, crearCuentaSupabase, iniciarSesionSupabase, cerrarSesionSupabase, obtenerUsuarioSupabase, getAdmin, setAdmin, getPerfil, setPerfil, listarRoles };
 };
 
 export default useAutenticacionSupabase;

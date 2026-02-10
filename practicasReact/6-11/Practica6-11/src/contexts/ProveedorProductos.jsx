@@ -13,10 +13,11 @@ const ProveedorProductos = (props) => {
   //También es posible hacer click en un producto y ver su página detallada, en ese caso sería ilogico descargar los 50 productos iniciales pero está pensado que el usuario también usará la característica de listas, así que eventualmetne acabará consumiendo dicha información, mejor tenerla de antemano.
 
   const [productosCargados, setProductosCargados] = useState([]); //Los productos actualmente cargados (para la magnitud de la aplicación, se descargan 50 al inicio y ya).
-  const { obtenerPublico, errorSupabase, cargandoSupabase, insertarPublico, editarPublico, borrarPublico, borrarPrivado } = useSupabase(); //Por cuestiones de dividir el código, las funciones que hacen operaciones sobre la base de datos en Supabase están en un hook aparte.
+  const { obtenerPublico, errorSupabase, cargandoSupabase, insertarPublico, editarPublico, borrarPublico } = useSupabase(); //Por cuestiones de dividir el código, las funciones que hacen operaciones sobre la base de datos en Supabase están en un hook aparte.
   const TAMAGNO_INICIAL = 50; //Cuantos productos descarga de primeras.
-  const { sesionIniciada, usuarioSesion } = useSesion(); //Se necesita saber los datos del usuario.
+  const { usuarioSesion, soyAdmin } = useSesion(); //Se necesita saber los datos del usuario.
   
+  //Las operaciones de escritura sobre los productos están reservadas para administradores (aunque en los comentarios pueda parecer que no).
 
   //Devuelve un producto en concreto. Si ya está en el estado lo devuelve, si no lo descarga de Supaabse y lo añade al estado.
   //Esta carga está optimizada en caso de que puedan llegar a haber millones de productos (no se confía en que el producto a buscar esté en el estado del contexto, pero si lo está pues mejor porque así se ahorra una petición).
@@ -34,7 +35,7 @@ const ProveedorProductos = (props) => {
 
   //Llama a guardar un nuevo producto a la base de datos, y si todo va bien se suma a la lista de productos cargados.
   const nuevoProducto = async (producto) => {
-    if (!validarDatosProducto(producto) || !sesionIniciada) return false;
+    if (!validarDatosProducto(producto) || !soyAdmin) return false;
     const nuevo = await insertarPublico("productos", {...producto, duegno: usuarioSesion?.user?.id});
     if (nuevo?.uuid?.length) {
       setProductosCargados([...productosCargados], { ...nuevo, uuid: nuevo.uuid });
@@ -44,8 +45,8 @@ const ProveedorProductos = (props) => {
 
   //Llama a eliminar un producto, y si todo va bien también lo quita de los productos cargados.
   const eliminarProducto = async (uuid) => {
-    if (!sesionIniciada) return false;
-    const resultado = await borrarPublico("lista_producto", uuid, "uuid_producto"); //De momento se hace el borrado en cascada de tal manera que también se borran las inserciones en lista_producto aunque el usuario que lo borre no sea el dueño de las listas en las que aparece ese producto. Esto se solucionará más adelante con la funcionalidad de los permisos.
+    if (!soyAdmin) return false;
+    const resultado = await borrarPublico("lista_producto", uuid, "uuid_producto"); //De momento se hace el borrado en cascada de tal manera que también se borran las inserciones en lista_producto aunque el usuario que lo borre no sea el dueño de las listas en las que aparece ese producto.
     const resultado2 = await borrarPublico("productos", uuid);
     //if (resultado) setProductosCargados(productosCargados.filter((e) => {return e.uuid !== uuid})); //Versión óptima en la que no vuelve a descargar los productos de la base de datos PERO el usuario verá 49 en lugar de 50.
     //Borrar coincidencias de ese producto en cada una de las listas.
@@ -57,7 +58,7 @@ const ProveedorProductos = (props) => {
 
   //Llama a editar un producto, y si todo va bien aplica dichos cambios en los productos cargados.
   const cambiarProducto = async (uuid, nuevo) => {
-    if (!validarDatosProducto(nuevo) || !sesionIniciada) return false;
+    if (!validarDatosProducto(nuevo) || !soyAdmin) return false;
     const resultado = await editarPublico("productos", uuid, nuevo);
     if (resultado?.uuid?.length) {
       setProductosCargados([...productosCargados.filter((e) => { return e.uuid !== uuid }), resultado]);

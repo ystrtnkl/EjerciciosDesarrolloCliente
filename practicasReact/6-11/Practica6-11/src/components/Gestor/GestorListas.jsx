@@ -13,7 +13,7 @@ import useSesion from '../../hooks/useSesion.js';
 //Aquí además se gestiona la lógica que involucra a las tres columnas a la vez.
 function GestorListas() {
 
-  const { sesionIniciada, usuarioSesion } = useSesion();
+  const { sesionIniciada, usuarioSesion, soyAdmin } = useSesion();
   //De normal descarga 50 productos al inicio, y estos son los que se mostrarán. En caso de que la aplicación tenga muchos más habría que implementar un sistema de paginación.
   const { cargandoSupabase: cargandoProductos, errorSupabase: errorProductos, productosCargados, getProductoConcreto } = useProductos();
   //También es necesario tener la información de las listas (en este caso se descargan todas).
@@ -52,7 +52,7 @@ function GestorListas() {
         <span className="seccion seccion-productos">
           <h2>Productos registrados</h2>
           {cargandoProductos ? (<Cargando />) : (errorProductos ? (<CajaError texto="Ha habido un error al cargar los productos" />) : (<>
-            <ListaProductos controles={sesionIniciada} productos={productosCargados} borrarProductos={sesionIniciada} editarProductos={sesionIniciada} agregar={agregarProducto} />
+            <ListaProductos controles={sesionIniciada} productos={productosCargados} borrarProductos={soyAdmin} editarProductos={soyAdmin} agregar={agregarProducto} />
           </>))}
         </span>
         {(sesionIniciada && usuarioSesion?.user?.id) && (<>

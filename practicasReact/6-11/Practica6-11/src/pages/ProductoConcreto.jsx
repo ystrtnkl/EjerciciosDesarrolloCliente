@@ -12,7 +12,7 @@ function ProductoConcreto() {
   const { getProductoConcreto, productosCargados } = useProductos();
   const [producto, setProducto] = useState([]);
   const [cargando, setCargando] = useState(true);
-  const { sesionIniciada } = useSesion();
+  const { soyAdmin } = useSesion();
 
   //Aunque esta sea una página para ver un solo producto, se ha considerado que es mejor descargar los 50 iniciales también ya que se espera que el usuario valla a hacer uso también de la lista completa, por eso se hace uso del estado del contexto.
 
@@ -28,7 +28,7 @@ function ProductoConcreto() {
 
   return (
     <>
-      {producto.length ? (<ListaProductos productos={producto} borrarProductos={sesionIniciada} editarProductos={sesionIniciada} />) : (cargando ? (<Cargando />) : (<p>Ha habido un error o no se ha encontrado el producto</p>))}
+      {producto.length ? (<ListaProductos productos={producto} borrarProductos={soyAdmin} editarProductos={soyAdmin} />) : (cargando ? (<Cargando />) : (<p>Ha habido un error o no se ha encontrado el producto</p>))}
     </>
   )
 }

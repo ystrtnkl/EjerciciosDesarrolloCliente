@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cargando from '../Principal/Cargando.jsx';
 import InputBasico from './InputBasico.jsx';
 import { manejadorInput } from '../../libraries/manejadorInput.js';
@@ -6,6 +6,7 @@ import { validarUuid, validarDatosProducto, validarNombreProducto, validarPesoPr
 import CajaError from '../Principal/CajaError.jsx';
 import useProductos from '../../hooks/useProductos.js';
 import { useNavigate } from 'react-router-dom';
+import useSesion from '../../hooks/useSesion.js';
 
 //Formulario para editar o registrar un nuevo producto.
 function FormularioProducto(props) {
@@ -16,6 +17,7 @@ function FormularioProducto(props) {
   const [datosProducto, setDatosProducto] = useState(datosOriginales);
   const { cargandoSupabase, errorSupabase, nuevoProducto, cambiarProducto } = useProductos();
   const navegar = useNavigate();
+  const { soyAdmin } = useSesion(); //Solo los administradores pueden ver esto.
 
   //Valida los datos antes de enviar, aunque también se validan cada vez que cambian.
   const validar = () => {
@@ -42,6 +44,10 @@ function FormularioProducto(props) {
     e.preventDefault();
     setDatosProducto(datosOriginales)
   }
+
+  useEffect(() => {
+    if (!soyAdmin) navegar("/");
+  }, []);
 
   return (
     <>
