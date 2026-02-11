@@ -47,7 +47,6 @@ function FormularioPerfil() {
       </form>)}
       {errorAutenticacion && (<CajaError texto={errorAutenticacion} />)}
       <p>{resultado}</p>
-      {JSON.stringify(datosEdicion)}
     </>
   )
 }

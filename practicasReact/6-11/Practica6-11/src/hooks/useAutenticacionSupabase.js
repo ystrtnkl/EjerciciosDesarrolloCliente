@@ -91,10 +91,10 @@ const useAutenticacionSupabase = () => {
 
     //Hace que el usuario con x correo se vuelva admin, esto solo lo pueden hacerl os administradores.
     const setAdmin = async (correo, permisos) => {
-        if (await !getAdmin()) return false;
         setCargandoAutenticacion(true);
         setErrorAutenticacion("");
         try {
+            //No es explicitamente necesario comprobar que el usuario que hace esto sea admin, ya que si no lo es el propio servidor devolverá error.
             if (typeof correo !== 'string') throw new Error("No se ha encontrado el usuario");
             const { data, error } = await supabaseConexion.from("roles").update({ rol: permisos ? "admin" : "usuario" }).eq("correo", correo);
             if (error) throw error;
@@ -150,8 +150,7 @@ const useAutenticacionSupabase = () => {
         try {
             const { data: data1, error: error1 } = await supabaseConexion.from("perfil").update({ ...datos, id_usuario: undefined }).eq("id_usuario", uuid);
             if (error1) throw error1;
-            //if (data?.length !== 1) throw new Error("No se ha encontrado el usuario"); //Opción antigua que seleccionaba el número de filas editadas.
-            const { data: data2, error: error2 } = await supabaseConexion.auth.updateUser({ user_metadata: { display_name: datos.nombre_completo } }); //Es posible que para que se actualice el display_name del schema auth (options.data.display_name) haya que cerrar e iniciar sesión, sin embargo el de la tabla perfiles se edita correctamente.
+            const { data: data2, error: error2 } = await supabaseConexion.auth.updateUser({data: { display_name: datos.nombre_completo }}); //Aquí se está editanto una fila en el esquema auth.
             if (error2) throw error2;
             return true;
         } catch (e) {

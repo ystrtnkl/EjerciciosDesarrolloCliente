@@ -78,7 +78,7 @@ const ProveedorSesion = (props) => {
 
   //Descarga la lista de roles de la base de datos (solo para admins) (también funciona para establecer el estado de soyAdmin si se recarga la página).
   const cargarRoles = async () => {
-    const soyAdminAhora = typeof usuarioSesion.user !== "object" ? false : await getAdmin(usuarioSesion?.user?.id);
+    const soyAdminAhora = typeof usuarioSesion.user?.id !== "string" ? false : await getAdmin(usuarioSesion?.user?.id);
     if (soyAdminAhora) {
       setRolesCargados(await listarRoles());
     } else {
