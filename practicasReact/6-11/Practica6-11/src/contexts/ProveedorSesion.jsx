@@ -40,9 +40,9 @@ const ProveedorSesion = (props) => {
   const cerrarSesion = async () => {
     if (await cerrarSesionSupabase()) {
       setSesionIniciada(false);
+      setSoyAdmin(false);
       setUsuarioSesion({ user: false });
       setDatosPerfil({});
-      setSoyAdmin(false);
       navegar("/");
     }
   }

@@ -63,21 +63,25 @@ const Lista = (props) => {
     <>
       {errorLista ? (<CajaError texto={errorLista} />) : ((cargandoLista || typeof listaActual === "undefined") ? (<Cargando />) : (<div>
         {props.nuevo && <p>Estás creando una nueva lista</p>}
+        {typeof listaActual.autor === "string" && (<p>Como esta lista no es tuya, no puedes editarla aunque seas admin</p>)}
         <form onChange={(e) => { manejadorInput(e, setListaActual, listaActual) }}>
-          <InputBasico nombre="nombre" titulo="Nombre:" tipo="text" valor={listaActual.nombre} validador={validarNombreLista} mensajeError="El nombre de la lista debe tener entre 4 y 20 carácteres" />
-          <InputBasico nombre="descripcion" titulo="Descripción:" tipo="textarea" valor={listaActual.descripcion} validador={validarDescripcionLista} mensajeError="La descripción del producto debe tener menos de 512 carácteres" />
+          <InputBasico bloqueado={typeof listaActual.autor === "string"} nombre="nombre" titulo="Nombre:" tipo="text" valor={listaActual.nombre} validador={validarNombreLista} mensajeError="El nombre de la lista debe tener entre 4 y 20 carácteres" />
+          <InputBasico bloqueado={typeof listaActual.autor === "string"} nombre="descripcion" titulo="Descripción:" tipo="textarea" valor={listaActual.descripcion} validador={validarDescripcionLista} mensajeError="La descripción del producto debe tener menos de 512 carácteres" />
         </form>
         {listaActual.fecha && (<p>Fecha: {timestampAFecha(listaActual.fecha)}</p>)}
+        {typeof listaActual.autor === "string" && (<p>Autor de esta lista: <strong>{listaActual.autor}</strong></p>)}
         <h3>Productos: </h3>
         <p>Peso total: {pesaMucho(listaActual.productos.map((e) => { return e.peso * e.cantidad }).reduce((a, e) => { return a + e }, 0))}</p>
         <p>Precio total: {floatAPrecio(listaActual.productos.map((e) => { return e.precio * e.cantidad }).reduce((a, e) => { return a + e }, 0))}</p>
         <div className="productos-en-lista lista-productos" onClick={productoMasOMenos}>
           {listaActual.productos.length ? (<>{listaActual.productos.sort((a, b) => { return a.uuid.localeCompare(b.uuid) }).map((e) => {
-            return (<Producto key={e.uuid} producto={e} enLista={true} cantidad={e.cantidad} />) //Aquí se muestaran los productos de la lista.
+            return (<Producto key={e.uuid} producto={e} enLista={typeof listaActual.autor !== "string"} cantidad={e.cantidad} />) //Aquí se muestaran los productos de la lista.
           })}</>) : (<p>Esta lista está vacía</p>)}
         </div>
-        {props.nuevo || <button className="boton-lista boton-borrar" onClick={borrarEsta}><img src={imgBorrar} alt="Borrar" /></button>}
-        <button className="boton-lista boton-aceptar" onClick={guardar}><img src={imgAceptar} alt="Aceptar" /></button>
+        {typeof listaActual.autor !== "string" && (<>
+          {props.nuevo || <button className="boton-lista boton-borrar" onClick={borrarEsta}><img src={imgBorrar} alt="Borrar" /></button>}
+          <button className="boton-lista boton-aceptar" onClick={guardar}><img src={imgAceptar} alt="Aceptar" /></button>
+        </>)}
       </div>))}
     </>
   )

@@ -89,14 +89,15 @@ INFORMACIÓN DE SQL:
     create policy "select-listas" on "public"."listas" as PERMISSIVE for SELECT to authenticated using (((uuid_usuario)::text = (auth.uid())::text OR is_admin_user()));
     create policy "delete-listas" on "public"."listas" as PERMISSIVE for DELETE to authenticated using (((uuid_usuario)::text = (auth.uid())::text)); -- cascade delete user -> lista
     create policy "update-listas" on "public"."listas" as PERMISSIVE for UPDATE to public using (((uuid_usuario)::text = (auth.uid())::text));
-    create policy "select-lista_producto" on "public"."lista_producto" as PERMISSIVE for SELECT to authenticated using (((uuid_usuario)::text = (auth.uid())::text));
+    create policy "select-lista_producto" on "public"."lista_producto" as PERMISSIVE for SELECT to authenticated using (((uuid_usuario)::text = (auth.uid())::text) OR is_admin_user());
     create policy "insert-lista_producto" on "public"."lista_producto" as PERMISSIVE for INSERT to authenticated with check (((uuid_usuario)::text = (auth.uid())::text));
     create policy "update-lista_producto"on "public"."lista_producto" as PERMISSIVE for UPDATE to authenticated using (((uuid_usuario)::text = (auth.uid())::text));
     create policy "delete-lista_producto" on "public"."lista_producto" as PERMISSIVE for DELETE to authenticated using (((uuid_usuario)::text = (auth.uid())::text)); -- cascade delete productos -> lista_producto
     -- cascade delete user -> perfil
-    create policy "insert-perfil" on "public"."perfil" to authenticated with check ((((SELECT auth.uid() AS uid))::text = (id_usuario)::text));
+    create policy "insert-perfil" on "public"."perfil" to authenticated with check ((((SELECT auth.uid() AS uid))::text = (id_usuario)::text OR is_admin_user()));
     create policy "select-perfil"on "public"."perfil" to public using (((id_usuario)::text = (auth.uid())::text OR is_admin_user()));
     create policy "update-perfil" on "public"."perfil" to authenticated using (((id_usuario)::text = (auth.uid())::text OR is_admin_user()));
+    create policy "delete-perfil" on "public"."perfil" as PERMISSIVE for DELETE to authenticated using (is_admin_user());
     -- cascade delete user -> roles
     create policy "select-roles" on "public"."roles" to authenticated using (true); 
     create policy "update-roles" on "public"."roles" to authenticated using (is_admin_user()) with check (is_admin_user());
@@ -105,9 +106,7 @@ NOTAS EXTRA:
   Algunas partes de la aplicación no están pensadas para soportar millones de objetos (ejemplo: millones de usuarios, millones de objetos, millones de listas).
   Para solucionar esto estaría interesante usar la estrategia de paginación y búsqueda indexada, esto habría que implementarlo tanto en el frontend como en el backend.
   También habría estado interesante implementar más roles, ya que de momento los administradores pueden hacer lo que quieran en los productos y cambiar los permisos de otros usuarios (incluso si son administradores).
-
-  ADMINS VEN LISTAS AJENAS
-  ADMINST CRUD A PERFIL
+  Por otra parte se ha evitado usar selects anidados (subconsultas) y en su lugar se hacen varias consultas pequeñas. Esto se debe a las limitaciones del SDK, si esta práctica hubiese requerido programar el backend desde 0 sí se podrían haber programado consultas complejas para cada acción.
 
 */
 

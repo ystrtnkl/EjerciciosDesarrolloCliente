@@ -5,12 +5,12 @@ import FormularioProducto from '../components/Formularios/FormularioProducto.jsx
 //Página con el formulario para añadir un nuevo producto.
 function NuevoProducto() {
 
-  const { sesionIniciada } = useSesion();
+  const { soyAdmin } = useSesion();
 
   return (
     <>
       <h2>Agregar nuevo producto</h2>
-      {sesionIniciada ? (<FormularioProducto />) : (<p>Posiblemente no tengas permisos para agregar nuevos productos</p>)}
+      {soyAdmin ? (<FormularioProducto />) : (<p>Posiblemente no tengas permisos para agregar nuevos productos</p>)}
     </>
   )
 }

@@ -9,14 +9,14 @@ const ListaListas = (props) => {
 
   return (
     <div>
-      <button onClick={props.botonNuevo} className="boton-lista boton-nueva-lista"><img src={imgAgnadir} alt="Agregar producto" /></button>
+      {props.escritura && (<button onClick={props.botonNuevo} className="boton-lista boton-nueva-lista"><img src={imgAgnadir} alt="Agregar producto" /></button>)}
       {props.listas.length ? (<>
         <div onClick={props.seleccionar}>
           {props.listas.sort((a, b) => { return parseInt(a.fecha) > parseInt(b.fecha) }).map((e) => {
-            return (<MiniLista key={e.uuid} uuid={e.uuid} nombre={e.nombre} />) //Básicamente esto es lo que aparecerá en la columna central.
+            return (<MiniLista botonBorrar={props.escritura} key={e.uuid} uuid={e.uuid} nombre={e.nombre} />) //Básicamente esto es lo que aparecerá en la columna central.
           })}
         </div>
-      </>) : (<p>No hay ninguna lista asignada a tu usuario</p>)}
+      </>) : (<p>No se ha encontrado ninguna lista</p>)}
     </div>
   )
 }

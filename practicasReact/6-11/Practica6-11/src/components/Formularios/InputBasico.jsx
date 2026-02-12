@@ -12,6 +12,7 @@ function InputBasico(props) {
       {props.tipo === "textarea" ? (<><br />
         <textarea
           cols="30" rows="300"
+          readOnly={props.bloqueado ? true : false}
           name={props.nombre ?? ''} id={props.nombre ?? ''}
           onChange={(e) => { setCorrecto(funcionValidadora(e.target.value) ?? true) }}
           value={props.valor ?? ''} />
@@ -23,6 +24,7 @@ function InputBasico(props) {
           value={props.valor ?? ''}
           name={props.nombre ?? ''}
           id={props.nombre ?? ''}
+          readOnly={props.bloqueado ? true : false}
           checked={props.tipo === "checkbox" && props.estaChecked}
           placeholder={props.placeholder ?? ''}
         />

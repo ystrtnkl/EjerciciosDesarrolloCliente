@@ -11,16 +11,17 @@ const ProveedorListas = (props) => {
 
   const [listasCargadas, setListasCargadas] = useState([]); //Listas cargadas actualmente (solo se pueden descargar las que pertenezcan al usuario).
   const [uuidListaSeleccionada, setUuidListaSeleccionada] = useState(""); //UUID de la lista seleccionada actualmente.
-  const { cargandoSupabase, errorSupabase, obtenerPrivado, insertarPrivado, editarPrivado, borrarPrivado } = useSupabase();
-  const { usuarioSesion, sesionIniciada } = useSesion(); //Se necesita saber los datos del usuario antes de manipular las listas.
+  const { cargandoSupabase, errorSupabase, obtenerPrivado, insertarPrivado, editarPrivado, borrarPrivado, obtenerPublico } = useSupabase();
+  const { usuarioSesion, sesionIniciada, soyAdmin } = useSesion(); //Se necesita saber los datos del usuario antes de manipular las listas.
   const [listaActual, setListaActual] = useState({ nombre: "", descripcion: "", productos: [] }); //Datos de la lista a manipular.
   const { getProductoConcreto } = useProductos();
+  const [listasCargadasAjenas, setListasCargadasAjenas] = useState([]); //Almacena hasta 50 listas de otros usuarios, solo para admins (en caso de hacer la aplicación mucho más grande se debería implementar paginado y búsqueda para esta funcionalidad).
 
   //Manda a seleccionar una lista a partir de su uuid, tiene que estar cargada.
   const seleccionarLista = (uuid) => {
     if (uuid === "") {
       setUuidListaSeleccionada("");
-    } else if (listasCargadas.filter((e) => { return e.uuid === uuid }).length) {
+    } else if ([...listasCargadas, ...listasCargadasAjenas].filter((e) => { return e.uuid === uuid }).length) {
       setUuidListaSeleccionada(uuid);
     }
   }
@@ -29,7 +30,8 @@ const ProveedorListas = (props) => {
   const getListaSeleccionada = () => {
     const listaDummy = { nombre: "", descripcion: "", productos: [] }
     if (uuidListaSeleccionada === "" || !sesionIniciada) return listaDummy;
-    const encontrado = listasCargadas.filter((e) => { return e.uuid === uuidListaSeleccionada });
+    let encontrado = listasCargadas.filter((e) => { return e.uuid === uuidListaSeleccionada });
+    if (!encontrado.length) encontrado = listasCargadasAjenas.filter((e) => { return e.uuid === uuidListaSeleccionada });
     return encontrado.length ? encontrado[0] : listaDummy;
   }
 
@@ -82,14 +84,41 @@ const ProveedorListas = (props) => {
         return { ...e, productos: productosEnLista }
       }));
       setListasCargadas(informacionListas);
+    } else {
+      setUuidListaSeleccionada("");
+    }
+    //Y si el usuario es administrador, descarga además hasta 50 listas de otros usuarios.
+    if (soyAdmin) {
+      //Aquí se usa obtener publico porque el servidor detecta que el usuario es administrador, desde el punto de vista de un administrador todas las listas son públicas.
+      const resultado = await obtenerPublico("listas", { filtros: { propiedad: "uuid_usuario", valor: usuarioSesion?.user?.id, invertido: 1 } });
+      let uuidsConocidos = []; //Evita hacer muchas llamadas al servidor en búsqueda de los nombres de los autores de las listas cacheandolos aquí.
+      const informacionListas = await Promise.all(resultado.map(async (e) => {
+        let autor = uuidsConocidos.filter((ee) => { return ee.uuid_usuario === e.uuid_usuario });
+        if (autor.length) {
+          autor = autor[0].nombre_completo;
+        } else {
+          autor = await obtenerPublico("perfil", { limite: 1, orden: { propiedad: "id_usuario" }, filtros: { propiedad: "id_usuario", valor: e.uuid_usuario, invertido: 2 } });
+          autor = autor[0];
+          uuidsConocidos = [...uuidsConocidos, { uuid_usuario: e.uuid_usuario, nombre_completo: autor.nombre_completo }];
+        }
+        const intermedios = await obtenerPublico("lista_producto", { orden: { propiedad: "uuid_producto", descendente: true }, filtros: { propiedad: "uuid_lista", valor: e.uuid } });
+        const productosEnLista = intermedios.length ? await Promise.all(intermedios.map(async (ee) => {
+          const elProducto = await getProductoConcreto(ee.uuid_producto);
+          return { ...elProducto[0], cantidad: ee.cantidad };
+        })) : [];
+        return { ...e, productos: productosEnLista, autor: autor?.nombre_completo ?? "Desconocido" }
+      }));
+      setListasCargadasAjenas(informacionListas);
+    } else {
+      setListasCargadasAjenas([]);
     }
   }
   useEffect(() => {
     cargaInicial();
-  }, [usuarioSesion]);
+  }, [usuarioSesion, soyAdmin]);
 
   const datosProveer = {
-    seleccionarLista, cargandoSupabase, errorSupabase, listasCargadas, uuidListaSeleccionada, getListaSeleccionada, guardarLista, borrarLista, listaActual, setListaActual
+    seleccionarLista, cargandoSupabase, errorSupabase, listasCargadas, uuidListaSeleccionada, getListaSeleccionada, guardarLista, borrarLista, listaActual, setListaActual, listasCargadasAjenas
   }
 
   return (

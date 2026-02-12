@@ -150,7 +150,7 @@ const useAutenticacionSupabase = () => {
         try {
             const { data: data1, error: error1 } = await supabaseConexion.from("perfil").update({ ...datos, id_usuario: undefined }).eq("id_usuario", uuid);
             if (error1) throw error1;
-            const { data: data2, error: error2 } = await supabaseConexion.auth.updateUser({data: { display_name: datos.nombre_completo }}); //Aquí se está editanto una fila en el esquema auth.
+            const { data: data2, error: error2 } = await supabaseConexion.auth.updateUser({ data: { display_name: datos.nombre_completo } }); //Aquí se está editanto una fila en el esquema auth.
             if (error2) throw error2;
             return true;
         } catch (e) {

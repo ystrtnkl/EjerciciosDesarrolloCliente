@@ -16,13 +16,24 @@ const useSupabase = () => {
     //Parámetro de tabla (este NO está dentro del objeto, es un parametro aparte): nombre de la tabla, en este caso tiene que ser una cuyos items no estén privados para cada usuario.
     //Parámetro de limite: el límite máximo de objetos que se recibirán.
     //Parámetro de orden: un objeto con "propiedad" que indica la propiedad con la que ordenar, y "descendente" en true o false para alterar el orden.
-    //Parámetro de filtros: un objeto con "propiedad" que indica la propiedad a filtrar y "valor" que indica como deberá de ser.
+    //Parámetro de filtros: un objeto con "propiedad" que indica la propiedad a filtrar y "valor" que indica como deberá de ser. inverso indica como se buscará (mirar if para más información).
     //Parámetro de sentenciaSelect: por si se quiere recibir propiedades concretas o hacer un join.
-    const obtenerPublico = async (tabla, opciones = { limite: 50, orden: { propiedad: "uuid", descendente: true }, filtros: { propiedad: "uuid", valor: "-" }, sentenciaSelect: "*" }) => {
+    const obtenerPublico = async (tabla, opciones = { limite: 50, orden: { propiedad: "uuid", descendente: true }, filtros: { propiedad: "uuid", valor: "%", invertido: 0 }, sentenciaSelect: "*" }) => {
         setErrorSupabase("");
         setCargandoSupabase(true);
         try {
-            const { data, error } = await supabaseConexion.from(tabla).select(opciones?.sentenciaSelect ?? "*").limit(opciones?.limite ?? 50).order(opciones?.orden?.propiedad ?? "uuid", opciones?.orden?.descendente).ilike(opciones?.filtros?.propiedad ?? "uuid", opciones?.filtros?.valor ?? "%");
+            //Esta era la manera antigua con toda la consulta seguida: 
+            //const { data, error } = await supabaseConexion.from(tabla).select(opciones?.sentenciaSelect ?? "*").limit(opciones?.limite ?? 50).order(opciones?.orden?.propiedad ?? "uuid", opciones?.orden?.descendente).ilike(opciones?.filtros?.propiedad ?? "uuid", opciones?.filtros?.valor ?? "%");
+            let consulta = supabaseConexion.from(tabla).select(opciones?.sentenciaSelect ?? "*").limit(opciones?.limite ?? 50).order(opciones?.orden?.propiedad ?? "uuid", opciones?.orden?.descendente ?? false);
+            //Es posible hacer que el filtrado busque que sea igual a x o no igual a x.
+            if (opciones?.filtros?.invertido === 1) {
+                consulta = consulta.not(opciones?.filtros?.propiedad ?? "uuid", "ilike", opciones?.filtros?.valor ?? "%"); //No coincida.
+            } else if (opciones?.filtros?.invertido === 2) {
+                consulta = consulta.eq(opciones?.filtros?.propiedad ?? "uuid", opciones?.filtros?.valor ?? "%"); //Sea igual.
+            } else {
+                consulta = consulta.ilike(opciones?.filtros?.propiedad ?? "uuid", opciones?.filtros?.valor ?? "%"); //Coincida.
+            }
+            const { data, error } = await consulta;
             if (error) throw error;
             if (data) return data;
             return []; //En caso de no devolver nada.

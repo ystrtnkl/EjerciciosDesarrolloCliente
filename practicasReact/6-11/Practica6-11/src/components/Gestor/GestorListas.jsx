@@ -17,17 +17,17 @@ function GestorListas() {
   //De normal descarga 50 productos al inicio, y estos son los que se mostrarán. En caso de que la aplicación tenga muchos más habría que implementar un sistema de paginación.
   const { cargandoSupabase: cargandoProductos, errorSupabase: errorProductos, productosCargados, getProductoConcreto } = useProductos();
   //También es necesario tener la información de las listas (en este caso se descargan todas).
-  const { listasCargadas, errorSupabase: errorListas, cargandoSupabase: cargandoListas, seleccionarLista, uuidListaSeleccionada, borrarLista, listaActual, setListaActual } = useListas();
-  
+  const { listasCargadas, errorSupabase: errorListas, cargandoSupabase: cargandoListas, seleccionarLista, uuidListaSeleccionada, borrarLista, listaActual, setListaActual, listasCargadasAjenas } = useListas();
+
   //Función (usada por ListaProductos) que añade ese producto a la lista seleccionada.
   const agregarProducto = async (uuid) => {
     let productoAgnadir = await getProductoConcreto(uuid);
     if (!productoAgnadir.length) return false;
     productoAgnadir = productoAgnadir[0];
-    if (listaActual.productos.map((e) => {return e.uuid}).includes(uuid)) {
-      setListaActual({...listaActual, productos: [...listaActual.productos.filter((e) => {return e.uuid !== uuid}), {uuid, ...productoAgnadir, cantidad: listaActual.productos.filter((e) => {return e.uuid === uuid})[0].cantidad + 1}]});
+    if (listaActual.productos.map((e) => { return e.uuid }).includes(uuid)) {
+      setListaActual({ ...listaActual, productos: [...listaActual.productos.filter((e) => { return e.uuid !== uuid }), { uuid, ...productoAgnadir, cantidad: listaActual.productos.filter((e) => { return e.uuid === uuid })[0].cantidad + 1 }] });
     } else {
-      setListaActual({...listaActual, productos: [...listaActual.productos, {uuid, ...productoAgnadir, cantidad: 1}]});
+      setListaActual({ ...listaActual, productos: [...listaActual.productos, { uuid, ...productoAgnadir, cantidad: 1 }] });
     }
   }
 
@@ -57,10 +57,17 @@ function GestorListas() {
         </span>
         {(sesionIniciada && usuarioSesion?.user?.id) && (<>
           <span className="seccion seccion-listas">
-            <h2>Tus listas</h2>
+            <h2>{soyAdmin ? "Todas las listas" : "Tus listas"}</h2>
             {cargandoListas ? (<Cargando />) : (errorListas ? (<CajaError texto="Ha habido un error al cargar las listas" />) : (<>
-              <ListaListas seleccionar={seleccionar} listas={listasCargadas} botonNuevo={() => { seleccionarLista(""); }} />
+              <ListaListas escritura={true} seleccionar={seleccionar} listas={listasCargadas} botonNuevo={() => { seleccionarLista(""); }} />
             </>))}
+            {soyAdmin && (<>
+              {/*Aquí se muestran las listas (readonly) de los otros usuarios*/}
+              <h3>Listas de otros usuarios:</h3>
+              {cargandoListas ? (<Cargando />) : (errorListas ? (<CajaError texto="Ha habido un error al cargar las listas ajenas" />) : (<>
+                <ListaListas seleccionar={seleccionar} listas={listasCargadasAjenas} botonNuevo={() => { seleccionarLista(""); }} />
+              </>))}
+            </>)}
           </span>
           <span className="seccion seccion-lista-seleccionada">
             <h2>Lista seleccionada</h2>
